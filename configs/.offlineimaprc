@@ -1,0 +1,22 @@
+[general]
+accounts = Personal
+maxsyncaccounts = 1
+
+[Account Personal]
+localrepository = Local
+remoterepository = Remote
+
+[Repository Local]
+type = Maildir
+localfolders = ~/Mail
+
+[Repository Remote]
+type = IMAP
+remotehost = mail.example.com
+remoteuser = user@example.com
+remotepass = yourpassword
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+remotepasscmd = pass show email/personal
+

@@ -1,0 +1,27 @@
+# ~/.muttrc
+
+# Paths
+set mbox_type=Maildir
+set folder="~/Mail"
+set spoolfile="~/Mail/INBOX"
+set record="~/Mail/[Gmail]/Sent Mail"
+
+# Sendmail via msmtp
+set sendmail="/usr/bin/msmtp"
+set use_from=yes
+set realname="Your Name"
+set from="yourusername@gmail.com"
+
+# Caching
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set mail_check=60
+
+# Display settings
+set sort=threads
+set sort_aux=last-date-received
+set index_format="%4C %Z %{%b %d} %-15.15F %s"
+
+# Misc
+set ssl_force_tls=yes
+

@@ -1,0 +1,13 @@
+
+# ADDITIONAL DEW SETTINGS
+
+export PAGER="/usr/bin/less"
+export VISUAL="/usr/bin/vim"
+export EDITOR="/usr/bin/vim"
+export LESS='-FRX'
+
+# Gonna use Docker ?  Not gonna install it currently
+# DOCKER
+export DEVMAIL='blah@blah.com'
+export PRUNEPATHS="/var/lib/docker /run/user"
+
