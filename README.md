@@ -26,87 +26,9 @@ Videos showing my progress would be uploaded to my Youtube channel, so please su
 To keep it simple, this experiment would assume a home-based system for everyday personal use, without additional peripheral devices, like printers or whatever else might come to mind.
 
 
-## USE CASES
+## USE CASES AND WHAT IS INSTALLED
 
-make -f DewMakefile
-
-
-Since this experiment assumes a system for personal home use, the folowing use cases were taken into consideration:
-
-- A bootable and operational computer as a base
-    - Debian linux
-- Basic accessibility option - Font setup
-- Basic system management and system information
-    - manual system management
-    - neofetch for information
-    - htop
-- Comfortable shell with some coloring
-    - bash
-- Desktop organization
-    - tmux
-- Comfortable file management
-    - locate
-    - mc
-- Text editing - text files
-    - vim
-- Document conversion
-    - pandoc
-- Text editing - Word Processor
-    - wordgrinder
-- Spreadsheet
-    - sc
-    - sc-im
-- Calendar and self-organizing
-    - calcurse
-- TODO management and self-organizing
-    - Taskwarrior
-- Music listening
-    - alsamixer  # Soundcontrol
-    - moc
-- Image viewing
-    - fbi
-- Internet browsing
-    - lynx and links2
-- Email
-    - neomutt
-- Chat
-    - weechat
-- Software development
-    - vim editor is already installed
-    - python3
-    - perl
-    - ALE plugin for vim
-    - hexcurse hex editor
-- Software development - for manual install
-    - Python linter and code formatter
-    - Perl linter and code formatter
-- Games
-    - bsdgames
-        - adventure
-        - arithmetic
-        - backgammon
-        - bcd
-        - crack
-        - dick
-        - fortune
-        - hangman
-        - hunt
-        - madlibs
-        - maze
-        - robots
-        - trek
-        - worm
-        - wormwar
-        - quiz
-        - tippecanoe
-    - pacman4console
-    - bastet  # Tetris clone
-    - nudoku
-    - frotz
-    - asciiquarium
-    - cowsay
-    - vitetris
-
+Please see [documentation/index.html](documentation/index.html)
 
 ## DISTRO
 
@@ -136,7 +58,8 @@ apt -y install sudo git vim vim-nox console-setup
 
 # Only if you want to change the console font and size
 # setfont Lat15-TerminusBold18x20  # Font change ~/.profile
-# sudo dpkg-reconfigure console-setup
+# OR
+# dpkg-reconfigure console-setup
 
 # Adding the main user to the sudoers file
 usermod -aG sudo $(ls /home)
@@ -173,6 +96,7 @@ Parameters to `make`:
 - main: Install only the most needed tools
 - games: Install only the games
 - dev: Install development tools (C, Perl, Python)
+- DEBUG=1: Sets the DEBUG flag
 
 
 ### NEOMUTT EMAIL SETUP
@@ -224,3 +148,14 @@ CRONTAB:
 */10 * * * * /home/yourusername/bin/offlineimap-sync.sh
 ```
 
+### VIDEO
+
+The folowing video shows the initial installation
+> WORK IN PROGRESS! VIDEO NOT READY YET!
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/VIDEO_ID" 
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+          frameborder="0" allowfullscreen>
+  </iframe>
+</div>

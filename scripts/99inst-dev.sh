@@ -1,6 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
+# Debugging
+trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
+
+echo "INSTALLING SOFTWARE DEVELOPMENT TOOLS..."
+
 sudo apt -y install vim-ale
 # Since vim is already installed
 # you can use vimdiff

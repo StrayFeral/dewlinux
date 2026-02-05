@@ -1,6 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
+# Debugging
+trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
+
+echo "INSTALLING MAIN SYSTEM..."
+
 mkdir -p ~/bin
 cat /home/$(ls /home)/dewlinux/configs/add_to_profile >> /home/$(ls /home)/.profile
 
