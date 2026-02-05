@@ -10,10 +10,18 @@ sudo apt -y install vim-ale
 # Since vim is already installed
 # you can use vimdiff
 
-sudo apt -y install hexcurse  # Hex editor
+sudo apt -y install hexcurse                # Hex editor
 
 sudo apt -y install python3
+sudo apt -y install python-is-python3       # Not truly needed, but convenient
 sudo apt -y install python3-pip
+
+# Python tools
+sudo apt -y install python3-isort
+sudo apt -y install python3-pylsp-black
+sudo apt -y install python3-flake8
+sudo apt -y install python3-mypy
+sudo apt -y install python3-bandit
 
 # Perl is already installed by default
 # These are useful tools for Perl
