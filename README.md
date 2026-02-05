@@ -98,6 +98,7 @@ Parameters to `make`:
 - dev: Install development tools (C, Perl, Python)
 - DEBUG=1: Sets the DEBUG flag
 
+> On the question should you enable AppArmor support, answer YES
 
 ### NEOMUTT EMAIL SETUP
 ```bash
