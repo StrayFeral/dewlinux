@@ -7,7 +7,14 @@ trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ER
 echo "INSTALLING MAIN SYSTEM..."
 
 mkdir -p ~/bin
-cat /home/$(ls /home)/dewlinux/configs/add_to_profile >> /home/$(ls /home)/.profile
+
+# Configs
+cat configs/add_to_profile >> ~/.profile
+cat configs/add_to_bashrc >> ~/.bashrc
+cp configs/.vimrc ~/
+cp configs/.bash_aliases ~/
+sudo mv /etc/motd /etc/motd_old
+sudo cp configs/motd /etc/motd
 
 # Compiling C sources
 sudo apt -y install build-essential

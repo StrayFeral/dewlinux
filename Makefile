@@ -3,7 +3,7 @@ SHELL := /bin/bash
 .SHELLFLAGS := -euo pipefail -c
 
 # The folowing is to install PROJECT DEW
-# by StrayF 2006
+# by StrayF 2026
 
 
 .PHONY: all main games dev help
