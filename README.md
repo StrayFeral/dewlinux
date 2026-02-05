@@ -54,7 +54,7 @@ When promoted for hostname, enter **"blah.local"** where **"blah"** is your desi
 apt update
 apt upgrade
 
-apt -y install sudo git vim vim-nox console-setup
+apt -y install make sudo git vim vim-nox console-setup
 
 # Only if you want to change the console font and size
 # setfont Lat15-TerminusBold18x20  # Font change ~/.profile
@@ -64,7 +64,7 @@ apt -y install sudo git vim vim-nox console-setup
 # Adding the main user to the sudoers file
 usermod -aG sudo $(ls /home)
 
-# In the next prompt choose "vim.basic"
+# In the next prompt choose "vim.nox"
 update-alternatives --config editor
 
 # Get the installation scripts

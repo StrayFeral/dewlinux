@@ -14,19 +14,19 @@ all: main games dev
 
 main:
 	[[ "$(DEBUG)" == 1 ]] && set -x
-    ./scripts/00inst-main.sh
+	./scripts/00inst-main.sh
 
 games:
 	[[ "$(DEBUG)" == 1 ]] && set -x
-    ./scripts/50inst-games.sh
+	./scripts/50inst-games.sh
 
 dev:
 	[[ "$(DEBUG)" == 1 ]] && set -x
-    ./scripts/99inst-dev.sh
+	./scripts/99inst-dev.sh
 
 help:
 	@echo "Targets:"
-	@echo "  make all      - Full system installation"
-	@echo "  make main     - Main packages installation"
-	@echo "  make games    - Games installation"
-	@echo "  make dev      - Development tools installation"
+	@echo "  make all		- Full system installation"
+	@echo "  make main		- Main packages installation"
+	@echo "  make games		- Games installation"
+	@echo "  make dev		- Development tools installation"
