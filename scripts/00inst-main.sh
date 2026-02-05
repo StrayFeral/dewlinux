@@ -36,6 +36,7 @@ sudo apt -y install calcurse                # Calendar
 sudo apt -y install taskwarrior             # TODO manager
 sudo apt -y install moc moc-ffmpeg-plugin   # MP3 player: mocp
 sudo apt -y install fbi                     # Image viewer
+sudo apt -y install mpv                     # Video player
 sudo apt -y install wordgrinder             # Word processor
 sudo apt -y install alsa-utils              # Sound control
 
