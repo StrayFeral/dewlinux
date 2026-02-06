@@ -103,7 +103,7 @@ Parameters to `make`:
 
 > IMPORTANT: Essentially what I've built is a terminal-only system. While installation of some packages does install specific libraries from graphical environments and we get about 20% contamination with such components, the system as a whole remains a terminal-only system with no graphical desktop environment being installed or able to run.
 
-### NEOMUTT EMAIL SETUP
+### NEOMUTT EMAIL SETUP - WORK IN PROGRESS!
 ```bash
 # List existing GPG keys
 gpg --list-keys
