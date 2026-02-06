@@ -71,8 +71,9 @@ update-alternatives --config editor
 git clone https://github.com/StrayFeral/dewlinux.git /root/$(ls /home)/dewlinux
 chown -R $(ls /home):$(ls /home) /home/$(ls /home)/dewlinux
 
-cat /home/$(ls /home)/dewlinux/configs/add_to_profile >> /root/.profile
+cat /home/$(ls /home)/dewlinux/configs/add_to_root_profile >> /root/.profile
 cat /home/$(ls /home)/dewlinux/configs/add_to_bashrc >> /root/.bashrc
+cp /home/$(ls /home)/dewlinux/configs/.inputrc /root/
 cp /home/$(ls /home)/dewlinux/configs/.vimrc /root/
 cp /home/$(ls /home)/dewlinux/configs/.bash_aliases /root/
 

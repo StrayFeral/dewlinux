@@ -5,6 +5,3 @@
 export GH_TOKEN=""  # Fill this one out later
 export GCM_CREDENTIAL_STORE=secretservice
 
-# Disable audible bell, enable visual bell
-setterm -blength 0 -blink on
-
