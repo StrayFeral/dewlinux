@@ -1,7 +1,7 @@
 # Minimal AppArmor profile for msmtp
 #include <tunables/global>
 
-/usr/bin/msmtp {
+profile msmtp /usr/bin/msmtp {
   # Allow reading system and user config
   /etc/msmtprc r,
   owner @{HOME}/.msmtprc r,

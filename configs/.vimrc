@@ -20,4 +20,5 @@ set nu
 set nobackup
 
 filetype plugin on
+syntax on
 
