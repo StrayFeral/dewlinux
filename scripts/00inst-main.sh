@@ -15,7 +15,6 @@ mkdir -p ~/bin
 # Configs
 cat configs/add_to_profile >> ~/.profile
 cat configs/add_to_bashrc >> ~/.bashrc
-# cp configs/.inputrc ~/
 cp configs/.vimrc ~/
 cp configs/.bash_aliases ~/
 sudo mv /etc/motd /etc/motd_old
