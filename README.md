@@ -56,19 +56,16 @@ apt upgrade
 
 export DEBIAN_FRONTEND="noninteractive"
 
-# On the keymap question select "Don't touch the keymap"
 apt -y install make sudo git vim vim-nox console-setup console-data
 
 # Only if you want to change the console font and size
-# setfont Lat15-TerminusBold18x20  # Font change ~/.profile
-# OR
-# dpkg-reconfigure console-setup
+# I personally choose: TerminusBold 12x24
+# DEBIAN_FRONTEND=dialog dpkg-reconfigure console-setup
 
 # Adding the main user to the sudoers file
 usermod -aG sudo $(ls /home)
 
-# In the next prompt choose "vim.nox"
-update-alternatives --config editor
+update-alternatives --set editor $(which vim.nox)
 
 # Get the installation scripts
 git clone https://github.com/StrayFeral/dewlinux.git /home/$(ls /home)/dewlinux
