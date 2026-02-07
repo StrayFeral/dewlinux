@@ -28,13 +28,11 @@ sudo apt -y install pkg-config
 sudo apt -y install libtool
 sudo apt -y install libssl-dev libncurses-dev libsqlite3-dev
 
-# For use with the mail system later
-sudo apt install -y apparmor apparmor-utils apparmor-profiles
-sudo cp configs/usr.bin.msmtp /etc/apparmor.d/
-sudo systemctl enable apparmor --now
-sudo apparmor_parser -r /etc/apparmor.d/usr.bin.msmtp
-sudo aa-enforce /etc/apparmor.d/usr.bin.msmtp
-
+# I've spent near a day to figure out how to automate the dialog of
+# msmpt asking for apparmor and since this lost me too much time and
+# msmtp still asks me, I give up so I can move on to other tasks.
+# If anyone gets a smart idea working on this Debian image -
+# be my guest.
 
 sudo apt -y install wget
 sudo apt -y install curl
@@ -42,18 +40,11 @@ sudo apt -y install locate                  # File location
 sudo apt -y install tmux                    # Terminal multiplexer
 sudo apt -y install htop                    # Colored top
 
-sudo apt -y install vlock                   # Console locking
+sudo apt -y install vlock                   # Console locker
 
 sudo apt -y install pandoc                  # Document conversion tool
 sudo apt -y install lynx links2             # Browsers
 sudo apt -y install neomutt msmtp msmtp-mta offlineimap ca-certificates gnupg pass # Mail client
-
-#~ sudo debconf-set-selections <<EOF
-#~ pass pass/apparmor boolean true
-#~ EOF
-
-#~ sudo apt install -y pass
-
 
 sudo apt -y install mc                      # File manager
 sudo apt -y install sc sc-im                # Spreadsheets
@@ -69,6 +60,8 @@ sudo apt -y install wordgrinder             # Word processor
 sudo apt -y install alsa-utils              # Sound control
 
 sudo apt -y install weechat                 # IRC client
+
+sudo apt -y install poppler-utils           # pdftotext file.pdf - | less
 
 echo ""
 echo "MAIN COMPONENTS INSTALLED."

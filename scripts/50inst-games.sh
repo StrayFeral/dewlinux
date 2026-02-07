@@ -13,10 +13,13 @@ echo "INSTALLING GAMES..."
 sudo apt -y install bsdgames            # Collection of old BSD games
 sudo apt -y install pacman4console      # PacMan clone
 sudo apt -y install nudoku              # Sudoku
-sudo apt -y install frotz
 sudo apt -y install cowsay              # Not a game, but it's a classic
 sudo apt -y install bastet              # Tetris clone
 sudo apt -y install vitetris            # Tetris clone
+
+# Installing interpretter for Infocom Z-machine games and a sample game
+sudo apt -y install frotz
+wget -P ~/zgames "https://www.ifarchive.org/if-archive/games/zcode/LostPig.z8"
 
 echo ""
 echo "GAMES INSTALLED."

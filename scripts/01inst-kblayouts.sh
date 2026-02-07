@@ -37,16 +37,14 @@ sudo dpkg-reconfigure -f noninteractive console-setup
 # In order for the Cyrillic characters to be visualized properly on the
 # terminal, you must select the proper terminal font:
 # dpkg-reconfigure console-setup
-# and select these in sequence (encoding, character set, font, font size):
-# UTF8
+# and select these in sequence: encoding, character set, font, font size
+
+# So these charsets would work great:
 # #Cyrillic - Slavic languages (also Bosnian and Serbian latin)
-
-# Please not the "#" sign in front of the selected language
-
-# It would also work with:
+# OR
 # .Combined - Latin; Slavic and non-Slavic Cyrillic
 
-# Note the "." sign
+# Please not the "#" and the "." signs in front of the selected charsets
 
 # For a font I personally select TerminusBold 12x24 (framebuffer-only)
 

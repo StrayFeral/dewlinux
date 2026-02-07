@@ -4,7 +4,6 @@
 
 2026-02-03: PHASE1 and PHASE2 Start. WORK-IN-PROGRESS...
 
-
 ## DESCRIPTION
 
 This repository is to document my journey in my experimental project **"DEWLINUX"**.
@@ -17,7 +16,7 @@ I am going to use a linux distro without any desktop environment installed.
 
 I am going to search and document what **in my opinion** are the best everyday use tools for a home user.
 
-The experiment will be conducted at present in the form of a virtual machine image.
+The experiment will be conducted at present in the form of a virtual machine environment.
 
 Videos showing my progress would be uploaded to my Youtube channel, so please subscribe:
 
@@ -25,10 +24,11 @@ Videos showing my progress would be uploaded to my Youtube channel, so please su
 
 To keep it simple, this experiment would assume a home-based system for everyday personal use, without additional peripheral devices, like printers or whatever else might come to mind.
 
-
 ## USE CASES AND WHAT IS INSTALLED
 
 Please see [documentation/index.html](documentation/index.html)
+
+After installation you could simply run `dewdoc.sh` which would be inside ~/dewlinux
 
 ## DISTRO
 
@@ -38,12 +38,11 @@ I've decided to use Debian, so I went with the netinst image which is only near 
 
 My goal was never to use the most barebone distro. While I have some experience with some unix distros, some RedHat derivatives, I am mostly experienced in pure Debian and some of the derivative distros, so Debian was the natural choice for me. While I am experimenting to go a bit hardcore, it was never my goal to go fully hardcore for which Devuan was never considered.
 
-
 ## INSTALLATION
 
 > Partitioning and base OS installation are manual by design.
 
-Everything from this line and on will be kept as a recipe how to reproduce the 
+Start creating a virtual machine with the specified Debian image. Choosing any other image is at your own risk. You may choose also to install on an actual computer, but I tested this setup only on a virtual machine.
 
 > VIRTUAL MACHINES: For hostname type: **blah.local**
 
@@ -78,7 +77,6 @@ cp /home/$(ls /home)/dewlinux/configs/.vimrc ~/
 
 logout
 ```
-
 **LOGIN AS the newly created user**
 
 ```bash
@@ -94,17 +92,21 @@ make
 ```
 
 Parameters to `make`:
-- all (or no parameter listed): Install everything
-- main: Install only the most needed tools
-- games: Install only the games
-- dev: Install development tools (C, Perl, Python)
+- all (or no parameter): Install everything
+- main: Main packages installation
+- games: Games installation
+- dev: Development tools installation (C, Perl, Python)
+- cyr: Installation of Cyrillic keyboard layouts
 - DEBUG=1: Sets the DEBUG flag
 
 > On the question should you enable AppArmor support, answer YES
 
+That AppArmor dialog was the only thing I could not automate, sorry.
+
 > IMPORTANT: Essentially what I've built is a terminal-only system. While installation of some packages does install specific libraries from graphical environments and we get about 20% contamination with such components, the system as a whole remains a terminal-only system with no graphical desktop environment being installed or able to run.
 
 ### NEOMUTT EMAIL SETUP - WORK IN PROGRESS!
+
 ```bash
 # List existing GPG keys
 gpg --list-keys
