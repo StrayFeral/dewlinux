@@ -36,3 +36,6 @@ sudo apt -y install perltidy
 
 # Copying the vim-ale config
 cat configs/vim_ale_config >> ~/.vimrc
+
+echo ""
+echo "SOFTWARE DEVELOPMENT TOOLS INSTALLED."

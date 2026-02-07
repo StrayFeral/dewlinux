@@ -49,3 +49,6 @@ sudo dpkg-reconfigure -f noninteractive console-setup
 # Note the "." sign
 
 # For a font I personally select TerminusBold 12x24 (framebuffer-only)
+
+echo ""
+echo "KEYBOARD LAYOUTS INSTALLED."

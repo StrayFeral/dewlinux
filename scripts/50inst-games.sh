@@ -17,3 +17,6 @@ sudo apt -y install frotz
 sudo apt -y install cowsay              # Not a game, but it's a classic
 sudo apt -y install bastet              # Tetris clone
 sudo apt -y install vitetris            # Tetris clone
+
+echo ""
+echo "GAMES INSTALLED."

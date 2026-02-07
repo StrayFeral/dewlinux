@@ -69,3 +69,6 @@ sudo apt -y install wordgrinder             # Word processor
 sudo apt -y install alsa-utils              # Sound control
 
 sudo apt -y install weechat                 # IRC client
+
+echo ""
+echo "MAIN COMPONENTS INSTALLED."
