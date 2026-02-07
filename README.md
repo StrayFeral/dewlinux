@@ -54,6 +54,8 @@ When promoted for hostname, enter **"blah.local"** where **"blah"** is your desi
 apt update
 apt upgrade
 
+export DEBIAN_FRONTEND="noninteractive"
+
 # On the keymap question select "Don't touch the keymap"
 apt -y install make sudo git vim vim-nox console-setup console-data
 
