@@ -45,8 +45,9 @@ My goal was never to use the most barebone distro. While I have some experience 
 
 Everything from this line and on will be kept as a recipe how to reproduce the 
 
-When promoted for hostname, enter **"blah.local"** where **"blah"** is your desired hostname, but do not forget the **".local"**, unless you have your own purchased domain name.
+> VIRTUAL MACHINES: For hostname type: **blah.local**
 
+Where **"blah"** is your desired hostname. If **".local"** is omitted, it could increase your boottime a lot later if you install sendmail.
 
 **LOGIN AS ROOT**
 

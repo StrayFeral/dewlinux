@@ -4,7 +4,9 @@ set -euo pipefail
 export DEBIAN_FRONTEND="noninteractive"
 
 # Debugging
-trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
+# trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
+trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
+
 
 echo "INSTALLING MAIN SYSTEM..."
 
@@ -29,6 +31,7 @@ sudo apt -y install libssl-dev libncurses-dev libsqlite3-dev
 # For use with the mail system later
 sudo apt install -y apparmor apparmor-utils
 sudo systemctl enable apparmor --now
+sudo aa-enforce /etc/apparmor.d/*
 
 sudo apt -y install wget
 sudo apt -y install curl
