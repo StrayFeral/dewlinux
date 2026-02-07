@@ -1,0 +1,18 @@
+# Minimal AppArmor profile for msmtp
+#include <tunables/global>
+
+/usr/bin/msmtp {
+  # Allow reading system and user config
+  /etc/msmtprc r,
+  owner @{HOME}/.msmtprc r,
+
+  # Allow network access to send mail
+  network inet stream,
+
+  # Allow logging (optional, if msmtp writes logs)
+  /var/log/msmtp.log w,
+
+  # Deny everything else
+  deny /** w,
+}
+

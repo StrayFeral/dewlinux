@@ -29,9 +29,12 @@ sudo apt -y install libtool
 sudo apt -y install libssl-dev libncurses-dev libsqlite3-dev
 
 # For use with the mail system later
-sudo apt install -y apparmor apparmor-utils
+sudo apt install -y apparmor apparmor-utils apparmor-profiles
+sudo cp configs/usr.bin.msmtp /etc/apparmor.d/
 sudo systemctl enable apparmor --now
-sudo aa-enforce /etc/apparmor.d/*
+sudo apparmor_parser -r /etc/apparmor.d/usr.bin.msmtp
+sudo aa-enforce /etc/apparmor.d/usr.bin.msmtp
+
 
 sudo apt -y install wget
 sudo apt -y install curl
