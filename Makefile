@@ -35,3 +35,5 @@ help:
 	@echo "  make games		- Games installation"
 	@echo "  make dev		- Development tools installation"
 	@echo "  make cyr		- Installation of Cyrillic keyboard layouts"
+
+@echo "ALL DONE."
