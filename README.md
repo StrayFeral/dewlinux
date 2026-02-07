@@ -2,7 +2,7 @@
 
 ## STATUS
 
-2026-02-03: Start. WORK-IN-PROGRESS
+2026-02-03: PHASE1 and PHASE2 Start. WORK-IN-PROGRESS...
 
 
 ## DESCRIPTION
@@ -54,7 +54,8 @@ When promoted for hostname, enter **"blah.local"** where **"blah"** is your desi
 apt update
 apt upgrade
 
-apt -y install make sudo git vim vim-nox console-setup
+# On the keymap question select "Don't touch the keymap"
+apt -y install make sudo git vim vim-nox console-setup console-data
 
 # Only if you want to change the console font and size
 # setfont Lat15-TerminusBold18x20  # Font change ~/.profile
@@ -68,12 +69,12 @@ usermod -aG sudo $(ls /home)
 update-alternatives --config editor
 
 # Get the installation scripts
-git clone https://github.com/StrayFeral/dewlinux.git /root/$(ls /home)/dewlinux
+git clone https://github.com/StrayFeral/dewlinux.git /home/$(ls /home)/dewlinux
 chown -R $(ls /home):$(ls /home) /home/$(ls /home)/dewlinux
 
-cat /home/$(ls /home)/dewlinux/configs/add_to_root_profile >> /root/.profile
-cat /home/$(ls /home)/dewlinux/configs/add_to_bashrc >> /root/.bashrc
-cp /home/$(ls /home)/dewlinux/configs/.vimrc /root/
+cat /home/$(ls /home)/dewlinux/configs/add_to_root_profile >> ~/.profile
+cat /home/$(ls /home)/dewlinux/configs/add_to_bashrc >> ~/.bashrc
+cp /home/$(ls /home)/dewlinux/configs/.vimrc ~/
 
 logout
 ```

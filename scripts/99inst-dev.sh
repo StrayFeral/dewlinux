@@ -1,17 +1,20 @@
 #!/bin/bash
 set -euo pipefail
 
+export DEBIAN_FRONTEND="noninteractive"
+
 # Debugging
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 
 echo "INSTALLING SOFTWARE DEVELOPMENT TOOLS..."
 
-sudo apt -y install vim-ale
+sudo apt -y install vim-ale                 # Great vim plugin
 # Since vim is already installed
 # you can use vimdiff
 
 sudo apt -y install hexcurse                # Hex editor
 
+# Python 3
 sudo apt -y install python3
 sudo apt -y install python-is-python3       # Not truly needed, but convenient
 sudo apt -y install python3-pip
@@ -28,3 +31,6 @@ sudo apt -y install python3-bandit
 sudo apt -y install perlnavigator
 sudo apt -y install libperl-critic-perl
 sudo apt -y install perltidy
+
+# Copying the vim-ale config
+cat configs/vim_ale_config >> ~/.vimrc

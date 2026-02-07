@@ -6,11 +6,11 @@ SHELL := /bin/bash
 # by StrayF 2026
 
 
-.PHONY: all main games dev help
+.PHONY: all main games dev help cyr
 
 DEBUG ?= 0
 
-all: main games dev
+all: main games dev cyr
 
 main:
 	[[ "$(DEBUG)" == 1 ]] && set -x
@@ -24,9 +24,14 @@ dev:
 	[[ "$(DEBUG)" == 1 ]] && set -x
 	./scripts/99inst-dev.sh
 
+cyr:
+	[[ "$(DEBUG)" == 1 ]] && set -x
+	./scripts/01inst-kblayouts.sh
+
 help:
 	@echo "Targets:"
 	@echo "  make all		- Full system installation"
 	@echo "  make main		- Main packages installation"
 	@echo "  make games		- Games installation"
 	@echo "  make dev		- Development tools installation"
+	@echo "  make cyr		- Installation of Cyrillic keyboard layouts"

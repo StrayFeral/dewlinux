@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+export DEBIAN_FRONTEND="noninteractive"
+
 # Debugging
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 
@@ -24,6 +26,10 @@ sudo apt -y install pkg-config
 sudo apt -y install libtool
 sudo apt -y install libssl-dev libncurses-dev libsqlite3-dev
 
+# For use with the mail system later
+sudo apt install -y apparmor apparmor-utils
+sudo systemctl enable apparmor --now
+
 sudo apt -y install wget
 sudo apt -y install curl
 sudo apt -y install locate                  # File location
@@ -34,7 +40,15 @@ sudo apt -y install vlock                   # Console locking
 
 sudo apt -y install pandoc                  # Document conversion tool
 sudo apt -y install lynx links2             # Browsers
-sudo apt -y install neomutt msmtp msmtp-mta offlineimap ca-certificates gnupg pass  # Mail client
+sudo apt -y install neomutt msmtp msmtp-mta offlineimap ca-certificates gnupg pass # Mail client
+
+#~ sudo debconf-set-selections <<EOF
+#~ pass pass/apparmor boolean true
+#~ EOF
+
+#~ sudo apt install -y pass
+
+
 sudo apt -y install mc                      # File manager
 sudo apt -y install sc sc-im                # Spreadsheets
 sudo apt -y install fastfetch               # System info
