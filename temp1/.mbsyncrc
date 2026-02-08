@@ -1,0 +1,22 @@
+IMAPAccount primary
+Host imap.example.com
+User you@example.com
+PassCmd "pass email/primary"
+SSLType IMAPS
+
+IMAPStore primary-remote
+Account primary
+
+LocalStore primary-local
+Path ~/Mail/
+Inbox ~/Mail/Inbox
+SubFolders Verbatim
+
+Channel primary-sync
+Far :primary-remote:
+Near :primary-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *
+
