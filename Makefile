@@ -11,6 +11,8 @@ SHELL := /bin/bash
 DEBUG ?= 0
 
 all: main games dev cyr
+	@echo ""
+	@echo "ALL DONE."
 
 main:
 	[[ "$(DEBUG)" == 1 ]] && set -x
@@ -35,5 +37,3 @@ help:
 	@echo "  make games		- Games installation"
 	@echo "  make dev		- Development tools installation"
 	@echo "  make cyr		- Installation of Cyrillic keyboard layouts"
-
-@echo "ALL DONE."
