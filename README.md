@@ -108,8 +108,98 @@ That AppArmor dialog was the only thing I could not automate, sorry.
 ### NEOMUTT EMAIL SETUP - WORK IN PROGRESS!
 
 ```bash
+export GPG_TTY=$(tty)
+sudo apt install neomutt isync msmtp msmtp-mta pass gpg notmuch abook
+
 # List existing GPG keys
 gpg --list-keys
+gpg --list-secret-keys --keyid-format LONG
+
+# Generate if you don't have one (choose RSA)
+gpg --full-generate-key
+
+# The part after the slash ("/") is the key ID
+gpg --list-secret-keys --keyid-format LONG
+
+# Suppose your key ID is ABCDEF12
+pass init ABCDEF12
+
+# For NON-GMAIL
+pass insert email/personal
+# pass show email/personal
+
+mkdir -p ~/Mail/Inbox
+cp configs/email/.mbsyncrc ~/
+
+mbsync -a
+
+cp configs/email/.msmtprc ~/
+chmod 600 ~/.msmtprc
+
+cp /usr/share/doc/msmtp/examples/msmtpq/msmtpq ~/bin/
+cp /usr/share/doc/msmtp/examples/msmtpq/msmtp-runqueue.sh ~/bin/
+chmod +x ~/bin/msmtp*
+mkdir -p ~/.msmtp.queue
+
+cp configs/email/.neomuttrc ~/.neomuttrc
+mkdir -p ~/.cache/mutt/headers ~/.cache/mutt/bodies
+
+# When asks for mail path: ~/Mail
+notmuch setup
+
+# Init and press q
+abook
+
+
+########### workflow:
+inside neomutt when writing email: y to reply
+S to sync
+
+
+
+#########
+mbsync to pull the new mail
+
+
+
+
+
+
+
+
+
+
+
+
+
+sudo apt install isync notmuch
+
+# Create a local bin if you don't have one
+# mkdir -p ~/.local/bin
+Then create the folder: mkdir -p ~/.msmtp.queue
+
+# Copy the scripts from the doc directory
+cp /usr/share/doc/msmtp/examples/msmtpq/msmtpq ~/bin/
+cp /usr/share/doc/msmtp/examples/msmtpq/msmtp-runqueue.sh ~/bin/
+
+# Make them executable
+chmod +x ~/bin/msmtpq ~/bin/msmtp-runqueue.sh
+
+cp configs/temp/mailsync.service  ~/.config/systemd/user/mailsync.service
+
+
+
+
+
+# List existing GPG keys
+gpg --list-keys
+gpg --list-secret-keys --keyid-format LONG
+
+# Generate if you don't have one (choose RSA)
+gpg --full-generate-key
+
+# The part after the slash ("/") is the key ID
+gpg --list-secret-keys --keyid-format LONG
 
 # Suppose your key ID is ABCDEF12
 pass init ABCDEF12
@@ -117,6 +207,12 @@ pass init ABCDEF12
 # For NON-GMAIL
 pass insert email/personal
 passwordeval "pass show email/personal"
+
+
+
+
+
+
 
 # FOR GMAIL
 pass insert gmail/app-password

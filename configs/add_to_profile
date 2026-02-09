@@ -6,6 +6,8 @@ export VISUAL="/usr/bin/vim"
 export EDITOR="/usr/bin/vim"
 export LESS='-FRX'
 
+export MSMTPQ_DIR=$HOME/.msmtp.queue
+
 # Gonna use Docker ?  Not gonna install it currently
 # DOCKER
 export DEVMAIL='blah@blah.com'
