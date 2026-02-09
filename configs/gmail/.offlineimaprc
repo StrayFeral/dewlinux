@@ -1,8 +1,0 @@
-[Repository Remote]
-type = IMAP
-remotehost = imap.gmail.com
-remoteuser = yourusername@gmail.com
-remotepasscmd = pass show gmail/app-password
-ssl = yes
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-
