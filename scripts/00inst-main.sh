@@ -43,7 +43,6 @@ sudo apt -y install vlock                   # Console locker
 
 sudo apt -y install pandoc                  # Document conversion tool
 sudo apt -y install lynx links2             # Browsers
-sudo apt -y install neomutt msmtp msmtp-mta offlineimap ca-certificates gnupg pass # Mail client
 
 sudo apt -y install mc                      # File manager
 sudo apt -y install sc sc-im                # Spreadsheets

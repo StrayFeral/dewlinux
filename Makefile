@@ -6,7 +6,7 @@ SHELL := /bin/bash
 # by StrayF 2026
 
 
-.PHONY: all main games dev help cyr
+.PHONY: all main games dev cyr email help
 
 DEBUG ?= 0
 
@@ -30,6 +30,10 @@ cyr:
 	[[ "$(DEBUG)" == 1 ]] && set -x
 	./scripts/01inst-kblayouts.sh
 
+email:
+	[[ "$(DEBUG)" == 1 ]] && set -x
+	./scripts/02inst-email.sh
+
 help:
 	@echo "Targets:"
 	@echo "  make all		- Full system installation"
@@ -37,3 +41,4 @@ help:
 	@echo "  make games		- Games installation"
 	@echo "  make dev		- Development tools installation"
 	@echo "  make cyr		- Installation of Cyrillic keyboard layouts"
+	@echo "  make email		- Installation of email client and tools"
