@@ -7,8 +7,9 @@ export DEBIAN_FRONTEND="noninteractive"
 # trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
-
+echo ""
 echo "INSTALLING GAMES..."
+echo ""
 
 sudo apt -y install bsdgames            # Collection of old BSD games
 sudo apt -y install pacman4console      # PacMan clone

@@ -7,8 +7,9 @@ export DEBIAN_FRONTEND="noninteractive"
 # trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
-
+echo ""
 echo "INSTALLING ADDITIONAL KEYBOARD LAYOUTS..."
+echo ""
 
 # This will install the Bulgarian and Russian phonetic layouts
 # and will make them switchable with LEFTALT+LEFTSHIFT keys
