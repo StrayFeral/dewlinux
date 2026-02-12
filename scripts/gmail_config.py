@@ -2,6 +2,7 @@
 
 import re
 import json
+import getpass
 import requests
 import subprocess
 from typing import Pattern, Match, Dict
@@ -102,13 +103,17 @@ if __name__ == "__main__":
         r"FIXME: https://www.youtube.com/watch?v=bJ9jYlJb7Mc"
     )  # TODO: FIX MEEEEEEEEEEE
     print("")
+    print("NOTE: When typing the answers to the folowing questions,")
+    print("      the characters for your GMAIL PASSWORD and the")
+    print("      CLIENT SECRET will be hidden.")
+    print("")
 
     # account_email: str = input("Enter your GMAIL email address : ")
-    account_password: str = input("Enter your GMAIL password      : ")
+    account_password: str = getpass.getpass("Enter your GMAIL password      : ")
     client_id: str = input("Enter your GMAIL CLIENT ID     : ")
-    client_secret: str = input("Enter your GMAIL CLIENT SECRET : ")
+    client_secret: str = getpass.getpass("Enter your GMAIL CLIENT SECRET : ")
 
-    authorizer: GMailAuthorizer = GMailAuthorizer()
+    authorizer: GMailAuthorizer = GMailAuthorizer(client_id, client_secret)
     authorization_url: str = authorizer.get_authorization_url()
 
     print("============================== PASTE THIS URL IN YOUR BROWSER")
