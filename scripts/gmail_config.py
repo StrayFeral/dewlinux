@@ -1,4 +1,4 @@
-#/usr/bin/env puthon3
+# /usr/bin/env puthon3
 
 import re
 import json
@@ -6,22 +6,25 @@ import requests
 import subprocess
 from typing import Pattern, Match, Dict
 
+
 class GMailAuthorizer:
     def __init__(self, client_id: str, client_secret: str) -> None:
         self.client_id: str = client_id
         self.client_secret: str = client_secret
         self.authorization_code: str = ""
-        self.api_url: str = r'https://oauth2.googleapis.com/token'
-        
+        self.api_url: str = r"https://oauth2.googleapis.com/token"
+
     def get_authorization_url(self) -> str:
         """Returns the authorization URL which the user must manually paste into the browser, in order to get the response URL with the authorization code."""
-        
-        url: str = r'https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=http://localhost&response_type=code&scope=https://mail.google.com/&access_type=offline&prompt=consent'
-        
+
+        url: str = (
+            r"https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=http://localhost&response_type=code&scope=https://mail.google.com/&access_type=offline&prompt=consent"
+        )
+
         # User needs to manually paste this, so they manually click "Allow"
-        auth_url: str = url.replace(r'YOUR_CLIENT_ID', self.client_id)
+        auth_url: str = url.replace(r"YOUR_CLIENT_ID", self.client_id)
         return auth_url
-    
+
     def get_refresh_token(self, authorization_response: str) -> str:
         """After the response URL was returned, it contains the authorization code, which comes as an argument to this method."""
         # After "Allow", browser will unsuccessfully redirect
@@ -34,34 +37,34 @@ class GMailAuthorizer:
         if match:
             authorization_code = match.group(1)
         else:
-            raise Exception(f"Cannot get the authorization code out of the response url({self.auth_response})")
-        
-        
+            raise Exception(
+                f"Cannot get the authorization code out of the response url({self.auth_response})"
+            )
+
         # Data to be sent
         # We will get a JSON object in return
         post_data: Dict[str:str] = {
             "code": authorization_code,  # AuthorizationCode
             "client_id": self.client_id,  # ClientID
             "client_secret": self.client_secret,  # ClientSecret
-            "redirect_uri": r'http://localhost',
+            "redirect_uri": r"http://localhost",
             "grant_type": "authorization_code",
         }
-        
+
         # A POST request to the API
         # We are looking for a refresh token here
-        json_response: str = requests.post(self.api_url, json: Dict[str:str] = post_data)
-        
-        
+        json_response: str = requests.post(self.api_url, json=post_data)
+
     def get_temporary_access_token(self, refresh_token: str) -> str:
         post_data: Dict[str:str] = {
-            'client_id': self.client_id,  # ClientID
-            'client_secret': self.client_secret,  # ClientSecret
-            'refresh_token': REFRESH_TOKEN,
-            'grant_type': 'refresh_token'
+            "client_id": self.client_id,  # ClientID
+            "client_secret": self.client_secret,  # ClientSecret
+            "refresh_token": REFRESH_TOKEN,
+            "grant_type": "refresh_token",
         }
-        
-        response: str = requests.post(self.api_url, data: Dict[str:str] = post_data)
-        return response.json()['access_token']
+
+        response: str = requests.post(self.api_url, data=post_data)
+        return response.json()["access_token"]
 
 
 def store_secret(secret_name: str, secret_value: str):
@@ -69,20 +72,18 @@ def store_secret(secret_name: str, secret_value: str):
         # We use 'pass insert -m' to allow multi-line/piped input
         # The -f flag forces an overwrite if the secret already exists
         result: str = subprocess.run(
-            ['pass', 'insert', '--multiline', '-f', secret_name],
+            ["pass", "insert", "--multiline", "-f", secret_name],
             input=secret_value,  # This pipes the secret into the command
             text=True,
             capture_output=True,
-            check=True
+            check=True,
         )
         print(f"Successfully stored: {secret_name}")
     except subprocess.CalledProcessError as e:
         print(f"Error: {e.stderr}")
 
 
-
-
-if __name__ = "__main__":
+if __name__ == "__main__":
     print("")
     print("INSTRUCTIONS:")
     print("FIRST BE SURE YOU DID THE GCP APP SETUP!")
@@ -92,22 +93,24 @@ if __name__ = "__main__":
     print("no need to interrupt this script.")
     print("To do the GCP APP setup, go to this URL:")
     print("")
-    print(r'https://console.cloud.google.com/')
+    print(r"https://console.cloud.google.com/")
     print("")
     print("If you do not know what to do there, just follow the")
     print("instructions from this youtube video:")
     print("")
-    print(r'FIXME: https://www.youtube.com/watch?v=bJ9jYlJb7Mc')  # TODO: FIX MEEEEEEEEEEE
+    print(
+        r"FIXME: https://www.youtube.com/watch?v=bJ9jYlJb7Mc"
+    )  # TODO: FIX MEEEEEEEEEEE
     print("")
-    
-    #account_email: str = input("Enter your GMAIL email address : ")
+
+    # account_email: str = input("Enter your GMAIL email address : ")
     account_password: str = input("Enter your GMAIL password      : ")
     client_id: str = input("Enter your GMAIL CLIENT ID     : ")
     client_secret: str = input("Enter your GMAIL CLIENT SECRET : ")
-    
+
     authorizer: GMailAuthorizer = GMailAuthorizer()
     authorization_url: str = authorizer.get_authorization_url()
-    
+
     print("============================== PASTE THIS URL IN YOUR BROWSER")
     print(authorization_url)
     print("=============================================================")
@@ -118,11 +121,11 @@ if __name__ = "__main__":
     print("what we expect. When this happens, copy the URL from the adress bar")
     print("on the line below and press ENTER...")
     print("")
-    
+
     failed_redirect_url: str = input("Enter the failed redirect URL  : ")
     refresh_token: str = authorizer.get_refresh_token(failed_redirect_url)
-    #temporary_access_token: str = authorizer.get_temporary_access_token(refresh_token)
-    
+    # temporary_access_token: str = authorizer.get_temporary_access_token(refresh_token)
+
     # Storing everything in "pass"
     store_secret("gmail/accpass", account_password)
     store_secret("gmail/clientid", client_id)

@@ -20,7 +20,7 @@ echo ""
 read -p "Press [ENTER] to resume ..."
 
 sudo apt update
-sudo apt install neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass
+sudo apt -y install neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass
 
 mkdir -p ~/.mail/gmail ~/.msmtpqueue
 
