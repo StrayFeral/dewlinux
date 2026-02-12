@@ -6,12 +6,15 @@ SHELL := /bin/bash
 # by StrayF 2026
 
 
-.PHONY: all main games dev cyr email help
+.PHONY: all main games dev cyr help
 
 DEBUG ?= 0
 
 all: main games dev cyr
 	@echo ""
+	@echo "Email/Gmail setup not installed. You need to install this manually."
+	@echo ""
+	@echo "=========================================================="
 	@echo "ALL DONE."
 
 main:
@@ -46,3 +49,4 @@ help:
 	@echo "  make dev		- Development tools installation"
 	@echo "  make cyr		- Installation of Cyrillic keyboard layouts"
 	@echo "  make email		- Installation of email client and tools"
+	@echo "  make gmail		- Installation of email client and GMAIL SETUP"
