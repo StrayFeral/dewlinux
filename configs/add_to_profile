@@ -8,8 +8,3 @@ export LESS='-FRX'
 
 export MSMTPQ_DIR=$HOME/.msmtp.queue
 
-# Gonna use Docker ?  Not gonna install it currently
-# DOCKER
-export DEVMAIL='blah@blah.com'
-export PRUNEPATHS="/var/lib/docker /run/user"
-

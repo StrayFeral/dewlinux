@@ -1,0 +1,14 @@
+set mbox_type = Maildir
+set folder = "~/.mail/gmail"
+set spool_file = "+/INBOX"
+set postponed = "+/[Gmail]/Drafts"
+set record = "+/[Gmail]/Sent Mail"
+
+set my_passw `pass gmail/accpass`
+
+# Send mail through the QUEUE instead of the internet directly
+set sendmail = "/usr/local/bin/msmtpq -a gmail"
+
+# Tell NeoMutt where to look for your local mail
+mailboxes `find ~/.mail/gmail -maxdepth 1 -type d -name ".*" -printf "+'%f' "`
+

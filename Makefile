@@ -34,6 +34,10 @@ email:
 	[[ "$(DEBUG)" == 1 ]] && set -x
 	./scripts/02inst-email.sh
 
+gmail:
+	[[ "$(DEBUG)" == 1 ]] && set -x
+	./scripts/03inst-gmail.sh
+
 help:
 	@echo "Targets:"
 	@echo "  make all		- Full system installation"

@@ -1,0 +1,6 @@
+[general]
+pythonfile = ~/dewlinux/scripts/offlineimap.py
+
+[Repository Remote]
+oauth2_access_token_eval = get_token()
+
