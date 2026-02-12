@@ -10,6 +10,8 @@ trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 1
 echo ""
 echo "INSTALLING GMAIL EMAIL TOOLS..."
 echo ""
+echo "On the 'Enable AppArmor' question just say 'Yes'..."
+echo ""
 
 echo "**** WORK IN PROGRESS ******"
 echo ""
