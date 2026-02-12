@@ -6,6 +6,7 @@ import getpass
 import requests
 import subprocess
 from typing import Pattern, Match, Dict
+from requests.models import Response
 
 
 class GMailAuthorizer:
@@ -32,11 +33,15 @@ class GMailAuthorizer:
         # The user needs to paste the full redirect URL in this
 
         # We need to get the AuthorizationCode out of this URL
-        pattern: str = r"code=(.*?)\&"
+        # pattern: str = r"code=(.*?)\&?"
+        pattern: str = r'code=([^&]+)'
         authorization_code: str = ""
         match: Match[str] = re.search(pattern, authorization_response)
         if match:
             authorization_code = match.group(1)
+            
+            # Debug print
+            print(f"* Got authorization code: {authorization_code}")
         else:
             raise Exception(
                 f"Cannot get the authorization code out of the response url({self.auth_response})"
@@ -54,18 +59,43 @@ class GMailAuthorizer:
 
         # A POST request to the API
         # We are looking for a refresh token here
-        json_response: str = requests.post(self.api_url, json=post_data)
+        print("Sending request to Google API to get the refresh token...")
+        # json_response: str = requests.post(self.api_url, json=post_data)
+        response: Response = requests.post(self.api_url, data=post_data, timeout=10)
+        
+        # Check for HTTP errors (400, 500, etc.)
+        response.raise_for_status()
+        
+        tokens = response.json()
+        refresh_token = tokens.get("refresh_token")
+        
+        if not refresh_token:
+            raise Exception("Warning: No refresh_token returned. Did you use 'prompt=consent' in the auth URL?")
+            
+        return refresh_token
 
     def get_temporary_access_token(self, refresh_token: str) -> str:
         post_data: Dict[str:str] = {
             "client_id": self.client_id,  # ClientID
             "client_secret": self.client_secret,  # ClientSecret
-            "refresh_token": REFRESH_TOKEN,
+            "refresh_token": refresh_token,
             "grant_type": "refresh_token",
         }
 
-        response: str = requests.post(self.api_url, data=post_data)
-        return response.json()["access_token"]
+        print("Sending request to Google API to get the temporary access token...")
+        response: Response = requests.post(self.api_url, data=post_data, timeout=10)
+        
+        # Check for HTTP errors (400, 500, etc.)
+        response.raise_for_status()
+        
+        tokens = response.json()
+        access_token = tokens.get("access_token")
+        
+        if not access_token:
+            raise Exception("Warning: No access_token returned.")
+        
+        # return response.json()["access_token"]
+        return access_token
 
 
 def store_secret(secret_name: str, secret_value: str):
@@ -86,9 +116,13 @@ def store_secret(secret_name: str, secret_value: str):
 
 if __name__ == "__main__":
     print("")
-    print("INSTRUCTIONS:")
-    print("FIRST BE SURE YOU DID THE GCP APP SETUP!")
     print("****************************************")
+    print("GMAIL NEOMUTT CONFIGURATION")
+    print("****************************************")
+    print("")
+    print("FIRST BE SURE YOU DID THE GCP APP SETUP!")
+    print("")
+    print("INSTRUCTIONS:")
     print("")
     print("If you still haven't, just go and do it now,")
     print("no need to interrupt this script.")
@@ -115,7 +149,11 @@ if __name__ == "__main__":
 
     authorizer: GMailAuthorizer = GMailAuthorizer(client_id, client_secret)
     authorization_url: str = authorizer.get_authorization_url()
-
+    
+    print("")
+    print("NOTE: If you want Google to issue another refresh token, just")
+    print(r"append '&prompt=consent' to the end of the next URL.")
+    print("")
     print("============================== PASTE THIS URL IN YOUR BROWSER")
     print(authorization_url)
     print("=============================================================")
