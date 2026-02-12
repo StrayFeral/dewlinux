@@ -7,10 +7,12 @@ export DEBIAN_FRONTEND="noninteractive"
 # trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
-
+echo ""
 echo "INSTALLING GMAIL EMAIL TOOLS..."
+echo ""
 
 echo "**** WORK IN PROGRESS ******"
+echo ""
 
 #read -p "Enter Age: " age
 
