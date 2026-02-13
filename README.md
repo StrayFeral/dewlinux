@@ -2,8 +2,8 @@
 
 ## STATUS
 
-2026-02-16: PHASE3 Start. I will make demo videos and will put them on Youtube.
-2026-02-03: PHASE1 and PHASE2 Start. WORK-IN-PROGRESS...
+- 2026-02-16: PHASE3 Start. I will make demo videos and will put them on Youtube.
+- 2026-02-03: PHASE1 and PHASE2 Start. WORK-IN-PROGRESS...
 
 ## DESCRIPTION
 
