@@ -71,7 +71,8 @@ class GMailAuthorizer:
         
         if not refresh_token:
             raise Exception("Warning: No refresh_token returned. Did you use 'prompt=consent' in the auth URL?")
-            
+        
+        print(f"* Got refresh token: {refresh_token}")
         return refresh_token
 
     def get_temporary_access_token(self, refresh_token: str) -> str:

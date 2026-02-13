@@ -38,13 +38,14 @@ sudo apt -y install wget
 sudo apt -y install curl
 sudo apt -y install locate                  # File location
 sudo apt -y install tmux                    # Terminal multiplexer
-sudo apt -y install htop                    # Colored top
+sudo apt -y install htop btop               # System monitoring
 
 sudo apt -y install vlock                   # Console locker
 
 sudo apt -y install pandoc                  # Document conversion tool
 sudo apt -y install lynx links2             # Browsers
 
+sudo apt -y install neovim                  # Text editor
 sudo apt -y install mc                      # File manager
 sudo apt -y install sc sc-im                # Spreadsheets
 sudo apt -y install fastfetch               # System info
@@ -53,7 +54,7 @@ sudo apt -y install tty-clock               # Clock
 sudo apt -y install calcurse                # Calendar
 sudo apt -y install taskwarrior             # TODO manager
 sudo apt -y install moc moc-ffmpeg-plugin   # MP3 player: mocp
-sudo apt -y install fbi                     # Image viewer
+sudo apt -y install fbi fim                 # Image viewers
 sudo apt -y install mpv                     # Video player
 sudo apt -y install wordgrinder             # Word processor
 sudo apt -y install alsa-utils              # Sound control
