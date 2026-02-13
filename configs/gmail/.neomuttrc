@@ -1,12 +1,15 @@
 set mbox_type = Maildir
 set folder = "~/.mail/gmail"
 
-# FIX 1: Remove the leading slash after the + sign
 set spool_file = "+INBOX"
 set postponed = "+[Gmail]/Drafts"
 set record = "+[Gmail]/Sent Mail"
 
-# FIX 2: A more reliable find command
-# This looks for any directory that actually contains a 'cur' folder (valid Maildir)
 mailboxes `find ~/.mail/gmail -maxdepth 2 -type d -name cur | xargs dirname`
+
+# --- Identity Settings ---
+set realname = "YOURNAMEHERE"
+set from = "YOURGMAILEMAILHERE"
+set use_from = yes
+set envelope_from = yes
 

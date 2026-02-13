@@ -33,9 +33,9 @@ cyr:
 	[[ "$(DEBUG)" == 1 ]] && set -x
 	./scripts/01inst-kblayouts.sh
 
-email:
-	[[ "$(DEBUG)" == 1 ]] && set -x
-	./scripts/02inst-email.sh
+#email:
+#	[[ "$(DEBUG)" == 1 ]] && set -x
+#	./scripts/02inst-email.sh
 
 gmail:
 	[[ "$(DEBUG)" == 1 ]] && set -x
@@ -48,5 +48,6 @@ help:
 	@echo "  make games		- Games installation"
 	@echo "  make dev		- Development tools installation"
 	@echo "  make cyr		- Installation of Cyrillic keyboard layouts"
-	@echo "  make email		- Installation of email client and tools"
+	#@echo "  make email		- Installation of email client and tools"
 	@echo "  make gmail		- Installation of email client and GMAIL SETUP"
+	@echo "  DEBUG=1		- Sets the DEBUG flag"

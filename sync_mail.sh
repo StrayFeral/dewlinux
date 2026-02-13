@@ -28,7 +28,7 @@ echo "--------------------------------"
 echo "Downloading new messages via OfflineIMAP..."
 # -o runs it once and exits (no background daemon)
 # -u basic provides clean output for your terminal
-offlineimap -o -u basic
+offlineimap -o -u basic -c "$HOME/.offlineimaprc"
 
 if [ $? -eq 0 ]; then
     echo "Inbound sync complete."
@@ -37,5 +37,5 @@ else
 fi
 
 echo "--------------------------------"
-echo "DEW Sync Finished."
+echo "Mail Sync Finished."
 

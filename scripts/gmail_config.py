@@ -75,30 +75,6 @@ class GMailAuthorizer:
         print(f"* Got refresh token: {refresh_token}")
         return refresh_token
 
-    def get_temporary_access_token(self, refresh_token: str) -> str:
-        post_data: Dict[str:str] = {
-            "client_id": self.client_id,  # ClientID
-            "client_secret": self.client_secret,  # ClientSecret
-            "refresh_token": refresh_token,
-            "grant_type": "refresh_token",
-        }
-
-        print("Sending request to Google API to get the temporary access token...")
-        response: Response = requests.post(self.api_url, data=post_data, timeout=10)
-        
-        # Check for HTTP errors (400, 500, etc.)
-        response.raise_for_status()
-        
-        tokens = response.json()
-        access_token = tokens.get("access_token")
-        
-        if not access_token:
-            raise Exception("Warning: No access_token returned.")
-        
-        # return response.json()["access_token"]
-        return access_token
-
-
 def store_secret(secret_name: str, secret_value: str):
     try:
         # We use 'pass insert -m' to allow multi-line/piped input
@@ -143,7 +119,6 @@ if __name__ == "__main__":
     print("      CLIENT SECRET will be hidden.")
     print("")
 
-    # account_email: str = input("Enter your GMAIL email address : ")
     account_password: str = getpass.getpass("Enter your GMAIL password      : ")
     client_id: str = input("Enter your GMAIL CLIENT ID     : ")
     client_secret: str = getpass.getpass("Enter your GMAIL CLIENT SECRET : ")
@@ -168,10 +143,10 @@ if __name__ == "__main__":
 
     failed_redirect_url: str = input("Enter the failed redirect URL  : ")
     refresh_token: str = authorizer.get_refresh_token(failed_redirect_url)
-    # temporary_access_token: str = authorizer.get_temporary_access_token(refresh_token)
 
     # Storing everything in "pass"
     store_secret("gmail/accpass", account_password)
     store_secret("gmail/clientid", client_id)
     store_secret("gmail/clientsecret", client_secret)
     store_secret("gmail/refreshtoken", refresh_token)
+

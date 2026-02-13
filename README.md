@@ -63,17 +63,17 @@ apt -y install make sudo git vim vim-nox console-setup console-data
 # DEBIAN_FRONTEND=dialog dpkg-reconfigure console-setup
 
 # Adding the main user to the sudoers file
-usermod -aG sudo $(ls /home)
+usermod -aG sudo $USER
 
 update-alternatives --set editor $(which vim.nox)
 
 # Get the installation scripts
-git clone https://github.com/StrayFeral/dewlinux.git /home/$(ls /home)/dewlinux
-chown -R $(ls /home):$(ls /home) /home/$(ls /home)/dewlinux
+git clone https://github.com/StrayFeral/dewlinux.git /home/$USER/dewlinux
+chown -R $USER:$USER /home/$USER/dewlinux
 
-cat /home/$(ls /home)/dewlinux/configs/add_to_root_profile >> ~/.profile
-cat /home/$(ls /home)/dewlinux/configs/add_to_bashrc >> ~/.bashrc
-cp /home/$(ls /home)/dewlinux/configs/.vimrc ~/
+cat /home/$USER/dewlinux/configs/add_to_root_profile >> ~/.profile
+cat /home/$USER/dewlinux/configs/add_to_bashrc >> ~/.bashrc
+cp /home/$USER/dewlinux/configs/.vimrc ~/
 
 logout
 ```
@@ -105,150 +105,43 @@ That AppArmor dialog was the only thing I could not automate, sorry.
 
 > IMPORTANT: Essentially what I've built is a terminal-only system. While installation of some packages does install specific libraries from graphical environments and we get about 20% contamination with such components, the system as a whole remains a terminal-only system with no graphical desktop environment being installed or able to run.
 
-### NEOMUTT EMAIL SETUP - WORK IN PROGRESS!
+### NEOMUTT GMAIL EMAIL SETUP
+
+Before you do anything, the very very first thing you MUST ABSOLUTELY DO is to setup an "app" in the Google Cloud Platform (GCP). Don't ask me why - just do it.
+
+I know, many people would scratch their heads and bang themself in the wall with the "Why should I do this crap" question, but trust me - you just have to. Google outphased the simple username/password authentication since it's not secure enough, recently outphased the apppasswords too (maybe still work in some areas - no idea) and the only authentication method working now is the OAUTH2, which requires you to setup an app in their GCP platform.
+
+It took me time and lots of nerves until I set this right, since I had no previous GCP exposure at all. I could not find any Youtube video tutorial on how to do this, so I did it the hard way.
+
+I am however going to make a video tutorial on how to do this, so you don't have to suffer.
+
+So please subscribe to my Youtube channel and click LIKE on the video because I really lost lots of time and efforts until I made this work. Thanks!
+
+#### GETTING THE GOOGLE OAUTH2 CREDENTIALS
+
+You need to do these steps only once.
+
+Use your host OS and go to:
+
+>https://console.cloud.google.com
+
+You must create:
+- New project
+- Select the newly created project
+- New EXTERNAL DESKTOP app
+- Add your email
+- Add your email as a TESTER
+- Enable GMAIL API (search in APIs&Services)
+- Manually add a scope "https://mail.google.com/"
+
+> COPY THE CLIENT_ID AND CLIENT_SECRET AND SAVE THEM SOMEWHERE !!
+
+> NEVER "PUBLISH" YOUR APPLICATION OR GOOGLE WILL CHARGE YOU MONEY !!
+
+Finally run this and follow the on-screen instructions!
 
 ```bash
-export GPG_TTY=$(tty)
-sudo apt install neomutt isync msmtp msmtp-mta pass gpg notmuch abook
-
-# List existing GPG keys
-gpg --list-keys
-gpg --list-secret-keys --keyid-format LONG
-
-# Generate if you don't have one (choose RSA)
-gpg --full-generate-key
-
-# The part after the slash ("/") is the key ID
-gpg --list-secret-keys --keyid-format LONG
-
-# Suppose your key ID is ABCDEF12
-pass init ABCDEF12
-
-# For NON-GMAIL
-pass insert email/personal
-# pass show email/personal
-
-mkdir -p ~/Mail/Inbox
-cp configs/email/.mbsyncrc ~/
-
-mbsync -a
-
-cp configs/email/.msmtprc ~/
-chmod 600 ~/.msmtprc
-
-cp /usr/share/doc/msmtp/examples/msmtpq/msmtpq ~/bin/
-cp /usr/share/doc/msmtp/examples/msmtpq/msmtp-runqueue.sh ~/bin/
-chmod +x ~/bin/msmtp*
-mkdir -p ~/.msmtp.queue
-
-cp configs/email/.neomuttrc ~/.neomuttrc
-mkdir -p ~/.cache/mutt/headers ~/.cache/mutt/bodies
-
-# When asks for mail path: ~/Mail
-notmuch setup
-
-# Init and press q
-abook
-
-
-########### workflow:
-inside neomutt when writing email: y to reply
-S to sync
-
-
-
-#########
-mbsync to pull the new mail
-
-
-
-
-
-
-
-
-
-
-
-
-
-sudo apt install isync notmuch
-
-# Create a local bin if you don't have one
-# mkdir -p ~/.local/bin
-Then create the folder: mkdir -p ~/.msmtp.queue
-
-# Copy the scripts from the doc directory
-cp /usr/share/doc/msmtp/examples/msmtpq/msmtpq ~/bin/
-cp /usr/share/doc/msmtp/examples/msmtpq/msmtp-runqueue.sh ~/bin/
-
-# Make them executable
-chmod +x ~/bin/msmtpq ~/bin/msmtp-runqueue.sh
-
-cp configs/temp/mailsync.service  ~/.config/systemd/user/mailsync.service
-
-
-
-
-
-# List existing GPG keys
-gpg --list-keys
-gpg --list-secret-keys --keyid-format LONG
-
-# Generate if you don't have one (choose RSA)
-gpg --full-generate-key
-
-# The part after the slash ("/") is the key ID
-gpg --list-secret-keys --keyid-format LONG
-
-# Suppose your key ID is ABCDEF12
-pass init ABCDEF12
-
-# For NON-GMAIL
-pass insert email/personal
-passwordeval "pass show email/personal"
-
-
-
-
-
-
-
-# FOR GMAIL
-pass insert gmail/app-password
-pass show gmail/app-password
-
-# TEST
-echo "Test email from TTY" | msmtp -s "Test" recipient@example.com
-
-
-
-GMAIL > Settings > Forwarding and POP/IMAP > Enable IMAP
-Google Account > Security > App Passwords > select "Mail" > Generate
-**COPY to clipboard**
-
-COPY: ~/.msmtprc
-chmod 600 ~/.msmtprc
-
-COPY: ~/.offlineimaprc
-RUN: offlineimap
-
-COPY: ~/.muttrc
-
-RUN: offlineimap  # This syncs gmail with local mail
-RUN: neomutt
-
-
-FOR GMAIL
-Google “App Password” (simplest)
-
-Works only if your account allows it (for Gmail + 2FA)
-Generate App Password in your Google account → 16-character password
-Store in ~/.password-store or NeoMutt config
-NeoMutt + msmtp can use it as normal password
-
-CRONTAB:
-*/10 * * * * /home/yourusername/bin/offlineimap-sync.sh
+make gmail
 ```
 
 ### VIDEO
