@@ -28,8 +28,14 @@ chmod 600 ~/.msmtprc
 cp configs/gmail/.neomuttrc ~/
 cp scripts/mailhelper.py ~/
 
+mkdir -p ~/.msmtp.queue
+chmod 700 ~/.msmtp.queue
+
 # Generate a key
+echo ""
+echo ""
 echo "Choose RSA type of key, 4096 size, 'never expire', then type 'y' and ENTER:"
+echo ""
 gpg --full-generate-key
 
 # Initialize the password store
@@ -50,7 +56,7 @@ python3 scripts/gmail_config.py
 cp configs/gmail/.offlineimaprc ~/
 
 echo ""
-read -p "Enter your NAME (to use in FROM): " realname
+read -p "Enter your NAME (to use in FROM)   : " realname
 read -p "Enter your FULL GMail email address: " emailaddr
 
 sed -i "s|YOURLINUXUSERNAMEHERE|$USER|g" ~/.offlineimaprc
@@ -72,8 +78,6 @@ sudo systemctl restart apparmor
 # -rwx------ 1 forester forester 2219 Feb 13 17:41 /home/forester/mailhelper.py
 # -rw------- 1 forester forester 664 Feb 13 17:39 /home/forester/.msmtprc
 
-echo ""
-echo "GMAIL EMAIL TOOLS INSTALLED."
 echo ""
 echo "Now you need to run './sync_mail.sh' to initialize everything..."
 echo ""
@@ -104,3 +108,5 @@ echo ""
 echo "And after all if you want some automation - you can always put"
 echo "'sync_mail.sh' in a cron job, so I am not limiting you in any way."
 echo ""
+echo ""
+echo "GMAIL EMAIL TOOLS INSTALLED."

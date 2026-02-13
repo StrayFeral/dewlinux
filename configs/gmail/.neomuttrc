@@ -13,3 +13,15 @@ set from = "YOURGMAILEMAILHERE"
 set use_from = yes
 set envelope_from = yes
 
+# Force NeoMutt to use the queue script
+#set sendmail = "/usr/libexec/msmtp/msmtpq/msmtpq"
+#set sendmail = "/usr/bin/env MSMTPQ_Q_ONLY=1 MSMTPQ_DIR=/home/forester/.msmtp.queue /usr/libexec/msmtp/msmtpq/msmtpq"
+#set sendmail = "~/bin/msmtp-force-queue"
+set sendmail = "~/bin/msmtp-enqueue-only"
+
+# Tell NeoMutt NOT to wait for the result (helps with backgrounding)
+set sendmail_wait = -1
+
+# This prevents NeoMutt from trying to be 'smart' and using its internal SMTP
+set write_bcc = yes
+

@@ -6,5 +6,7 @@ export VISUAL="/usr/bin/vim"
 export EDITOR="/usr/bin/vim"
 export LESS='-FRX'
 
-export MSMTPQ_DIR=$HOME/.msmtp.queue
+export MSMTPQ_DIR="$HOME/.msmtp.queue"
+export MSMTP_QUEUE="$HOME/.msmtp.queue"
+export MSMTPQ_Q_ONLY=1
 

@@ -1,0 +1,16 @@
+#!/bin/bash
+QUEUEDIR="$HOME/.msmtp.queue"
+mkdir -p "$QUEUEDIR"
+
+# Create a unique filename base
+ID=$(date +%Y-%m-%d-%H.%M.%S)-${RANDOM}
+
+# Save the mail content (from stdin) to the .mail file
+cat > "${QUEUEDIR}/${ID}.mail"
+
+# Create the .msmtp file (metadata) so msmtp-queue knows how to send it
+# We pass the arguments NeoMutt gave us (the recipients) into this file
+echo "$@" > "${QUEUEDIR}/${ID}.msmtp"
+
+chmod 600 "${QUEUEDIR}/${ID}.mail" "${QUEUEDIR}/${ID}.msmtp"
+

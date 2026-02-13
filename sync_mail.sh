@@ -1,22 +1,31 @@
 #!/bin/bash
 
 # 1. Define the queue directory (must match your msmtpq setup)
-# QUEUEDIR="~/.msmtpqueue"
 QUEUEDIR="$HOME/.msmtpqueue"
+export EMAIL_CONN_TEST=p
 
 echo "Mail Sync Started: $(date)"
 echo "--------------------------------"
 
 # 2. Flush Outbound Mail
-if [ -n "$(ls -A "$QUEUEDIR" 2>/dev/null)" ]; then
-    echo "Sending queued outbound messages..."
-    # msmtp-flush is a wrapper that sends everything in the queue
-    msmtp-flush
+export MSMTPQ_DIR="$HOME/.msmtp.queue"
+export PATH="/usr/libexec/msmtp/msmtpq:$PATH"
+
+# IMPORTANT: Ensure GPG can talk to your terminal for the password
+export GPG_TTY=$(tty)
+
+echo "Syncing outbound mail..."
+
+if ls "$MSMTPQ_DIR"/*.msmtp >/dev/null 2>&1; then
+    # We use a subshell to ensure msmtp-queue sees everything it needs
+    # We also explicitly point to your msmtprc
+    msmtp-queue -r -- -C "$HOME/.msmtprc"
+    
     if [ $? -eq 0 ]; then
         echo "Outbound sync complete."
     else
-        echo "Error sending mail. Check internet connection."
-        exit 1
+        echo "Error: msmtp failed (Exit Code 78 usually means authentication/config error)."
+        echo "Check if your GPG agent is running: gpg-connect-agent /bye"
     fi
 else
     echo "No outbound mail to send."
