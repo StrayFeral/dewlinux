@@ -21,12 +21,14 @@ read -p "Press [ENTER] to resume ..."
 sudo apt update
 sudo apt -y install neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass
 
+mkdir -p ~/bin
 mkdir -p ~/.mail/gmail ~/.msmtpqueue
 
 cp configs/gmail/.msmtprc ~/
 chmod 600 ~/.msmtprc
 cp configs/gmail/.neomuttrc ~/
 cp scripts/mailhelper.py ~/
+cp scripts/msmtp-enqueue-only ~/bin
 
 mkdir -p ~/.msmtp.queue
 chmod 700 ~/.msmtp.queue
