@@ -1,14 +1,12 @@
 set mbox_type = Maildir
 set folder = "~/.mail/gmail"
-set spool_file = "+/INBOX"
-set postponed = "+/[Gmail]/Drafts"
-set record = "+/[Gmail]/Sent Mail"
 
-set my_passw `pass gmail/accpass`
+# FIX 1: Remove the leading slash after the + sign
+set spool_file = "+INBOX"
+set postponed = "+[Gmail]/Drafts"
+set record = "+[Gmail]/Sent Mail"
 
-# Send mail through the QUEUE instead of the internet directly
-set sendmail = "/usr/local/bin/msmtpq -a gmail"
-
-# Tell NeoMutt where to look for your local mail
-mailboxes `find ~/.mail/gmail -maxdepth 1 -type d -name ".*" -printf "+'%f' "`
+# FIX 2: A more reliable find command
+# This looks for any directory that actually contains a 'cur' folder (valid Maildir)
+mailboxes `find ~/.mail/gmail -maxdepth 2 -type d -name cur | xargs dirname`
 

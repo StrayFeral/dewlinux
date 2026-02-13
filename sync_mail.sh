@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # 1. Define the queue directory (must match your msmtpq setup)
-QUEUEDIR="~/.msmtpqueue"
+# QUEUEDIR="~/.msmtpqueue"
+QUEUEDIR="$HOME/.msmtpqueue"
 
 echo "Mail Sync Started: $(date)"
 echo "--------------------------------"

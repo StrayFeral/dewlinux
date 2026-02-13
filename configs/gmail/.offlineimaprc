@@ -1,6 +1,37 @@
 [general]
-pythonfile = ~/dewlinux/scripts/offlineimap.py
+# The list of accounts to sync (referencing the [Account ...] section below)
+accounts = Gmail
+# The path to your python helper for 'pass' integration
+pythonfile = ~/.offlineimap.py
+# How many accounts to sync at once
+maxsyncaccounts = 1
 
-[Repository Remote]
-oauth2_access_token_eval = get_token()
+[Account Gmail]
+# Links the local storage to the remote server settings
+localrepository = LocalRepo
+remoterepository = RemoteRepo
 
+[Repository LocalRepo]
+type = Maildir
+# Where your mail will be stored on your hard drive
+localfolders = ~/.mail/gmail
+
+[Repository RemoteRepo]
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = yourname@gmail.com
+
+# Use XOAUTH2 (required for Gmail in 2026)
+auth_mechanisms = XOAUTH2
+oauth2_request_url = https://accounts.google.com/o/oauth2/token
+
+# Pull credentials from 'pass' via your python helper
+oauth2_client_id_eval = get_pass("gmail/clientid")
+oauth2_client_secret_eval = get_pass("gmail/clientsecret")
+oauth2_refresh_token_eval = get_pass("gmail/refreshtoken")
+
+# Security settings
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+# Optional: Only sync specific folders to save time/space
+# folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Sent Mail', '[Gmail]/Drafts']
