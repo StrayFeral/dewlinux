@@ -32,7 +32,7 @@ cp configs/gmail/.msmtprc ~/
 chmod 600 ~/.msmtprc
 cp configs/gmail/.neomuttrc ~/
 cp configs/gmail/.offlineimaprc ~/
-cp configs/gmail/.offlineimap.py ~/
+cp scripts/.offlineimap.py ~/
 
 # Generate a key
 echo "Choose RSA type of key, 4096 size, 'never expire', then type 'y' and ENTER:"
