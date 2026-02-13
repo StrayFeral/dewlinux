@@ -63,17 +63,17 @@ apt -y install make sudo git vim vim-nox console-setup console-data
 # DEBIAN_FRONTEND=dialog dpkg-reconfigure console-setup
 
 # Adding the main user to the sudoers file
-usermod -aG sudo $USER
+usermod -aG sudo $(ls /home)
 
 update-alternatives --set editor $(which vim.nox)
 
 # Get the installation scripts
-git clone https://github.com/StrayFeral/dewlinux.git /home/$USER/dewlinux
-chown -R $USER:$USER /home/$USER/dewlinux
+git clone https://github.com/StrayFeral/dewlinux.git /home/$(ls /home)/dewlinux
+chown -R $(ls /home):$(ls /home) /home/$(ls /home)/dewlinux
 
-cat /home/$USER/dewlinux/configs/add_to_root_profile >> ~/.profile
-cat /home/$USER/dewlinux/configs/add_to_bashrc >> ~/.bashrc
-cp /home/$USER/dewlinux/configs/.vimrc ~/
+cat /home/$(ls /home)/dewlinux/configs/add_to_root_profile >> ~/.profile
+cat /home/$(ls /home)/dewlinux/configs/add_to_bashrc >> ~/.bashrc
+cp /home/$(ls /home)/dewlinux/configs/.vimrc ~/
 
 logout
 ```
