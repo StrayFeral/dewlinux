@@ -2,7 +2,7 @@
 accounts = Gmail
 maxsyncaccounts = 1
 # IMPORTANT: Use the full absolute path here
-pythonfile = /home/YOURLINUXUSERNAMEHERE/mailhelper.py
+pythonfile = /home/YOURLINUXUSERNAMEHERE/get_pass_secret.py
 
 [Account Gmail]
 localrepository = LocalRepo
@@ -20,9 +20,9 @@ auth_mechanisms = XOAUTH2
 oauth2_request_url = https://accounts.google.com/o/oauth2/token
 
 # Switch back to _eval and wrap the function call in quotes
-oauth2_client_id_eval = get_pass("gmail/clientid")
-oauth2_client_secret_eval = get_pass("gmail/clientsecret")
-oauth2_refresh_token_eval = get_pass("gmail/refreshtoken")
+oauth2_client_id_eval = get_pass_secret("gmail/clientid")
+oauth2_client_secret_eval = get_pass_secret("gmail/clientsecret")
+oauth2_refresh_token_eval = get_pass_secret("gmail/refreshtoken")
 
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt

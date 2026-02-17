@@ -17,7 +17,10 @@ class GMailAuthorizer:
         self.api_url: str = r"https://oauth2.googleapis.com/token"
 
     def get_authorization_url(self) -> str:
-        """Returns the authorization URL which the user must manually paste into the browser, in order to get the response URL with the authorization code."""
+        """Returns the authorization URL which the user must manually
+        paste into the browser, in order to get the response URL with
+        the authorization code.
+        """
 
         url: str = (
             r"https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=http://localhost&response_type=code&scope=https://mail.google.com/&access_type=offline&prompt=consent"
@@ -27,25 +30,30 @@ class GMailAuthorizer:
         auth_url: str = url.replace(r"YOUR_CLIENT_ID", self.client_id)
         return auth_url
 
-    def get_refresh_token(self, authorization_response: str) -> str:
-        """After the response URL was returned, it contains the authorization code, which comes as an argument to this method."""
+    def get_authorization_code(self, authorization_response_url: str) -> str:
+        """Filters the authorization code out of the
+        authorization response url."""
         # After "Allow", browser will unsuccessfully redirect
         # The user needs to paste the full redirect URL in this
 
         # We need to get the AuthorizationCode out of this URL
-        # pattern: str = r"code=(.*?)\&?"
         pattern: str = r'code=([^&]+)'
         authorization_code: str = ""
         match: Match[str] = re.search(pattern, authorization_response)
         if match:
             authorization_code = match.group(1)
-            
-            # Debug print
-            print(f"* Got authorization code: {authorization_code}")
         else:
             raise Exception(
                 f"Cannot get the authorization code out of the response url({self.auth_response})"
             )
+        
+        return authorization_code
+    
+    
+    def get_refresh_token(self, authorization_code: str) -> str:
+        """After the response URL was returned, it contains the
+        authorization code, which comes as an argument to this method.
+        """
 
         # Data to be sent
         # We will get a JSON object in return
@@ -59,8 +67,6 @@ class GMailAuthorizer:
 
         # A POST request to the API
         # We are looking for a refresh token here
-        print("Sending request to Google API to get the refresh token...")
-        # json_response: str = requests.post(self.api_url, json=post_data)
         response: Response = requests.post(self.api_url, data=post_data, timeout=10)
         
         # Check for HTTP errors (400, 500, etc.)
@@ -72,23 +78,18 @@ class GMailAuthorizer:
         if not refresh_token:
             raise Exception("Warning: No refresh_token returned. Did you use 'prompt=consent' in the auth URL?")
         
-        print(f"* Got refresh token: {refresh_token}")
         return refresh_token
 
 def store_secret(secret_name: str, secret_value: str):
-    try:
-        # We use 'pass insert -m' to allow multi-line/piped input
-        # The -f flag forces an overwrite if the secret already exists
-        result: str = subprocess.run(
-            ["pass", "insert", "--multiline", "-f", secret_name],
-            input=secret_value,  # This pipes the secret into the command
-            text=True,
-            capture_output=True,
-            check=True,
-        )
-        print(f"Successfully stored: {secret_name}")
-    except subprocess.CalledProcessError as e:
-        print(f"Error: {e.stderr}")
+    # We use 'pass insert -m' to allow multi-line/piped input
+    # The -f flag forces an overwrite if the secret already exists
+    result: str = subprocess.run(
+        ["pass", "insert", "--multiline", "-f", secret_name],
+        input=secret_value,  # This pipes the secret into the command
+        text=True,
+        capture_output=True,
+        check=True,
+    )
 
 
 if __name__ == "__main__":
@@ -119,7 +120,7 @@ if __name__ == "__main__":
     print("      CLIENT SECRET will be hidden.")
     print("")
 
-    account_password: str = getpass.getpass("Enter your GMAIL password      : ")
+    # account_password: str = getpass.getpass("Enter your GMAIL password      : ")
     client_id: str = input("Enter your GMAIL CLIENT ID     : ")
     client_secret: str = getpass.getpass("Enter your GMAIL CLIENT SECRET : ")
 
@@ -142,11 +143,14 @@ if __name__ == "__main__":
     print("")
 
     failed_redirect_url: str = input("Enter the failed redirect URL  : ")
-    refresh_token: str = authorizer.get_refresh_token(failed_redirect_url)
+    authorization_code: str = authorizer.get_authorization_code(failed_redirect_url)
+    print("Sending request to Google API to get the refresh token...")
+    refresh_token: str = authorizer.get_refresh_token(authorization_code)
 
     # Storing everything in "pass"
-    store_secret("gmail/accpass", account_password)
+    # store_secret("gmail/accpass", account_password)
     store_secret("gmail/clientid", client_id)
     store_secret("gmail/clientsecret", client_secret)
     store_secret("gmail/refreshtoken", refresh_token)
+    print("Secrets stored.")
 

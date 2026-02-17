@@ -3,7 +3,7 @@ import sys
 import requests
 import subprocess
 
-def get_pass(path):
+def get_pass_secret(path):
     try:
         # Using full path /usr/bin/pass is safer for AppArmor/Cron/msmtp
         result = subprocess.run(["/usr/bin/pass", path], 
@@ -21,9 +21,9 @@ def get_temporary_access_token():
     try:
         api_url = "https://oauth2.googleapis.com/token"
         # 1. Pull the 3 required secrets from your 'pass' store
-        client_id = get_pass("gmail/clientid")
-        client_secret = get_pass("gmail/clientsecret")
-        refresh_token = get_pass("gmail/refreshtoken")
+        client_id = get_pass_secret("gmail/clientid")
+        client_secret = get_pass_secret("gmail/clientsecret")
+        refresh_token = get_pass_secret("gmail/refreshtoken")
 
         # 2. Perform the exchange with Google
         post_data = {
@@ -56,11 +56,11 @@ if __name__ == "__main__":
             else:
                 raise Exception("Cannot get the temporary access token!")
         else:
-            secret = get_pass(keyname)
+            secret = get_pass_secret(keyname)
             if secret:
                 print(secret)
             else:
                 raise Exception("Cannot get the secret from 'pass' store!")
     else:
-        sys.stderr.write("Usage: python3 mailhelper.py <pass_path>\n")
+        sys.stderr.write("Usage: python3 get_pass_secret.py <pass_path|temporary_access_token>\n")
         sys.exit(1)

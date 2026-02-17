@@ -79,7 +79,7 @@ profile msmtp /usr/bin/msmtp flags=(attach_disconnected) {
 
     # Allow Python to run and access your specific script
     /usr/bin/python3.[0-9]* PUx,
-    owner @{HOME}/mailhelper.py r,
+    owner @{HOME}/get_pass_secret.py r,
 
     # Allow Python to read its own libraries (the "cannot read output" fix)
     /usr/lib/python3.[0-9]/** r,
