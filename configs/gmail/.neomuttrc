@@ -12,11 +12,9 @@ set realname = "YOURNAMEHERE"
 set from = "YOURGMAILEMAILHERE"
 set use_from = yes
 set envelope_from = yes
+alternates "YOURGMAILEMAILHERE"
 
 # Force NeoMutt to use the queue script
-#set sendmail = "/usr/libexec/msmtp/msmtpq/msmtpq"
-#set sendmail = "/usr/bin/env MSMTPQ_Q_ONLY=1 MSMTPQ_DIR=/home/forester/.msmtp.queue /usr/libexec/msmtp/msmtpq/msmtpq"
-#set sendmail = "~/bin/msmtp-force-queue"
 set sendmail = "~/bin/msmtp-enqueue-only"
 
 # Tell NeoMutt NOT to wait for the result (helps with backgrounding)
@@ -24,4 +22,37 @@ set sendmail_wait = -1
 
 # This prevents NeoMutt from trying to be 'smart' and using its internal SMTP
 set write_bcc = yes
+
+# Set the global default
+set sort = reverse-date
+set sort_aux = date
+
+# Date & Index Definitions
+set date_format = "%Y-%m-%d %H:%M"
+
+# Update the hooks to enforce REVERSE sorting every time you switch folders
+# Note the 'reverse-date' inside the single quotes
+folder-hook . 'set sort=reverse-date; set index_format="%4C %Z %d %-25.25n %s"'
+
+# Handle the Sent folder (also newest on top)
+folder-hook "[Gmail]/Sent Mail" 'set sort=reverse-date; set index_format="%4C %Z %d %-25.25t %s"'
+
+# Colors
+color index brightyellow default "~N"
+color index cyan default "~F"           # Flagged (Starred)
+color index brightred default "~D"      # Flagged for deletion
+color index brightwhite default "~O"    # Old, but still unread
+color index_date green default          # The date column
+color index_subject white default       # The subject
+
+# Quotes (text starting with >)
+color body cyan default "^>.*"
+color body brightcyan default "^>>.*"
+color body blue default "^>>>.*"
+
+# Pager colors
+color header green default "^Date:"
+color header brightwhite default "^From:"
+color header white default "^To:"
+color header brightyellow default "^Subject:"
 
