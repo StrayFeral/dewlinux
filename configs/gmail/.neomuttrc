@@ -51,8 +51,12 @@ color body brightcyan default "^>>.*"
 color body blue default "^>>>.*"
 
 # Pager colors
-color header green default "^Date:"
-color header brightwhite default "^From:"
-color header white default "^To:"
-color header brightyellow default "^Subject:"
+color header white default "."
+color header green default "Date:"
+color header green default "Received:"
+color header brightwhite default "From:"
+color header brightwhite default "Reply-To:"
+color header cyan default "To:"
+color header brightwhite default "Delivered-To:"
+color header brightyellow default "Subject:"
 
