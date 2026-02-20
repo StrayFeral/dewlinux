@@ -9,12 +9,72 @@ from typing import Pattern, Match, Dict
 from requests.models import Response
 
 
+def get_discovery_url_by_email(email):
+    domain = email.split('@')[-1].lower()
+    
+    # 1. Map the domain to the Standard Issuer
+    # For Microsoft 'common' works for all personal & work accounts
+    providers = {
+        "gmail.com": "https://accounts.google.com",
+        "outlook.com": "https://login.microsoftonline.com/common/v2.0",
+        "hotmail.com": "https://login.microsoftonline.com/common/v2.0",
+        "live.com": "https://login.microsoftonline.com/common/v2.0"
+    }
+    
+    issuer = providers.get(domain)
+    
+    if not issuer:
+        raise ValueError(f"Domain '{domain}' is not supported yet.")
+        
+    # 2. Construct the standard Discovery URL
+    discovery_url = f"{issuer.rstrip('/')}/.well-known/openid-configuration"
+    
+    # 3. Try to fetch the configuration
+    try:
+        print(f"Attempting to reach: {discovery_url}")
+        response = requests.get(discovery_url, timeout=5)
+        response.raise_for_status()
+        return response.json()
+    
+    except requests.exceptions.RequestException:
+        # BACKUP PLAN: If you had a proxy or secondary provider, call it here.
+        # For now, we raise your specific Exception as requested.
+        raise Exception("Discovery URL provider cannot be reached")
+
+# --- EXECUTION ---
+try:
+    user_email = input("What is your email?: ")
+    config = get_discovery_url_by_email(user_email)
+    
+    print("\n--- Discovery Success ---")
+    print(f"Auth Endpoint: {config.get('authorization_endpoint')}")
+    print(f"Token Endpoint: {config.get('token_endpoint')}")
+
+except Exception as e:
+    print(f"CRITICAL ERROR: {e}")
+
+
+
+
 class GMailAuthorizer:
     def __init__(self, client_id: str, client_secret: str) -> None:
         self.client_id: str = client_id
         self.client_secret: str = client_secret
         self.authorization_code: str = ""
-        self.api_url: str = r"https://oauth2.googleapis.com/token"
+        
+        self.token_endpoint_url: str = ""
+        self.auth_endpoint_url: str = ""
+    
+    def discover(self) -> None:
+        discovery_url: str = r"/.well-known/openid-configuration"
+        #discovery_url: str = r"https://accounts.google.com/.well-known/openid-configuration"
+        
+        response = requests.get(discovery_url)
+        response.raise_for_status() # Check for errors
+        config_data = response.json()
+        
+        self.auth_endpoint_url = config_data.get("authorization_endpoint"),
+        self.token_endpoint_url = config_data.get("token_endpoint"),
 
     def get_authorization_url(self) -> str:
         """Returns the authorization URL which the user must manually
@@ -67,7 +127,7 @@ class GMailAuthorizer:
 
         # A POST request to the API
         # We are looking for a refresh token here
-        response: Response = requests.post(self.api_url, data=post_data, timeout=10)
+        response: Response = requests.post(self.token_endpoint_url, data=post_data, timeout=10)
         
         # Check for HTTP errors (400, 500, etc.)
         response.raise_for_status()
@@ -125,6 +185,7 @@ if __name__ == "__main__":
     client_secret: str = getpass.getpass("Enter your GMAIL CLIENT SECRET : ")
 
     authorizer: GMailAuthorizer = GMailAuthorizer(client_id, client_secret)
+    authorizer.discover()
     authorization_url: str = authorizer.get_authorization_url()
     
     print("")
