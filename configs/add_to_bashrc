@@ -1,5 +1,8 @@
 
 #==================== ADDITIONAL DEW SETTINGS
 
-# Will leave this one empty for now
+# Viewing .md files
+mdview() {
+    pandoc "$1" | lynx -stdin
+}
 
