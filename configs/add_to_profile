@@ -5,6 +5,7 @@ export PAGER="/usr/bin/less"
 export VISUAL="/usr/bin/vim"
 export EDITOR="/usr/bin/vim"
 export LESS='-FRX'
+export EZA_COLORS="uu=0:gu=0:da=0"
 
 export MSMTPQ_DIR="$HOME/.msmtp.queue"
 export MSMTP_QUEUE="$HOME/.msmtp.queue"
