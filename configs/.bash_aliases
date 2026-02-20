@@ -1,3 +1,6 @@
+alias ls='eza'
+alias bat='batcat'
+
 # View .md files
 alias mdview='pandoc "$1" | lynx -stdin'
 

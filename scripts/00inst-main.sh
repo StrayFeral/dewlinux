@@ -39,6 +39,10 @@ sudo apt -y install curl
 sudo apt -y install locate                  # File location
 sudo apt -y install tmux                    # Terminal multiplexer
 sudo apt -y install htop btop               # System monitoring
+sudo apt -y install eza                     # Colorful ls
+sudo apt -y install fzf                     # Modern search tool
+sudo apt -y install ncdu                    # Great du replacement
+sudo apt -y install bat                     # Cat replacement
 
 sudo apt -y install vlock                   # Console locker
 
