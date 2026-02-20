@@ -1,6 +1,7 @@
 alias ls='eza'
 alias lsla='eza -la --header --group --time-style=long-iso'
 alias bat='batcat'
+alias fd='fdfind'
 
 # View .md files
 alias mdview='pandoc "$1" | lynx -stdin'
