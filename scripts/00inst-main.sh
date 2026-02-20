@@ -44,8 +44,9 @@ sudo apt -y install fzf                     # Modern search tool
 sudo apt -y install ncdu                    # Great du replacement
 sudo apt -y install bat                     # Cat replacement
 sudo apt -y install dysk                    # df replacement
-sudo apt -y install ripgrep                 # df replacement
-sudo apt -y install fd-find                 # df replacement
+sudo apt -y install duf                     # df replacement
+sudo apt -y install ripgrep                 # grep replacement
+sudo apt -y install fd-find                 # find replacement
 
 sudo apt -y install vlock                   # Console locker
 
