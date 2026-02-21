@@ -10,7 +10,8 @@ def get_secret(secret_name: str) -> str:
 
 
 def get_token(cid: str, csecret: str, rtoken: str) -> str:
-    url: str = r"https://oauth2.googleapis.com/token"
+    #url: str = r"https://oauth2.googleapis.com/token"
+    url: str = get_secret("gmail/tokenendpoint")
     post_data: Dict[str:str] = {
         "client_id": get_secret("gmail/clientid"),
         "client_secret": get_secret("gmail/clientsecret"),

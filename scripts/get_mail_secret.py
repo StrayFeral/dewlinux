@@ -19,13 +19,13 @@ def get_pass_secret(path):
 # Get the temporary access token
 def get_temporary_access_token():
     try:
-        api_url = "https://oauth2.googleapis.com/token"
-        # 1. Pull the 3 required secrets from your 'pass' store
+        #api_url = "https://oauth2.googleapis.com/token"
+        api_url = get_pass_secret("gmail/tokenendpoint")
         client_id = get_pass_secret("gmail/clientid")
         client_secret = get_pass_secret("gmail/clientsecret")
         refresh_token = get_pass_secret("gmail/refreshtoken")
 
-        # 2. Perform the exchange with Google
+        # 2. Perform the exchange
         post_data = {
             'client_id': client_id,
             'client_secret': client_secret,
@@ -36,7 +36,7 @@ def get_temporary_access_token():
         response = requests.post(api_url, data=post_data)
         response.raise_for_status()
         
-        # 3. Print ONLY the access_token for msmtp to read
+        # Print ONLY the access_token for msmtp to read
         return response.json()['access_token']
 
     except Exception as e:

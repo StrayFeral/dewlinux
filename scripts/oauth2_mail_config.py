@@ -1,6 +1,7 @@
 # /usr/bin/env puthon3
 
 import re
+import sys
 import json
 import getpass
 import requests
@@ -10,7 +11,12 @@ from requests.models import Response
 from urllib.parse import urlencode, urljoin
 
 
-class GMailAuthorizer:
+class MailAuthorizer:
+    """Class for doing OAUTH2 email setup for GMail and Outlook/Hotmail.
+    
+    NOTE: TESTED ONLY WITH GMAIL!
+    """
+    
     def __init__(self, client_id: str, client_secret: str) -> None:
         self.client_id: str = client_id
         self.client_secret: str = client_secret
@@ -20,6 +26,11 @@ class GMailAuthorizer:
         self.auth_endpoint_url: str = ""
 
     def __get_discovery_url_by_email(self, email: str) -> str:
+        """Adds more execution time, but also more abstraction.
+        And since this time will be lost only during the setup phase,
+        I really do not care.
+        """
+        
         domain: str = email.split('@')[-1].lower()
         
         providers: Dict[str:str] = {
@@ -132,12 +143,17 @@ def store_secret(secret_name: str, secret_value: str):
 
 
 if __name__ == "__main__":
+    if len(sys.argv) < 1:
+        raise Exception("USAGE: python3 oauth2_mail_config.py 'YOUREMAILADDRESSHERE@blah.com'")
+    
+    email: str = sys.argv[1]
+    
     print("")
     print("****************************************")
-    print("GMAIL NEOMUTT CONFIGURATION")
+    print("OAUTH2 EMAIL NEOMUTT CONFIGURATION")
     print("****************************************")
     print("")
-    print("FIRST BE SURE YOU DID THE GCP APP SETUP!")
+    print("FIRST BE SURE YOU DID THE **CLOUD** (GCP/AZURE) APP SETUP!")
     print("")
     print("INSTRUCTIONS:")
     print("")
@@ -159,17 +175,14 @@ if __name__ == "__main__":
     print("      CLIENT SECRET will be hidden.")
     print("")
 
-    # account_password: str = getpass.getpass("Enter your GMAIL password      : ")
-    client_id: str = input("Enter your GMAIL CLIENT ID     : ")
-    client_secret: str = getpass.getpass("Enter your GMAIL CLIENT SECRET : ")
+    input(f"Your email               : {email}")
+    client_id: str = input(              "Enter your CLIENT ID     : ")
+    client_secret: str = getpass.getpass("Enter your CLIENT SECRET : ")
 
-    authorizer: GMailAuthorizer = GMailAuthorizer(client_id, client_secret)
-    authorizer.discover()
+    authorizer: MailAuthorizer = MailAuthorizer(client_id, client_secret)
+    authorizer.discover(email)
     authorization_url: str = authorizer.get_authorization_url()
     
-    print("")
-    print("NOTE: If you want Google to issue another refresh token, just")
-    print(r"append '&prompt=consent' to the end of the next URL.")
     print("")
     print("============================== PASTE THIS URL IN YOUR BROWSER")
     print(authorization_url)
@@ -184,11 +197,11 @@ if __name__ == "__main__":
 
     failed_redirect_url: str = input("Enter the failed redirect URL  : ")
     authorization_code: str = authorizer.get_authorization_code(failed_redirect_url)
-    print("Sending request to Google API to get the refresh token...")
+    print("Sending request to the cloud API to get the refresh token...")
     refresh_token: str = authorizer.get_refresh_token(authorization_code)
 
     # Storing everything in "pass"
-    # store_secret("gmail/accpass", account_password)
+    store_secret("gmail/tokenendpoint", authorizer.token_endpoint_url)
     store_secret("gmail/clientid", client_id)
     store_secret("gmail/clientsecret", client_secret)
     store_secret("gmail/refreshtoken", refresh_token)
