@@ -72,7 +72,7 @@ update-alternatives --set editor $(which vim.nox)
 git clone https://github.com/StrayFeral/dewlinux.git /home/$(ls /home)/dewlinux
 chown -R $(ls /home):$(ls /home) /home/$(ls /home)/dewlinux
 
-cat /home/$(ls /home)/dewlinux/configs/add_to_root_profile >> ~/.profile
+cat /home/$(ls /home)/dewlinux/configs/add_to_profile >> ~/.profile
 cat /home/$(ls /home)/dewlinux/configs/add_to_bashrc >> ~/.bashrc
 cp /home/$(ls /home)/dewlinux/configs/.vimrc ~/
 
@@ -106,7 +106,7 @@ That AppArmor dialog was the only thing I could not automate, sorry.
 
 > IMPORTANT: Essentially what I've built is a terminal-only system. While installation of some packages does install specific libraries from graphical environments and we get about 20% contamination with such components, the system as a whole remains a terminal-only system with no graphical desktop environment being installed or able to run.
 
-### NEOMUTT GMAIL EMAIL SETUP
+### NEOMUTT OAUTH2 (GMAIL/OUTLOOK) EMAIL SETUP
 
 Before you do anything, the very very first thing you MUST ABSOLUTELY DO is to setup an "app" in the Google Cloud Platform (GCP). Don't ask me why - just do it.
 

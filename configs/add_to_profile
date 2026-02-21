@@ -7,7 +7,3 @@ export EDITOR="/usr/bin/vim"
 export LESS='-FRX'
 export EZA_COLORS="uu=0:gu=0:da=0"
 
-export MSMTPQ_DIR="$HOME/.msmtp.queue"
-export MSMTP_QUEUE="$HOME/.msmtp.queue"
-export MSMTPQ_Q_ONLY=1
-

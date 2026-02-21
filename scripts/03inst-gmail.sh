@@ -8,12 +8,12 @@ export DEBIAN_FRONTEND="noninteractive"
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
 echo ""
-echo "INSTALLING GMAIL EMAIL TOOLS..."
+echo "INSTALLING OAUTH2 EMAIL TOOLS..."
 echo ""
 echo "On the 'Enable AppArmor' question just say 'Yes'..."
 echo ""
 
-echo "FIRST BE SURE YOU DID THE GCP APP SETUP!"
+echo "FIRST BE SURE YOU DID THE **CLOUD** APP SETUP!"
 echo "IF NOT - PRESS CTRL-C NOW and go and do the setup."
 echo ""
 read -p "Press [ENTER] to resume ..."
@@ -33,6 +33,16 @@ cp scripts/msmtp-enqueue-only ~/bin
 mkdir -p ~/.msmtp.queue
 chmod 700 ~/.msmtp.queue
 
+export MSMTPQ_DIR="$HOME/.msmtp.queue"
+export MSMTP_QUEUE="$HOME/.msmtp.queue"
+export MSMTPQ_Q_ONLY=1
+
+echo '' >> ~/.profile
+echo 'export MSMTPQ_DIR="$HOME/.msmtp.queue"' >> ~/.profile
+echo 'export MSMTP_QUEUE="$HOME/.msmtp.queue"' >> ~/.profile
+echo 'export MSMTPQ_Q_ONLY=1' >> ~/.profile
+
+
 # Generate a key
 echo ""
 echo ""
@@ -44,6 +54,11 @@ gpg --full-generate-key
 export public_key=$(gpg --list-secret-keys --keyid-format LONG | grep sec | cut -d'/' -f2 | cut -d' ' -f1)
 pass init "$public_key"
 
+echo ""
+read -p "Enter your NAME (to use in FROM)   : " realname
+read -p "Enter your FULL email address      : " emailaddr
+echo ""
+
 # If you don't want to type passwords in the middle of neomutt session
 # you should install pinentry-tty or pinentry-curses
 # echo "pinentry-program /usr/bin/pinentry-curses" >> ~/.gnupg/gpg-agent.conf
@@ -51,15 +66,11 @@ pass init "$public_key"
 # sync it all with an external script
 
 # Get the refresh token
-python3 scripts/gmail_config.py
+python3 scripts/oauth2_mail_config.py $emailaddr
 
 # For some weird reason this file normally would get truncated and
 # this will break the whole config. So I am copying at the very end
 cp configs/gmail/.offlineimaprc ~/
-
-echo ""
-read -p "Enter your NAME (to use in FROM)   : " realname
-read -p "Enter your FULL GMail email address: " emailaddr
 
 sed -i "s|YOURLINUXUSERNAMEHERE|$USER|g" ~/.offlineimaprc
 sed -i "s|YOURGMAILEMAILHERE|$emailaddr|g" ~/.offlineimaprc
@@ -111,4 +122,4 @@ echo "And after all if you want some automation - you can always put"
 echo "'sync_mail.sh' in a cron job, so I am not limiting you in any way."
 echo ""
 echo ""
-echo "GMAIL EMAIL TOOLS INSTALLED."
+echo "OAUTH2 EMAIL TOOLS INSTALLED."

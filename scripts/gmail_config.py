@@ -7,53 +7,7 @@ import requests
 import subprocess
 from typing import Pattern, Match, Dict
 from requests.models import Response
-
-
-def get_discovery_url_by_email(email):
-    domain = email.split('@')[-1].lower()
-    
-    # 1. Map the domain to the Standard Issuer
-    # For Microsoft 'common' works for all personal & work accounts
-    providers = {
-        "gmail.com": "https://accounts.google.com",
-        "outlook.com": "https://login.microsoftonline.com/common/v2.0",
-        "hotmail.com": "https://login.microsoftonline.com/common/v2.0",
-        "live.com": "https://login.microsoftonline.com/common/v2.0"
-    }
-    
-    issuer = providers.get(domain)
-    
-    if not issuer:
-        raise ValueError(f"Domain '{domain}' is not supported yet.")
-        
-    # 2. Construct the standard Discovery URL
-    discovery_url = f"{issuer.rstrip('/')}/.well-known/openid-configuration"
-    
-    # 3. Try to fetch the configuration
-    try:
-        print(f"Attempting to reach: {discovery_url}")
-        response = requests.get(discovery_url, timeout=5)
-        response.raise_for_status()
-        return response.json()
-    
-    except requests.exceptions.RequestException:
-        # BACKUP PLAN: If you had a proxy or secondary provider, call it here.
-        # For now, we raise your specific Exception as requested.
-        raise Exception("Discovery URL provider cannot be reached")
-
-# --- EXECUTION ---
-try:
-    user_email = input("What is your email?: ")
-    config = get_discovery_url_by_email(user_email)
-    
-    print("\n--- Discovery Success ---")
-    print(f"Auth Endpoint: {config.get('authorization_endpoint')}")
-    print(f"Token Endpoint: {config.get('token_endpoint')}")
-
-except Exception as e:
-    print(f"CRITICAL ERROR: {e}")
-
-
+from urllib.parse import urlencode, urljoin
 
 
 class GMailAuthorizer:
@@ -64,13 +18,31 @@ class GMailAuthorizer:
         
         self.token_endpoint_url: str = ""
         self.auth_endpoint_url: str = ""
-    
-    def discover(self) -> None:
-        discovery_url: str = r"/.well-known/openid-configuration"
-        #discovery_url: str = r"https://accounts.google.com/.well-known/openid-configuration"
+
+    def __get_discovery_url_by_email(self, email: str) -> str:
+        domain: str = email.split('@')[-1].lower()
         
-        response = requests.get(discovery_url)
-        response.raise_for_status() # Check for errors
+        providers: Dict[str:str] = {
+            "gmail.com": "https://accounts.google.com",
+            "outlook.com": "https://login.microsoftonline.com/common/v2.0",
+            "hotmail.com": "https://login.microsoftonline.com/common/v2.0",
+            "live.com": "https://login.microsoftonline.com/common/v2.0"
+        }
+        
+        issuer: str = providers.get(domain)
+        
+        if not issuer:
+            raise ValueError(f"Domain '{domain}' is not supported yet.")
+            
+        discovery_url: str = f"{issuer.rstrip('/')}/.well-known/openid-configuration"
+        return discovery_url
+        
+    def discover(self, email: str) -> None:
+        discovery_url: str = self.__get_discovery_url_by_email(email)
+        discovery_url = discovery_url.rstrip('/') + r"/.well-known/openid-configuration"
+        
+        response: Response = requests.get(discovery_url)
+        response.raise_for_status()  # Check for errors
         config_data = response.json()
         
         self.auth_endpoint_url = config_data.get("authorization_endpoint"),
@@ -81,13 +53,20 @@ class GMailAuthorizer:
         paste into the browser, in order to get the response URL with
         the authorization code.
         """
-
-        url: str = (
-            r"https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=http://localhost&response_type=code&scope=https://mail.google.com/&access_type=offline&prompt=consent"
-        )
-
+        
+        params: Dict[str:str] = {
+            "client_id": self.client_id,
+            "redirect_uri": r'http://localhost',
+            "response_type": "code",
+            "scope": "https://mail.google.com/",
+            "access_type": "offline",
+            "prompt": "consent"
+        }
+        
+        parameters: str = urlencode(params)
+        
         # User needs to manually paste this, so they manually click "Allow"
-        auth_url: str = url.replace(r"YOUR_CLIENT_ID", self.client_id)
+        auth_url: str = f"{self.auth_endpoint_url}?{parameters}";
         return auth_url
 
     def get_authorization_code(self, authorization_response_url: str) -> str:
