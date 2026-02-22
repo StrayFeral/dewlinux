@@ -189,7 +189,7 @@ if __name__ == "__main__":
     print("      CLIENT SECRET will be hidden.")
     print("")
 
-    input(f"Your email               : {email}")
+    print(f"Your email               : {email}")
     client_id: str = input("Enter your CLIENT ID     : ")
     client_secret: str = getpass.getpass("Enter your CLIENT SECRET : ")
 

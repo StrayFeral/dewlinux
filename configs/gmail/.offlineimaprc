@@ -2,7 +2,7 @@
 accounts = Gmail
 maxsyncaccounts = 1
 # IMPORTANT: Use the full absolute path here
-pythonfile = /home/YOURLINUXUSERNAMEHERE/get_pass_secret.py
+pythonfile = /home/YOURLINUXUSERNAMEHERE/get_mail_secret.py
 
 [Account Gmail]
 localrepository = LocalRepo
