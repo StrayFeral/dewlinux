@@ -18,7 +18,7 @@ def get_token(cid: str, csecret: str, rtoken: str) -> str:
         "refresh_token": get_secret("gmail/refreshtoken"),
         "grant_type": "refresh_token",
     }
-    response: Response = requests.post(url, data=post_data)
+    response: Response = requests.post(url, data=post_data, timeout=5)
     return response.json()["access_token"]
 
 

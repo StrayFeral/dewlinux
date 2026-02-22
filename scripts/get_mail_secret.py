@@ -33,7 +33,7 @@ def get_temporary_access_token():
             'grant_type': 'refresh_token',
         }
         
-        response = requests.post(api_url, data=post_data)
+        response = requests.post(api_url, data=post_data, timeout=5)
         response.raise_for_status()
         
         # Print ONLY the access_token for msmtp to read
