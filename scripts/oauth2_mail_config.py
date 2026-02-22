@@ -17,40 +17,48 @@ class MailAuthorizer:
     NOTE: TESTED ONLY WITH GMAIL!
     """
     
-    def __init__(self, client_id: str, client_secret: str) -> None:
+    __providers_url: Dict[str:str] = {
+        "gmail.com": "https://accounts.google.com",
+        "outlook.com": "https://login.microsoftonline.com/common/v2.0",
+        "hotmail.com": "https://login.microsoftonline.com/common/v2.0",
+        "live.com": "https://login.microsoftonline.com/common/v2.0"
+    }
+    
+    __scopes: Dict[str:str] = {
+        "gmail.com": r'https://mail.google.com/',
+        "outlook.com": "ssssssssss",  # FIXME:
+        "hotmail.com": "sssssss",  # FIXME:
+        "live.com": "sssss"  # FIXME:
+    }
+    
+    __discovery_endpoint: str = r'/.well-known/openid-configuration'
+    __redirect_url: str = r'http://localhost'
+    
+    def __init__(self, email: str, client_id: str, client_secret: str) -> None:
         self.client_id: str = client_id
         self.client_secret: str = client_secret
         self.authorization_code: str = ""
+        self.email_provider: str = email.split('@')[-1].lower()
         
         self.token_endpoint_url: str = ""
         self.auth_endpoint_url: str = ""
 
-    def __get_discovery_url_by_email(self, email: str) -> str:
+    def __get_discovery_url_by_email(self) -> str:
         """Adds more execution time, but also more abstraction.
         And since this time will be lost only during the setup phase,
         I really do not care.
         """
         
-        domain: str = email.split('@')[-1].lower()
+        issuer_url: str = self.__providers_url.get(self.email_provider)
         
-        providers: Dict[str:str] = {
-            "gmail.com": "https://accounts.google.com",
-            "outlook.com": "https://login.microsoftonline.com/common/v2.0",
-            "hotmail.com": "https://login.microsoftonline.com/common/v2.0",
-            "live.com": "https://login.microsoftonline.com/common/v2.0"
-        }
-        
-        issuer: str = providers.get(domain)
-        
-        if not issuer:
-            raise ValueError(f"Domain '{domain}' is not supported yet.")
+        if not issuer_url:
+            raise ValueError(f"Domain '{self.email_provider}' is not supported yet.")
             
-        discovery_url: str = f"{issuer.rstrip('/')}/.well-known/openid-configuration"
+        discovery_url: str = issuer_url.rstrip('/') + self.__discovery_endpoint
         return discovery_url
         
-    def discover(self, email: str) -> None:
-        discovery_url: str = self.__get_discovery_url_by_email(email)
-        discovery_url = discovery_url.rstrip('/') + r"/.well-known/openid-configuration"
+    def discover(self) -> None:
+        discovery_url: str = self.__get_discovery_url_by_email()
         
         response: Response = requests.get(discovery_url)
         response.raise_for_status()  # Check for errors
@@ -67,9 +75,9 @@ class MailAuthorizer:
         
         params: Dict[str:str] = {
             "client_id": self.client_id,
-            "redirect_uri": r'http://localhost',
+            "redirect_uri": self.__redirect_url,
             "response_type": "code",
-            "scope": "https://mail.google.com/",
+            "scope": self.__scopes[self.email_provider],
             "access_type": "offline",
             "prompt": "consent"
         }
@@ -111,7 +119,7 @@ class MailAuthorizer:
             "code": authorization_code,  # AuthorizationCode
             "client_id": self.client_id,  # ClientID
             "client_secret": self.client_secret,  # ClientSecret
-            "redirect_uri": r"http://localhost",
+            "redirect_uri": self.__redirect_url,
             "grant_type": "authorization_code",
         }
 
