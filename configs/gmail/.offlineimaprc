@@ -17,12 +17,12 @@ type = IMAP
 remotehost = imap.gmail.com
 remoteuser = YOURGMAILEMAILHERE
 auth_mechanisms = XOAUTH2
-oauth2_request_url = https://accounts.google.com/o/oauth2/token
+oauth2_request_url = get_pass_secret("gmailcom/tokenendpoint")
 
 # Switch back to _eval and wrap the function call in quotes
-oauth2_client_id_eval = get_pass_secret("gmail/clientid")
-oauth2_client_secret_eval = get_pass_secret("gmail/clientsecret")
-oauth2_refresh_token_eval = get_pass_secret("gmail/refreshtoken")
+oauth2_client_id_eval = get_pass_secret("gmailcom/clientid")
+oauth2_client_secret_eval = get_pass_secret("gmailcom/clientsecret")
+oauth2_refresh_token_eval = get_pass_secret("gmailcom/refreshtoken")
 
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
