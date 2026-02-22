@@ -16,7 +16,10 @@ echo ""
 echo "FIRST BE SURE YOU DID THE **CLOUD** APP SETUP!"
 echo "IF NOT - PRESS CTRL-C NOW and go and do the setup."
 echo ""
-read -p "Press [ENTER] to resume ..."
+echo ""
+read -p "Enter your NAME (to use in FROM)   : " realname
+read -p "Enter your FULL email address      : " emailaddr
+echo ""
 
 sudo apt update
 sudo apt -y install neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass
@@ -46,18 +49,25 @@ echo 'export MSMTPQ_Q_ONLY=1' >> ~/.profile
 # Generate a key
 echo ""
 echo ""
-echo "Choose RSA type of key, 4096 size, 'never expire', then type 'y' and ENTER:"
-echo ""
-gpg --full-generate-key
+#echo "Choose RSA type of key, 4096 size, 'never expire', then type 'y' and ENTER:"
+#echo ""
+export GPG_TTY=$(tty)
+#gpg --full-generate-key
+gpg --batch --generate-key <<EOF
+    Key-Type: RSA
+    Key-Length: 4096
+    Subkey-Type: RSA
+    Subkey-Length: 4096
+    Name-Real: $realname
+    Name-Email: $emailaddr
+    Expire-Date: 0
+    %commit
+EOF
+
 
 # Initialize the password store
 export public_key=$(gpg --list-secret-keys --keyid-format LONG | grep sec | cut -d'/' -f2 | cut -d' ' -f1)
 pass init "$public_key"
-
-echo ""
-read -p "Enter your NAME (to use in FROM)   : " realname
-read -p "Enter your FULL email address      : " emailaddr
-echo ""
 
 # If you don't want to type passwords in the middle of neomutt session
 # you should install pinentry-tty or pinentry-curses
