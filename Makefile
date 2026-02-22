@@ -49,5 +49,7 @@ help:
 	@echo "  make dev		- Development tools installation"
 	@echo "  make cyr		- Installation of Cyrillic keyboard layouts"
 	#@echo "  make email		- Installation of email client and tools"
-	@echo "  make gmail		- Installation of email client and GMAIL SETUP"
+	@echo "  make gmail		- Installation and setup of email client for"
+	@echo "					  GMail/Hotmail/Outlook/Live.com"
+	@echo "					  (SINGLE account OAUTH2 setup !!)"
 	@echo "  DEBUG=1		- Sets the DEBUG flag"

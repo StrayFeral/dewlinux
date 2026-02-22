@@ -1,11 +1,13 @@
 # /usr/bin/env puthon3
 
+import base64
 import getpass
-import re
+import json
+import secrets
 import subprocess
 import sys
-from typing import Dict
-from urllib.parse import urlencode
+from typing import Dict, List
+from urllib.parse import parse_qs, urlencode
 
 import requests
 from requests.models import Response
@@ -18,17 +20,17 @@ class MailAuthorizer:
     """
 
     __providers_url: Dict[str, str] = {
-        "gmail.com": "https://accounts.google.com",
-        "outlook.com": "https://login.microsoftonline.com/common/v2.0",
-        "hotmail.com": "https://login.microsoftonline.com/common/v2.0",
-        "live.com": "https://login.microsoftonline.com/common/v2.0",
+        "gmailcom": "https://accounts.google.com",
+        "outlookcom": "https://login.microsoftonline.com/common/v2.0",
+        "hotmailcom": "https://login.microsoftonline.com/common/v2.0",
+        "livecom": "https://login.microsoftonline.com/common/v2.0",
     }
 
     __scopes: Dict[str, str] = {
-        "gmail.com": r"https://mail.google.com/",
-        "outlook.com": "ssssssssss",  # FIXME:
-        "hotmail.com": "sssssss",  # FIXME:
-        "live.com": "sssss",  # FIXME:
+        "gmailcom": r"https://mail.google.com/",
+        "outlookcom": "offline_access https://outlook.office.com/IMAP.AccessAsUser.All",
+        "hotmailcom": "offline_access https://outlook.office.com/IMAP.AccessAsUser.All",
+        "livecom": "offline_access https://outlook.office.com/IMAP.AccessAsUser.All",
     }
 
     __discovery_endpoint: str = r"/.well-known/openid-configuration"
@@ -39,9 +41,59 @@ class MailAuthorizer:
         self.client_secret: str = client_secret
         self.authorization_code: str = ""
         self.email_provider: str = email.split("@")[-1].lower()
+        self.email_provider = self.email_provider.replace(".", "")  # "googlecom"
 
         self.token_endpoint_url: str = ""
         self.auth_endpoint_url: str = ""
+
+        # Security feature
+        self.csrf_token: str = ""
+
+    def __generate_state(self, context_data: Dict[str, str]) -> str:
+        """Creates a URL-safe, Base64-encoded state string containing
+        a random CSRF token and custom app context.
+        """
+
+        # 1. Create a cryptographically strong random token
+        csrf_token: str = secrets.token_urlsafe(32)
+
+        # 2. Store this token in your session/database here!
+        self.csrf_token = csrf_token
+
+        # 3. Combine with your app context (like where to redirect the user)
+        # Unlike "redirect_uri" in the final request which serves
+        # the authorization_code being returned to our app,
+        # the return_to serves if we want the user to return to a
+        # specific state in our own app. However since this is an
+        # installer, it does not care what the value of this is
+        state_param: Dict[str, str] = {
+            "csrf": csrf_token,
+            "return_to": context_data.get("return_to", "/dashboard"),
+        }
+
+        # 4. Serialize to JSON and encode to Base64 (URL-safe)
+        json_state = json.dumps(state_param).encode("utf-8")
+
+        return base64.urlsafe_b64encode(json_state).decode("utf-8").rstrip("=")
+
+    def __verify_state(self, received_state: str | None) -> dict:
+        """Decodes the state and verifies the CSRF token matches."""
+
+        if not received_state:
+            raise Exception("No state received. Potential CSRF sttack?")
+
+        # Add padding back if it was stripped
+        padded_state = received_state + "=" * (4 - len(received_state) % 4)
+
+        # Decode
+        decoded_bytes = base64.urlsafe_b64decode(padded_state)
+        state_data = json.loads(decoded_bytes)
+
+        # 5. The Critical Security Check
+        if not secrets.compare_digest(state_data.get("csrf", ""), self.csrf_token):
+            raise ValueError("State mismatch! Potential CSRF attack.")
+
+        return state_data
 
     def __get_discovery_url_by_email(self) -> str:
         """Adds more execution time, but also more abstraction.
@@ -73,6 +125,7 @@ class MailAuthorizer:
         the authorization code.
         """
 
+        # Common URL parameters for all email providers
         params: Dict[str, str] = {
             "client_id": self.client_id,
             "redirect_uri": self.__redirect_url,
@@ -80,7 +133,14 @@ class MailAuthorizer:
             "scope": self.__scopes[self.email_provider],
             "access_type": "offline",
             "prompt": "consent",
+            "state": self.__generate_state({"return_to": "nowhere"}),
         }
+
+        # Specific email provider parameter differences
+        if self.email_provider == "gmailcom":
+            params["access_type"] = "offline"
+        else:
+            params["response_mode"] = "query"
 
         parameters: str = urlencode(params)
 
@@ -95,15 +155,25 @@ class MailAuthorizer:
         # The user needs to paste the full redirect URL in this
 
         # We need to get the AuthorizationCode out of this URL
-        pattern: str = r"code=([^&]+)"
-        authorization_code: str = ""
-        match: re.Match[str] | None = re.search(pattern, authorization_response_url)
-        if match:
-            authorization_code = match.group(1)
-        else:
+        params: Dict[str, List[str]] = parse_qs(authorization_response_url)
+
+        # Note: parse_qs returns lists for values (because keys can appear multiple times)
+        authorization_code: str | None = (
+            params.get("code")[0] if params.get("code") else None
+        )
+        received_state: str | None = (
+            params.get("state")[0] if params.get("state") else None
+        )
+
+        if not authorization_code:
             raise Exception(
                 f"Cannot get the authorization code out of the response url({authorization_response_url})"
             )
+
+        # Since this is an installer application we really do not care
+        # of the actual state data, but just in case we verify the
+        # CSRF token
+        verified_state_data: Dict[str, str] = self.__verify_state(received_state)
 
         return authorization_code
 
@@ -142,12 +212,12 @@ class MailAuthorizer:
         return refresh_token
 
 
-def store_secret(secret_name: str, secret_value: str):
+def store_pass_secret(path: str, value: str) -> None:
     # We use 'pass insert -m' to allow multi-line/piped input
     # The -f flag forces an overwrite if the secret already exists
     result: subprocess.CompletedProcess = subprocess.run(
-        ["pass", "insert", "--multiline", "-f", secret_name],
-        input=secret_value,  # This pipes the secret into the command
+        ["pass", "insert", "--multiline", "-f", path],
+        input=value,  # This pipes the secret into the command
         text=True,
         capture_output=True,
         check=True,
@@ -188,7 +258,7 @@ if __name__ == "__main__":
     print("      the characters for your CLIENT SECRET will be hidden.")
     print("")
 
-    print(f"Your email               : {email}")
+    # print(f"Your email               : {email}")
     client_id: str = input("Enter your CLIENT ID     : ")
     client_secret: str = getpass.getpass("Enter your CLIENT SECRET : ")
 
@@ -214,8 +284,10 @@ if __name__ == "__main__":
     refresh_token: str = authorizer.get_refresh_token(authorization_code)
 
     # Storing everything in "pass"
-    store_secret("gmail/tokenendpoint", authorizer.token_endpoint_url)
-    store_secret("gmail/clientid", client_id)
-    store_secret("gmail/clientsecret", client_secret)
-    store_secret("gmail/refreshtoken", refresh_token)
+    store_pass_secret(
+        f"{authorizer.email_provider}/tokenendpoint", authorizer.token_endpoint_url
+    )
+    store_pass_secret(f"{authorizer.email_provider}/clientid", client_id)
+    store_pass_secret(f"{authorizer.email_provider}/clientsecret", client_secret)
+    store_pass_secret(f"{authorizer.email_provider}/refreshtoken", refresh_token)
     print("Secrets stored.")
