@@ -5,7 +5,7 @@ set spool_file = "+INBOX"
 set postponed = "+[Gmail]/Drafts"
 set record = "+[Gmail]/Sent Mail"
 
-mailboxes `find ~/.mail/gmail -maxdepth 2 -type d -name cur | xargs dirname`
+mailboxes `find ~/.mail/gmail -type d -name cur -print0 | xargs -0 -n1 dirname | sed 's/.*/"&"/' | tr '\n' ' '`
 
 # --- Identity Settings ---
 set realname = "YOURNAMEHERE"
