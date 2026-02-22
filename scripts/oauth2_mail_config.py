@@ -185,8 +185,7 @@ if __name__ == "__main__":
     )  # TODO: FIX MEEEEEEEEEEE
     print("")
     print("NOTE: When typing the answers to the folowing questions,")
-    print("      the characters for your GMAIL PASSWORD and the")
-    print("      CLIENT SECRET will be hidden.")
+    print("      the characters for your CLIENT SECRET will be hidden.")
     print("")
 
     print(f"Your email               : {email}")
