@@ -7,6 +7,24 @@ set record = "+[Gmail]/Sent Mail"
 
 mailboxes `find ~/.mail/gmail -type d -name cur -print0 | xargs -0 -n1 dirname | sed 's/.*/"&"/' | tr '\n' ' '`
 
+# --- Sidebar Settings ---
+set sidebar_visible = yes
+set sidebar_width = 25
+set sidebar_short_path = yes
+set sidebar_folder_indent = yes
+
+# Highlight the active folder in the sidebar
+color sidebar_indicator brightcyan default
+color sidebar_new brightyellow default
+
+# Keybindings to move through the sidebar
+# ']' to go to the next folder and open it immediately
+macro index . "<sidebar-next><sidebar-open>" "Next folder"
+macro pager . "<sidebar-next><sidebar-open>" "Next folder"
+# '[' to go to the previous folder and open it immediately
+macro index , "<sidebar-prev><sidebar-open>" "Previous folder"
+macro pager , "<sidebar-prev><sidebar-open>" "Previous folder"
+
 # --- Identity Settings ---
 set realname = "YOURNAMEHERE"
 set from = "YOURGMAILEMAILHERE"
