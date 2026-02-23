@@ -24,9 +24,9 @@ echo ""
 emailaddr="${emailaddr,,}"
 
 # I really hate to hardcode things
-export TOKENENDPOINT = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+export TOKENENDPOINT="https://login.microsoftonline.com/common/oauth2/v2.0/token"
 if [[ "$emailaddr" == *"gmail"* ]]; then
-    export TOKENENDPOINT = "https://oauth2.googleapis.com/token"
+    export TOKENENDPOINT="https://oauth2.googleapis.com/token"
 fi
 
 sudo apt update
