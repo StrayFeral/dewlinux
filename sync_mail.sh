@@ -39,6 +39,9 @@ echo "Downloading new messages via OfflineIMAP..."
 # -u basic provides clean output for your terminal
 offlineimap -o -u basic -c "$HOME/.offlineimaprc"
 
+# 4. Notmuch indexing
+notmuch new
+
 if [ $? -eq 0 ]; then
     echo "Inbound sync complete."
 else
