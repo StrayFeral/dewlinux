@@ -5,11 +5,6 @@ set spool_file = "+INBOX"
 set postponed = "+[Gmail]/Drafts"
 set record = "+[Gmail]/Sent Mail"
 
-set header_cache = "~/.neomutt/cache/headers"
-set message_cachedir = "~/.neomutt/cache/bodies"
-set sleep_time = 0         # Speeds up UI transitions
-set mark_old = no          # Stops Mutt from moving Unread -> Old (cleaner for Notmuch)
-
 mailboxes `find ~/.mail/gmail -type d -name cur -print0 | xargs -0 -n1 dirname | sed 's/.*/"&"/' | tr '\n' ' '`
 
 # --- Identity Settings ---
@@ -40,10 +35,7 @@ set date_format = "%Y-%m-%d %H:%M"
 folder-hook . 'set sort=reverse-date; set index_format="%4C %Z %d %-25.25n %s"'
 
 # Handle the Sent folder (also newest on top)
-#folder-hook "[Gmail]/Sent Mail" 'set sort=reverse-date; set index_format="%4C %Z %d %-25.25t %s"'
-folder-hook . 'set sort=reverse-date; set index_format="%4C %Z %d %-25.25n (%-10.10g) %s"'
-
-color index yellow default "~s [URGENT]"
+folder-hook "[Gmail]/Sent Mail" 'set sort=reverse-date; set index_format="%4C %Z %d %-25.25t %s"'
 
 # Colors
 color index brightyellow default "~N"
@@ -59,7 +51,7 @@ color body brightcyan default "^>>.*"
 color body blue default "^>>>.*"
 
 # Pager colors
-color header default default "."
+color header white default "."
 color header green default "Date:"
 color header green default "Received:"
 color header brightwhite default "From:"
@@ -67,55 +59,4 @@ color header brightwhite default "Reply-To:"
 color header cyan default "To:"
 color header brightwhite default "Delivered-To:"
 color header brightyellow default "Subject:"
-
-# Use Shift+D to mark the actual file for deletion (Maildir standard)
-bind index D delete-message
-
-# --- Notmuch Integration ---
-# Tell NeoMutt where the notmuch database is located
-set nm_default_uri = "notmuch://YOURHOMEHERE/.mail"
-
-# Enable virtual folder support (essential for notmuch)
-set virtual_spoolfile = yes
-
-# --- Virtual Mailboxes (Notmuch Queries) ---
-# These appear in your sidebar or folder list like regular folders
-virtual-mailboxes \
-    "Inbox"    "notmuch://?query=tag:inbox" \
-    "Unread"   "notmuch://?query=tag:unread" \
-    "Starred"  "notmuch://?query=tag:flagged" \
-    "Today"    "notmuch://?query=date:today"   \
-    "GmailRaw" "notmuch://?query=folder:gmail/INBOX" \
-    "Trash"    "notmuch://?query=tag:deleted"
-
-# --- Recommended Keybindings ---
-# Use '/' to search your entire local archive instantly
-macro index / "<vlimit>notmuch-search " "Search with notmuch"
-
-# Use 'X' to open a custom search prompt that creates a temporary folder
-macro index X "<entire-thread><vlimit>notmuch-search " "Search entire threads"
-
-# --- Notmuch Tagging Macros ---
-# Press '+' to add a tag (e.g., +todo, +work)
-macro index + "<modify-labels>+ " "Add a tag to message"
-
-# Press '-' to remove a tag
-macro index - "<modify-labels>- " "Remove a tag from message"
-
-# Press 'i' to quickly mark as "inbox" and remove "unread" (Clear it out)
-macro index i "<modify-labels>-unread +inbox<enter>" "Mark as read and move to inbox"
-
-# Press 'd' to tag as deleted (Note: this doesn't delete the file, just tags it)
-macro index d "<modify-labels>+deleted -unread -inbox<enter>" "Tag as deleted"
-
-# Use the names defined in your virtual-mailboxes block
-macro index 1 "<change-vfolder>Inbox<enter>"    "Jump to Inbox"
-macro index 2 "<change-vfolder>Unread<enter>" "Jump to New Mail"
-macro index 3 "<change-vfolder>Starred<enter>"  "Jump to Starred"
-macro index 4 "<change-vfolder>Today<enter>"    "Jump to Today"
-macro index 5 "<change-vfolder><kill-line>Trash<enter>" "Jump to Trash"
-macro index 0 "<change-vfolder>GmailRaw<enter>"    "Jump to GmailRaw"
-
-# Press 'u' to remove deleted tag and restore to inbox
-macro index u "<modify-labels>-deleted +inbox<enter>" "Undelete message"
 

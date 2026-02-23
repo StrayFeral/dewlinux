@@ -30,12 +30,10 @@ if [[ "$emailaddr" == *"gmail"* ]]; then
 fi
 
 sudo apt update
-sudo apt -y install neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass notmuch
+sudo apt -y install neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass
 
 mkdir -p ~/bin
 mkdir -p ~/.mail/gmail ~/.msmtpqueue
-mkdir -p ~/.neomutt/cache/headers
-mkdir -p ~/.neomutt/cache/bodies
 
 cp configs/gmail/.msmtprc ~/
 chmod 600 ~/.msmtprc
@@ -110,12 +108,6 @@ sudo systemctl restart apparmor
 
 # -rwx------ 1 forester forester 2219 Feb 13 17:41 /home/forester/get_mail_secret.py
 # -rw------- 1 forester forester 664 Feb 13 17:39 /home/forester/.msmtprc
-
-notmuch config set database.path "$HOME/.mail"
-notmuch config set user.name "$realname"
-notmuch config set user.primary_email "$emailaddr"
-notmuch config set new.tags "unread;inbox"
-sed -i "s|YOURHOMEHERE|$HOME|g" ~/.neomuttrc
 
 echo ""
 echo "Now you need to run './sync_mail.sh' to initialize everything..."
