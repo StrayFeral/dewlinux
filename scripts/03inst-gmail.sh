@@ -21,6 +21,14 @@ read -p "Enter your NAME (to use in FROM)   : " realname
 read -p "Enter your FULL email address      : " emailaddr
 echo ""
 
+emailaddr="${emailaddr,,}"
+
+# I really hate to hardcode things
+export TOKENENDPOINT = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+if [[ "$emailaddr" == *"gmail"* ]]; then
+    export TOKENENDPOINT = "https://oauth2.googleapis.com/token"
+fi
+
 sudo apt update
 sudo apt -y install neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass
 
@@ -84,13 +92,13 @@ cp configs/gmail/.offlineimaprc ~/
 
 sed -i "s|YOURLINUXUSERNAMEHERE|$USER|g" ~/.offlineimaprc
 sed -i "s|YOURGMAILEMAILHERE|$emailaddr|g" ~/.offlineimaprc
+sed -i "s|TOKENENDPOINTHERE|$TOKENENDPOINT|g" ~/.offlineimaprc
 
 sed -i "s|YOURLINUXUSERNAMEHERE|$USER|g" ~/.msmtprc
 sed -i "s|YOURGMAILEMAILHERE|$emailaddr|g" ~/.msmtprc
 
 sed -i "s|YOURGMAILEMAILHERE|$emailaddr|g" ~/.neomuttrc
 sed -i "s|YOURNAMEHERE|$realname|g" ~/.neomuttrc
-
 
 chmod 700 ~/get_mail_secret.py
 sudo cp configs/gmail/usr.bin.msmtp /etc/apparmor.d/

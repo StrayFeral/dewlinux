@@ -17,7 +17,7 @@ type = IMAP
 remotehost = imap.gmail.com
 remoteuser = YOURGMAILEMAILHERE
 auth_mechanisms = XOAUTH2
-oauth2_request_url = get_pass_secret("gmailcom/tokenendpoint")
+oauth2_request_url = TOKENENDPOINTHERE
 
 # Switch back to _eval and wrap the function call in quotes
 oauth2_client_id_eval = get_pass_secret("gmailcom/clientid")

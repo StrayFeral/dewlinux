@@ -69,7 +69,7 @@ def get_temporary_access_token(email_provider: str) -> str:
 
 if __name__ == "__main__":
     # Check if a path was provided as an argument
-    if len(sys.argv) < 1:
+    if len(sys.argv) < 2:
         sys.stderr.write(
             "Usage: python3 get_mail_secret.py <pass_path|EMAILPROVIDERHERE/temporary_access_token>\n"
         )
