@@ -7,7 +7,7 @@ import secrets
 import subprocess
 import sys
 from typing import Dict, List
-from urllib.parse import parse_qs, urlencode
+from urllib.parse import ParseResult, parse_qs, urlencode, urlparse
 
 import requests
 from requests.models import Response
@@ -154,8 +154,10 @@ class MailAuthorizer:
         # After "Allow", browser will unsuccessfully redirect
         # The user needs to paste the full redirect URL in this
 
+        parsed_url: ParseResult = urlparse(authorization_response_url)
+
         # We need to get the AuthorizationCode out of this URL
-        params: Dict[str, List[str]] = parse_qs(authorization_response_url)
+        params: Dict[str, List[str]] = parse_qs(parsed_url.query)
 
         # Note: parse_qs returns lists for values (because keys can appear multiple times)
         authorization_code: str | None = (
