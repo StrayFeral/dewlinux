@@ -12,6 +12,7 @@ echo "INSTALLING MAIN SYSTEM..."
 echo ""
 
 mkdir -p ~/bin
+mkdir -p ~/.local/bin
 
 # Configs
 cat configs/add_to_profile >> ~/.profile

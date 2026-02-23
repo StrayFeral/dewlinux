@@ -21,6 +21,8 @@ sudo apt -y install hexcurse                # Hex editor
 sudo apt -y install python3
 sudo apt -y install python-is-python3       # Not truly needed, but convenient
 sudo apt -y install python3-pip
+sudo apt -y install pipx
+pipx ensurepath
 
 # Python tools
 sudo apt -y install python3-isort
