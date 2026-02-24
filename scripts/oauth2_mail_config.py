@@ -247,6 +247,7 @@ if __name__ == "__main__":
         )
 
     email: str = sys.argv[1]
+    email = email.lower()
 
     print("")
     print("****************************************")
