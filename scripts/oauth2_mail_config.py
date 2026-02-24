@@ -243,7 +243,7 @@ def store_pass_secret(path: str, value: str) -> None:
 if __name__ == "__main__":
     if len(sys.argv) < 1:
         raise Exception(
-            "USAGE: python3 oauth2_mail_config.py 'YOUREMAILADDRESSHERE@blah.com'"
+            "USAGE: python3 oauth2_config.py 'YOUREMAILADDRESSHERE@blah.com'"
         )
 
     email: str = sys.argv[1]
@@ -251,20 +251,16 @@ if __name__ == "__main__":
 
     print("")
     print("****************************************")
-    print("OAUTH2 EMAIL NEOMUTT CONFIGURATION")
+    print("OAUTH2 EMAIL/CONTACTS CONFIGURATION TOOL")
     print("****************************************")
+    print(r"https://github.com/StrayFeral/dewlinux")
     print("")
     print("FIRST BE SURE YOU DID THE **CLOUD** (GCP/AZURE) APP SETUP!")
     print("")
-    print("INSTRUCTIONS:")
-    print("")
     print("If you still haven't, just go and do it now,")
     print("no need to interrupt this script.")
-    print("To do the GCP APP setup, go to this URL:")
     print("")
-    print(r"https://console.cloud.google.com/")
-    print("")
-    print("If you do not know what to do there, just follow the")
+    print("If you do not know how to do it, just follow the")
     print("instructions from this youtube video:")
     print("")
     print(
@@ -275,7 +271,6 @@ if __name__ == "__main__":
     print("      the characters for your CLIENT SECRET will be hidden.")
     print("")
 
-    # print(f"Your email               : {email}")
     client_id: str = input("Enter your CLIENT ID     : ")
     client_secret: str = getpass.getpass("Enter your CLIENT SECRET : ")
 
@@ -310,4 +305,4 @@ if __name__ == "__main__":
     print("Secrets stored.")
 
     print("")
-    print("OAUTH2 AUTHORIZATION COMPLETED.")
+    print("OAUTH2 AUTHORIZATION AND CONFIGURATION COMPLETED.")
