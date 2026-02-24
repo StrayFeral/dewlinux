@@ -30,10 +30,16 @@ if [[ "$emailaddr" == *"gmail"* ]]; then
 fi
 
 sudo apt update
-sudo apt -y install neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass
+sudo apt -y install neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass abook
 
 mkdir -p ~/bin
 mkdir -p ~/.mail/gmail ~/.msmtpqueue
+
+mkdir -p ~/.config/abook
+cp configs/gmail/abookconf ~/.config/abook/abookconf
+
+# Local vCard Storage
+mkdir -p ~/.contacts/google
 
 cp configs/gmail/.msmtprc ~/
 chmod 600 ~/.msmtprc
@@ -84,7 +90,7 @@ pass init "$public_key"
 # sync it all with an external script
 
 # Get the refresh token
-python3 scripts/oauth2_mail_config.py $emailaddr
+python3 scripts/oauth2_config.py $emailaddr
 
 # For some weird reason this file normally would get truncated and
 # this will break the whole config. So I am copying at the very end
