@@ -1,4 +1,4 @@
-# /usr/bin/env puthon3
+#!/usr/bin/env python3
 
 import base64
 import getpass
@@ -13,7 +13,7 @@ import requests
 from requests.models import Response
 
 
-class MailAuthorizer:
+class OAuth2Authorizer:
     """Class for doing OAUTH2 email setup for GMail and Outlook/Hotmail.
 
     NOTE: TESTED ONLY WITH GMAIL!
@@ -274,7 +274,7 @@ if __name__ == "__main__":
     client_id: str = input("Enter your CLIENT ID     : ")
     client_secret: str = getpass.getpass("Enter your CLIENT SECRET : ")
 
-    authorizer: MailAuthorizer = MailAuthorizer(email, client_id, client_secret)
+    authorizer: OAuth2Authorizer = OAuth2Authorizer(email, client_id, client_secret)
     authorizer.discover()
     authorization_url: str = authorizer.get_authorization_url()
 
