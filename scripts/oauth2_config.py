@@ -292,6 +292,8 @@ if __name__ == "__main__":
 
     failed_redirect_url: str = input("Enter the failed redirect URL  : ")
     authorization_code: str = authorizer.get_authorization_code(failed_redirect_url)
+    
+    print("")
     print("Sending request to the cloud API to get the refresh token...")
     refresh_token: str = authorizer.get_refresh_token(authorization_code)
 
