@@ -133,7 +133,11 @@ You must create:
 - Add your email
 - Add your email as a TESTER
 - Enable GMAIL API (search in APIs&Services)
-- Manually add a scope "https://mail.google.com/"
+- Enable People API
+- Manually add a scopes:
+    https://mail.google.com/
+    https://www.googleapis.com/auth/contacts
+    https://www.googleapis.com/auth/contacts.other.readonly
 
 > COPY THE CLIENT_ID AND CLIENT_SECRET AND SAVE THEM SOMEWHERE !!
 

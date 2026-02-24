@@ -26,11 +26,25 @@ class MailAuthorizer:
         "livecom": "https://login.microsoftonline.com/common/v2.0",
     }
 
-    __scopes: Dict[str, str] = {
-        "gmailcom": r"https://mail.google.com/",
-        "outlookcom": "offline_access https://outlook.office.com/IMAP.AccessAsUser.All",
-        "hotmailcom": "offline_access https://outlook.office.com/IMAP.AccessAsUser.All",
-        "livecom": "offline_access https://outlook.office.com/IMAP.AccessAsUser.All",
+    __scopes: Dict[str, List[str]] = {
+        "gmailcom": [
+            # Scopes both for gmail and the contacts
+            r"https://mail.google.com/",
+            r"https://www.googleapis.com/auth/contacts",
+            r"https://www.googleapis.com/auth/contacts.other.readonly",
+        ],
+        "outlookcom": [
+            r"offline_access",
+            r"https://outlook.office.com/IMAP.AccessAsUser.All",
+        ],
+        "hotmailcom": [
+            r"offline_access",
+            r"https://outlook.office.com/IMAP.AccessAsUser.All",
+        ],
+        "livecom": [
+            r"offline_access",
+            r"https://outlook.office.com/IMAP.AccessAsUser.All",
+        ],
     }
 
     __discovery_endpoint: str = r"/.well-known/openid-configuration"
@@ -130,7 +144,7 @@ class MailAuthorizer:
             "client_id": self.client_id,
             "redirect_uri": self.__redirect_url,
             "response_type": "code",
-            "scope": self.__scopes[self.email_provider],
+            "scope": " ".join(self.__scopes[self.email_provider]),
             "access_type": "offline",
             "prompt": "consent",
             "state": self.__generate_state({"return_to": "nowhere"}),
@@ -293,3 +307,6 @@ if __name__ == "__main__":
     store_pass_secret(f"{authorizer.email_provider}/clientsecret", client_secret)
     store_pass_secret(f"{authorizer.email_provider}/refreshtoken", refresh_token)
     print("Secrets stored.")
+
+    print("")
+    print("OAUTH2 AUTHORIZATION COMPLETED.")
