@@ -116,11 +116,6 @@ sudo chmod 644 /etc/apparmor.d/usr.bin.msmtp
 sudo apparmor_parser -r /etc/apparmor.d/usr.bin.msmtp
 sudo systemctl restart apparmor
 
-echo ""
-echo ""
-python3 scripts/pull_contacts.py
-echo ""
-
 # -rwx------ 1 forester forester 2219 Feb 13 17:41 /home/forester/get_mail_secret.py
 # -rw------- 1 forester forester 664 Feb 13 17:39 /home/forester/.msmtprc
 
