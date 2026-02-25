@@ -48,6 +48,7 @@ sudo apt -y install dysk                    # df replacement
 sudo apt -y install duf                     # df replacement
 sudo apt -y install ripgrep                 # grep replacement
 sudo apt -y install fd-find                 # find replacement
+sudo apt -y install gpm                     # Mouse support
 
 sudo apt -y install vlock                   # Console locker
 
