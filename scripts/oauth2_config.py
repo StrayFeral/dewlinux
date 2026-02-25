@@ -243,14 +243,14 @@ def get_email_provider(s: str) -> str:
     s = s.replace(".", "")  # "gmailcom"
 
     if not s:
-        raise Exception(usage_str)
+        raise Exception(f"Error getting the email provider parameter.{usage_str}")
 
     return s
 
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        raise Exception(usage_str)
+        raise Exception(f"No email provided parameter.{usage_str}")
 
     email_provider: str = get_email_provider(sys.argv[1])
 
