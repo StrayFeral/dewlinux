@@ -249,7 +249,7 @@ def get_email_provider(s: str) -> str:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 1:
+    if len(sys.argv) < 2:
         raise Exception(usage_str)
 
     email_provider: str = get_email_provider(sys.argv[1])
