@@ -12,6 +12,10 @@ from urllib.parse import ParseResult, parse_qs, urlencode, urlparse
 import requests
 from requests.models import Response
 
+usage_str: str = (
+    "USAGE: oauth2_config.py <EMAILPROVIDER>\nEXAMPLE: oauth2_config.py outlook.com"
+)
+
 
 class OAuth2Authorizer:
     """Class for doing OAUTH2 email setup for GMail and Outlook/Hotmail.
@@ -50,12 +54,11 @@ class OAuth2Authorizer:
     __discovery_endpoint: str = r"/.well-known/openid-configuration"
     __redirect_url: str = r"http://localhost"
 
-    def __init__(self, email: str, client_id: str, client_secret: str) -> None:
+    def __init__(self, email_provider: str, client_id: str, client_secret: str) -> None:
         self.client_id: str = client_id
         self.client_secret: str = client_secret
         self.authorization_code: str = ""
-        self.email_provider: str = email.split("@")[-1].lower()
-        self.email_provider = self.email_provider.replace(".", "")  # "googlecom"
+        self.email_provider: str = email_provider
 
         self.token_endpoint_url: str = ""
         self.auth_endpoint_url: str = ""
@@ -240,14 +243,21 @@ def store_pass_secret(path: str, value: str) -> None:
     )
 
 
+def get_email_provider(s: str) -> str:
+    s = s.split("@")[-1].lower()
+    s = s.replace(".", "")  # "gmailcom"
+
+    if not s:
+        raise Exception(usage_str)
+
+    return s
+
+
 if __name__ == "__main__":
     if len(sys.argv) < 1:
-        raise Exception(
-            "USAGE: python3 oauth2_config.py 'YOUREMAILADDRESSHERE@blah.com'"
-        )
+        raise Exception(usage_str)
 
-    email: str = sys.argv[1]
-    email = email.lower()
+    email_provider: str = get_email_provider(sys.argv[1])
 
     print("")
     print("****************************************")
@@ -274,7 +284,9 @@ if __name__ == "__main__":
     client_id: str = input("Enter your CLIENT ID     : ")
     client_secret: str = getpass.getpass("Enter your CLIENT SECRET : ")
 
-    authorizer: OAuth2Authorizer = OAuth2Authorizer(email, client_id, client_secret)
+    authorizer: OAuth2Authorizer = OAuth2Authorizer(
+        email_provider, client_id, client_secret
+    )
     authorizer.discover()
     authorization_url: str = authorizer.get_authorization_url()
 
@@ -292,7 +304,7 @@ if __name__ == "__main__":
 
     failed_redirect_url: str = input("Enter the failed redirect URL  : ")
     authorization_code: str = authorizer.get_authorization_code(failed_redirect_url)
-    
+
     print("")
     print("Sending request to the cloud API to get the refresh token...")
     refresh_token: str = authorizer.get_refresh_token(authorization_code)
