@@ -34,7 +34,7 @@ class OAuth2Authorizer:
         "gmailcom": [
             # Scopes both for gmail and the contacts
             r"https://mail.google.com/",
-            r"https://www.googleapis.com/auth/contacts",
+            r"https://www.googleapis.com/auth/contacts.readonly",
             r"https://www.googleapis.com/auth/contacts.other.readonly",
         ],
         "outlookcom": [

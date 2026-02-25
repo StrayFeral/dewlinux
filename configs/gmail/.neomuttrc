@@ -25,6 +25,14 @@ macro pager . "<sidebar-next><sidebar-open>" "Next folder"
 macro index , "<sidebar-prev><sidebar-open>" "Previous folder"
 macro pager , "<sidebar-prev><sidebar-open>" "Previous folder"
 
+# --- Addressing & Contacts ---
+set query_command = "abook --mutt-query '%s'"
+set query_format = "%4c %t %-25.25n %-25.25a %e"
+bind editor <Tab> complete-query
+bind editor ^T complete
+set alias_file = "~/.neomutt_aliases"   # Where NeoMutt saves manual 'A' additions
+source $alias_file                      # Tells NeoMutt to actually read that file
+
 # --- Identity Settings ---
 set realname = "YOURNAMEHERE"
 set from = "YOURGMAILEMAILHERE"

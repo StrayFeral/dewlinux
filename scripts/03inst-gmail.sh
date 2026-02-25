@@ -36,7 +36,11 @@ mkdir -p ~/bin
 mkdir -p ~/.mail/gmail ~/.msmtpqueue
 
 mkdir -p ~/.config/abook
-cp configs/gmail/abookconf ~/.config/abook/abookconf
+cp configs/gmail/abookrc ~/.abook/abookrc
+
+# While I am using abook to hold the Google contact list, I still
+# want the aliases
+touch ~/.neomutt_aliases
 
 # Local vCard Storage
 mkdir -p ~/.contacts/google

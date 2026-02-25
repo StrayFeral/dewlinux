@@ -1,0 +1,20 @@
+set address_style=eu
+set add_email_prevent_duplicates=false
+set mutt_command=neomutt
+set show_all_emails=true
+set www_command=links2
+set use_mouse=true
+set preserve_fields=all
+set autosave=true
+# set show_cursor=true
+
+# Color config
+set use_colors=true
+set color_header_fg=cyan
+set color_footer_fg=cyan
+set color_list_header_fg=yellow
+set color_list_highlight_fg=black
+set color_list_highlight_bg=white
+
+set index_format="{name:20} {email:60} {phone|workphone|mobile}"
+
