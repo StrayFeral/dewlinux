@@ -2,7 +2,7 @@
 
 ## STATUS
 
-- 2026-02-16: PHASE3 Start. I will make demo videos and will put them on Youtube.
+- 2026-02-26: PHASE3 Start. I will make demo videos and will put them on Youtube.
 - 2026-02-03: PHASE1 and PHASE2 Start. WORK-IN-PROGRESS...
 
 ## DESCRIPTION
@@ -15,7 +15,7 @@ The goal of the project is to explore what it is to use a modern linux distribut
 
 I am going to use a linux distro without any desktop environment installed.
 
-I am going to search and document what **in my opinion** are the best everyday use tools for a home user.
+I am going to search and document some great everyday tools for use to a home user.
 
 The experiment will be conducted at present in the form of a virtual machine environment.
 
@@ -23,13 +23,13 @@ Videos showing my progress would be uploaded to my Youtube channel, so please su
 
 <https://www.youtube.com/@SkateCode>
 
-To keep it simple, this experiment would assume a home-based system for everyday personal use, without additional peripheral devices, like printers or whatever else might come to mind.
+To keep it simple, this experiment would assume a home-based system for everyday personal use, without additional peripheral devices, like printers or whatever else might come to mind. Primary input controller is assumed to be a standard keyboard and some mouse support have been added lately.
 
 ## USE CASES AND WHAT IS INSTALLED
 
 Please see [documentation/index.html](documentation/index.html)
 
-After installation you could simply run `dewdoc.sh` which would be inside ~/dewlinux
+After installation you could simply run `contents.sh` which would be inside ~/dewlinux
 
 ## DISTRO
 
@@ -40,6 +40,8 @@ I've decided to use Debian, so I went with the netinst image which is only near 
 My goal was never to use the most barebone distro. While I have some experience with some unix distros, some RedHat derivatives, I am mostly experienced in pure Debian and some of the derivative distros, so Debian was the natural choice for me. While I am experimenting to go a bit hardcore, it was never my goal to go fully hardcore for which Devuan was never considered.
 
 ## INSTALLATION
+
+> DISCLAIMER: The folowing instructions and code base represent a tested and verified installation and workflow ONLY for the above mentioned linux distro. If you're using another operating system of any sort, please keep in mind my goal was never to publish a multi-platform code. You are free to modify and adapt this project for your own OS and needs.
 
 > Partitioning and base OS installation are manual by design.
 
@@ -98,7 +100,10 @@ Parameters to `make`:
 - games: Games installation
 - dev: Development tools installation (C, Perl, Python)
 - cyr: Installation of Cyrillic keyboard layouts
+- gmail: Installation and OAUTH2 setup of either a Google Mail (GMail) or a Microsoft mail account (Outlook.com/Hotmail.com/Live.com)
 - DEBUG=1: Sets the DEBUG flag
+
+> For the email installation and setup, please see bellow
 
 > On the question should you enable AppArmor support, answer YES
 
@@ -108,15 +113,21 @@ That AppArmor dialog was the only thing I could not automate, sorry.
 
 ### NEOMUTT OAUTH2 (GMAIL/OUTLOOK) EMAIL SETUP
 
-Before you do anything, the very very first thing you MUST ABSOLUTELY DO is to setup an "app" in the Google Cloud Platform (GCP). Don't ask me why - just do it.
+This is the only weird part.
 
-I know, many people would scratch their heads and bang themself in the wall with the "Why should I do this crap" question, but trust me - you just have to. Google outphased the simple username/password authentication since it's not secure enough, recently outphased the apppasswords too (maybe still work in some areas - no idea) and the only authentication method working now is the OAUTH2, which requires you to setup an app in their GCP platform.
+> DISCLAIMER: The folowing setup was tested in detail and ensures a fully working OAUTH2 setup for a **free** GMAIL account (though a corporate GMAIL account should also work). Support of Google Contacts is also working, but only in read-only mode. While I made my OAUTH2 authorizer code to authorize a Microsoft account too, this scenario was never tested in reality. If you do a Microsoft email setup - use at your own risk. This project interacts with Google People API and local mail files. It is provided "as is." Use at your own risk.
+
+> NOTE: While neomutt does support multiple email account setup, such scenario was never tested.
+
+Before you do anything, the very very first thing you MUST ABSOLUTELY DO is to setup an "app" in the Google Cloud Platform (GCP). I am going to do a video in which I will explain it in detail why this is needed and why without it this setup will never work.
+
+I know, many people would scratch their heads and bang themselves in the wall with the "Why should I do this crap" question, but trust me - you just have to. Google outphased the simple username/password authentication since it's not secure enough, recently outphased the apppasswords too (maybe still work in some areas - no idea) and the only authentication method working now is the OAUTH2, which requires you to setup an app in their GCP platform.
 
 It took me time and lots of nerves until I set this right, since I had no previous GCP exposure at all. I could not find any Youtube video tutorial on how to do this, so I did it the hard way.
 
-I am however going to make a video tutorial on how to do this, so you don't have to suffer.
+I am doing a video tutorial on how to do this, so you don't have to suffer - check my Youtube channel! <https://www.youtube.com/@SkateCode>
 
-So please subscribe to my Youtube channel and click LIKE on the video because I really lost lots of time and efforts until I made this work. Thanks!
+Please subscribe to my Youtube channel and click LIKE on the video because I really lost lots of time and efforts until I made this work. Thanks!
 
 #### GETTING THE GOOGLE OAUTH2 CREDENTIALS
 
@@ -143,11 +154,29 @@ You must create:
 
 > NEVER "PUBLISH" YOUR APPLICATION OR GOOGLE WILL CHARGE YOU MONEY !!
 
+> WARNING: DO NOT RUN the folowing code in a virtual machine terminal. You would need a modern browser for the manual loopback authorization to work. Sorry, but while you can do the installation of everything else straight in the virtual machine terminal, for this step you would need to SSH from another host with some modern browser installed. I mean technically you can do everything in the virtual machine and manually type the URL in your phone, but this would be overkill. So hope you have a working SSH server on your host.
+
 Finally run this and follow the on-screen instructions!
 
 ```bash
 make gmail
 ```
+
+I made everything to display instructions on what to do, but regardless, the last thing you would need to do is to run
+
+```bash
+./sync_mail.sh
+```
+
+So it will do the initial email pull and create and initialize all local mailbox structure for neomutt to run properly.
+
+Finally, if you have Google Contacts and you want to use them in abook, just run:
+
+```bash
+./pull_google_contacts.sh
+```
+
+> If for any reason you would need to re-authorize the setup (like if you changed your settings in GCP) just run `reauthorize.sh` and it will do what's needed.
 
 ### VIDEO
 
