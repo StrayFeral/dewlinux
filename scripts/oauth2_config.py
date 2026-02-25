@@ -6,7 +6,7 @@ import json
 import secrets
 import subprocess
 import sys
-from typing import Dict, List
+from typing import Any
 from urllib.parse import ParseResult, parse_qs, urlencode, urlparse
 
 import requests
@@ -23,14 +23,14 @@ class OAuth2Authorizer:
     NOTE: TESTED ONLY WITH GMAIL!
     """
 
-    __providers_url: Dict[str, str] = {
+    __providers_url: dict[str, str] = {
         "gmailcom": "https://accounts.google.com",
         "outlookcom": "https://login.microsoftonline.com/common/v2.0",
         "hotmailcom": "https://login.microsoftonline.com/common/v2.0",
         "livecom": "https://login.microsoftonline.com/common/v2.0",
     }
 
-    __scopes: Dict[str, List[str]] = {
+    __scopes: dict[str, list[str]] = {
         "gmailcom": [
             # Scopes both for gmail and the contacts
             r"https://mail.google.com/",
@@ -66,30 +66,25 @@ class OAuth2Authorizer:
         # Security feature
         self.csrf_token: str = ""
 
-    def __generate_state(self, context_data: Dict[str, str]) -> str:
+    def __generate_state(self, context_data: dict[str, str]) -> str:
         """Creates a URL-safe, Base64-encoded state string containing
         a random CSRF token and custom app context.
         """
 
-        # 1. Create a cryptographically strong random token
-        csrf_token: str = secrets.token_urlsafe(32)
+        self.csrf_token = secrets.token_urlsafe(32)
 
-        # 2. Store this token in your session/database here!
-        self.csrf_token = csrf_token
-
-        # 3. Combine with your app context (like where to redirect the user)
         # Unlike "redirect_uri" in the final request which serves
         # the authorization_code being returned to our app,
         # the return_to serves if we want the user to return to a
         # specific state in our own app. However since this is an
         # installer, it does not care what the value of this is
-        state_param: Dict[str, str] = {
-            "csrf": csrf_token,
+        state_param: dict[str, str] = {
+            "csrf": self.csrf_token,
             "return_to": context_data.get("return_to", "/dashboard"),
         }
 
-        # 4. Serialize to JSON and encode to Base64 (URL-safe)
-        json_state = json.dumps(state_param).encode("utf-8")
+        # Serialize to JSON and encode to Base64 (URL-safe)
+        json_state: bytes = json.dumps(state_param).encode("utf-8")
 
         return base64.urlsafe_b64encode(json_state).decode("utf-8").rstrip("=")
 
@@ -100,13 +95,13 @@ class OAuth2Authorizer:
             raise Exception("No state received. Potential CSRF sttack?")
 
         # Add padding back if it was stripped
-        padded_state = received_state + "=" * (4 - len(received_state) % 4)
+        padded_state: str = received_state + "=" * (4 - len(received_state) % 4)
 
         # Decode
-        decoded_bytes = base64.urlsafe_b64decode(padded_state)
-        state_data = json.loads(decoded_bytes)
+        decoded_bytes: bytes = base64.urlsafe_b64decode(padded_state)
+        state_data: dict[str, Any] = json.loads(decoded_bytes)
 
-        # 5. The Critical Security Check
+        # Security Check
         if not secrets.compare_digest(state_data.get("csrf", ""), self.csrf_token):
             raise ValueError("State mismatch! Potential CSRF attack.")
 
@@ -131,7 +126,7 @@ class OAuth2Authorizer:
 
         response: Response = requests.get(discovery_url, timeout=5)
         response.raise_for_status()  # Check for errors
-        config_data = response.json()
+        config_data: Any = response.json()
 
         self.auth_endpoint_url = config_data.get("authorization_endpoint")
         self.token_endpoint_url = config_data.get("token_endpoint")
@@ -143,7 +138,7 @@ class OAuth2Authorizer:
         """
 
         # Common URL parameters for all email providers
-        params: Dict[str, str] = {
+        params: dict[str, str] = {
             "client_id": self.client_id,
             "redirect_uri": self.__redirect_url,
             "response_type": "code",
@@ -174,7 +169,7 @@ class OAuth2Authorizer:
         parsed_url: ParseResult = urlparse(authorization_response_url)
 
         # We need to get the AuthorizationCode out of this URL
-        params: Dict[str, List[str]] = parse_qs(parsed_url.query)
+        params: dict[str, list[str]] = parse_qs(parsed_url.query)
 
         # Note: parse_qs returns lists for values (because keys can appear multiple times)
         authorization_code: str | None = (
@@ -192,7 +187,7 @@ class OAuth2Authorizer:
         # Since this is an installer application we really do not care
         # of the actual state data, but just in case we verify the
         # CSRF token
-        verified_state_data: Dict[str, str] = self.__verify_state(received_state)
+        verified_state_data: dict[str, str] = self.__verify_state(received_state)
 
         return authorization_code
 
@@ -203,7 +198,7 @@ class OAuth2Authorizer:
 
         # Data to be sent
         # We will get a JSON object in return
-        post_data: Dict[str, str] = {
+        post_data: dict[str, str] = {
             "code": authorization_code,  # AuthorizationCode
             "client_id": self.client_id,  # ClientID
             "client_secret": self.client_secret,  # ClientSecret
@@ -220,8 +215,8 @@ class OAuth2Authorizer:
         # Check for HTTP errors (400, 500, etc.)
         response.raise_for_status()
 
-        tokens = response.json()
-        refresh_token = tokens.get("refresh_token")
+        tokens: Any = response.json()
+        refresh_token: str = tokens.get("refresh_token")
 
         if not refresh_token:
             raise Exception(

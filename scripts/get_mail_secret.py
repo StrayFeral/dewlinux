@@ -1,6 +1,5 @@
 import subprocess
 import sys
-from typing import Dict
 
 import requests
 from requests.models import Response
@@ -38,7 +37,7 @@ def get_temporary_access_token(email_provider: str) -> str:
         client_secret: str = get_pass_secret(f"{email_provider}/clientsecret")
         refresh_token: str = get_pass_secret(f"{email_provider}/refreshtoken")
 
-        post_data: Dict[str, str] = {
+        post_data: dict[str, str] = {
             "client_id": client_id,
             "client_secret": client_secret,
             "refresh_token": refresh_token,
@@ -55,7 +54,7 @@ def get_temporary_access_token(email_provider: str) -> str:
         response.raise_for_status()
 
         # We should always check
-        new_refresh_token = response.json().get("refresh_token", "")
+        new_refresh_token: str = response.json().get("refresh_token", "")
         if new_refresh_token:
             store_pass_secret(f"{email_provider}/refreshtoken", new_refresh_token)
 
