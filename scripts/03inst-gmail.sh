@@ -35,7 +35,7 @@ sudo apt -y install neomutt offlineimap msmtp msmtp-mta python3 python3-requests
 mkdir -p ~/bin
 mkdir -p ~/.mail/gmail ~/.msmtpqueue
 
-mkdir -p ~/.config/abook
+mkdir -p ~/.config/.abook
 cp configs/gmail/abookrc ~/.abook/abookrc
 
 # While I am using abook to hold the Google contact list, I still
