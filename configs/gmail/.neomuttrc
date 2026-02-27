@@ -40,6 +40,17 @@ set use_from = yes
 set envelope_from = yes
 alternates "YOURGMAILEMAILHERE"
 
+# Signature settings
+set signature = "~/.neomutt_signature"
+set sig_on_top = yes
+
+# Greeting
+set attribution = "Hi `echo '%n' | awk '{print $1}'`,\n\n\n"
+
+# Forwarding
+set forward_format = "Fwd: %s"
+set forward_quote = yes
+
 # Force NeoMutt to use the queue script
 set sendmail = "~/bin/msmtp-enqueue-only"
 

@@ -42,6 +42,9 @@ cp configs/gmail/abookrc ~/.abook/abookrc
 # want the aliases
 touch ~/.neomutt_aliases
 
+# Default signature file
+cp configs/gmail/.neomutt_signature ~/.neomutt_signature
+
 # Local vCard Storage
 mkdir -p ~/.contacts/google
 
@@ -148,6 +151,9 @@ echo "or just hang around."
 echo ""
 echo "And after all if you want some automation - you can always put"
 echo "'sync_mail.sh' in a cron job, so I am not limiting you in any way."
+echo ""
+echo "You might want to edit ~/.neomutt_signature which now is your"
+echo "email signature file."
 echo ""
 echo ""
 echo "OAUTH2 EMAIL TOOLS INSTALLED."
