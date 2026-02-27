@@ -1,13 +1,18 @@
 #!/bin/bash
 
-# 1. Define the queue directory (must match your msmtpq setup)
+# Deleting any existing lock file from a previous problematic
+# run of offlineimap only if offlineimap is not running
+if ! pgrep -x "offlineimap" > /dev/null; then
+    rm -f ~/.offlineimap/*.lock
+fi
+
 QUEUEDIR="$HOME/.msmtpqueue"
 export EMAIL_CONN_TEST=p
 
 echo "Mail Sync Started: $(date)"
 echo "--------------------------------"
 
-# 2. Flush Outbound Mail
+# Flush Outbound Mail
 export MSMTPQ_DIR="$HOME/.msmtp.queue"
 export PATH="/usr/libexec/msmtp/msmtpq:$PATH"
 
@@ -33,7 +38,7 @@ fi
 
 echo "--------------------------------"
 
-# 3. Pull Inbound Mail
+# Pull Inbound Mail
 echo "Downloading new messages via OfflineIMAP..."
 # -o runs it once and exits (no background daemon)
 # -u basic provides clean output for your terminal

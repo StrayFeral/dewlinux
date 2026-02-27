@@ -3,6 +3,11 @@ accounts = Gmail
 maxsyncaccounts = 1
 # IMPORTANT: Use the full absolute path here
 pythonfile = /home/YOURLINUXUSERNAMEHERE/get_mail_secret.py
+# Reduce the chance of hangs by limiting concurrency
+maxconnections = 2
+# Set a timeout so it doesn't wait forever
+socktimeout = 60
+
 
 [Account Gmail]
 localrepository = LocalRepo
