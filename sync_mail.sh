@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Preventing race condition
+LOCKFILE="/tmp/mailsync.lock"
+
+# Use 'flock' to grab an exclusive lock.
+# -n: Fail immediately if another instance is running (don't wait)
+# -e: Exclusive lock
+exec 200>$LOCKFILE
+flock -n 200 || { echo "Mailsync is already running in another terminal."; exit 1; }
+
+# EVERYTHING BELOW RUNS ONLY IF WE HAVE THE LOCK
+
+
 # Deleting any existing lock file from a previous problematic
 # run of offlineimap only if offlineimap is not running
 if ! pgrep -x "offlineimap" > /dev/null; then
