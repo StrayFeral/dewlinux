@@ -8,8 +8,10 @@ set record = "+[Gmail]/Sent Mail"
 set quit = ask-no
 set use_threads = no
 
+# NOTE: After some research, I came to realization that
+# it is better to run a spell checker directly inside vim
 # Spellcheck
-set ispell = "aspell --mode=email check"
+# set ispell = "aspell --mode=email check"
 # macro compose i "<ispell>" "Run Aspell"
 
 # We're on a totally offline setup, so it's fine
