@@ -5,11 +5,21 @@ set spool_file = "+INBOX"
 set postponed = "+[Gmail]/Drafts"
 set record = "+[Gmail]/Sent Mail"
 
+set quit = ask-no
+set use_threads = no
+
+# Spellcheck
+set ispell = "aspell --mode=email check"
+# macro compose i "<ispell>" "Run Aspell"
+
+# We're on a totally offline setup, so it's fine
+set mail_check = 300
+
 mailboxes `find ~/.mail/gmail -type d -name cur -print0 | xargs -0 -n1 dirname | sed 's/.*/"&"/' | tr '\n' ' '`
 
 # --- Sidebar Settings ---
 set sidebar_visible = yes
-set sidebar_width = 25
+set sidebar_width = 20
 set sidebar_short_path = yes
 set sidebar_folder_indent = yes
 
@@ -40,16 +50,22 @@ set use_from = yes
 set envelope_from = yes
 alternates "YOURGMAILEMAILHERE"
 
+set me_too = yes
+set preferred_languages="bg,en,fr,ru"
+set include = yes
+
+set empty_subject = "Re: "
+set greeting = "Hi %v,"
+
 # Signature settings
 set signature = "~/.neomutt_signature"
 set sig_on_top = yes
 
-# Greeting
-set attribution = "Hi `echo '%n' | awk '{print $1}'`,\n\n\n"
-
 # Forwarding
 set forward_format = "Fwd: %s"
 set forward_quote = yes
+# set forward_attribution_intro = ""
+# set forward_attribution_trailer = ""
 
 # Force NeoMutt to use the queue script
 set sendmail = "~/bin/msmtp-enqueue-only"
@@ -70,6 +86,7 @@ set date_format = "%Y-%m-%d %H:%M"
 # Update the hooks to enforce REVERSE sorting every time you switch folders
 # Note the 'reverse-date' inside the single quotes
 folder-hook . 'set sort=reverse-date; set index_format="%4C %Z %d %-25.25n %s"'
+# folder-hook . 'set sort=date; set sort_aux=reverse-date; set index_format="%4C %Z %d %-25.25n %s"'
 
 # Handle the Sent folder (also newest on top)
 folder-hook "[Gmail]/Sent Mail" 'set sort=reverse-date; set index_format="%4C %Z %d %-25.25t %s"'

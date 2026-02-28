@@ -70,6 +70,21 @@ sudo apt -y install mpv                     # Video player
 sudo apt -y install wordgrinder             # Word processor
 sudo apt -y install alsa-utils              # Sound control
 
+#~ # ISpell
+#~ sudo apt -y install ispell
+#~ sudo apt -y install ibulgarian
+#~ sudo apt -y install iamerican
+#~ sudo apt -y install ifrench
+#~ sudo apt -y install ienglish-common
+#~ sudo apt -y install irussian
+
+# ASpell
+sudo apt -y install aspell
+sudo apt -y install aspell-bg
+sudo apt -y install aspell-fr
+sudo apt -y install aspell-ru
+sudo apt -y install aspell-en
+
 sudo apt -y install weechat                 # IRC client
 
 sudo apt -y install poppler-utils           # pdftotext file.pdf - | less
