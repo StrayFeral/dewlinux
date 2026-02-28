@@ -68,7 +68,6 @@ sudo apt -y install moc moc-ffmpeg-plugin   # MP3 player: mocp
 sudo apt -y install fbi fim                 # Image viewers
 sudo apt -y install mpv                     # Video player
 sudo apt -y install wordgrinder             # Word processor
-sudo apt -y install wordgrinder-doc
 sudo apt -y install alsa-utils              # Sound control
 
 #~ # ISpell
