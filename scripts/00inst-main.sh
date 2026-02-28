@@ -89,5 +89,19 @@ sudo apt -y install weechat                 # IRC client
 
 sudo apt -y install poppler-utils           # pdftotext file.pdf - | less
 
+mkdir -p ~/.vim/spell
+# Vim spellchecking language files
+wget "https://ftp.nluug.nl/pub/vim/runtime/spell/en.utf-8.spl" -O ~/.vim/spell/en.utf-8.spl
+wget "https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.spl" -O ~/.vim/spell/fr.utf-8.spl
+wget "https://ftp.nluug.nl/pub/vim/runtime/spell/bg.utf-8.spl" -O ~/.vim/spell/bg.utf-8.spl
+wget "https://ftp.nluug.nl/pub/vim/runtime/spell/ru.utf-8.spl" -O ~/.vim/spell/ru.utf-8.spl
+wget "https://ftp.nluug.nl/pub/vim/runtime/spell/de.utf-8.spl" -O ~/.vim/spell/de.utf-8.spl
+# Suggestion files
+wget "https://ftp.nluug.nl/pub/vim/runtime/spell/en.utf-8.sug" -O ~/.vim/spell/en.utf-8.sug
+wget "https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.sug" -O ~/.vim/spell/fr.utf-8.sug
+wget "https://ftp.nluug.nl/pub/vim/runtime/spell/bg.utf-8.sug" -O ~/.vim/spell/bg.utf-8.sug
+wget "https://ftp.nluug.nl/pub/vim/runtime/spell/ru.utf-8.sug" -O ~/.vim/spell/ru.utf-8.sug
+wget "https://ftp.nluug.nl/pub/vim/runtime/spell/de.utf-8.sug" -O ~/.vim/spell/de.utf-8.sug
+
 echo ""
 echo "MAIN COMPONENTS INSTALLED."
