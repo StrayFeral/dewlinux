@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Hope you ran
-# make
-# or
-# make games
-# because otherwise you won't have the game
+if [ ! -f "LostPig.z8" ]; then
+    echo "Error: Game file not found. Did you ran 'make games'? Exiting now."
+    exit 1
+fi
+
 frotz LostPig.z8
 

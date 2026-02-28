@@ -20,7 +20,7 @@ sudo apt -y install vitetris            # Tetris clone
 
 # Installing interpretter for Infocom Z-machine games and a sample game
 sudo apt -y install frotz
-wget -P ~/zgames "https://www.ifarchive.org/if-archive/games/zcode/LostPig.z8"
+wget "https://www.ifarchive.org/if-archive/games/zcode/LostPig.z8" -O zgames/LostPig.z8
 
 echo ""
 echo "GAMES INSTALLED."
