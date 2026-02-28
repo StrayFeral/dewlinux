@@ -68,6 +68,7 @@ sudo apt -y install moc moc-ffmpeg-plugin   # MP3 player: mocp
 sudo apt -y install fbi fim                 # Image viewers
 sudo apt -y install mpv                     # Video player
 sudo apt -y install wordgrinder             # Word processor
+sudo apt -y install wordgrinder-doc
 sudo apt -y install alsa-utils              # Sound control
 
 #~ # ISpell
@@ -102,6 +103,10 @@ wget "https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.sug" -O ~/.vim/spell/f
 wget "https://ftp.nluug.nl/pub/vim/runtime/spell/bg.utf-8.sug" -O ~/.vim/spell/bg.utf-8.sug
 wget "https://ftp.nluug.nl/pub/vim/runtime/spell/ru.utf-8.sug" -O ~/.vim/spell/ru.utf-8.sug
 wget "https://ftp.nluug.nl/pub/vim/runtime/spell/de.utf-8.sug" -O ~/.vim/spell/de.utf-8.sug
+
+# Wordgrinder config
+mkdir -p ~/.wordgrinder
+cp configs/wordgrinder_startup.lua ~/.wordgrinder/startup.lua
 
 echo ""
 echo "MAIN COMPONENTS INSTALLED."
