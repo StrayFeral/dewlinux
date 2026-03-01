@@ -70,6 +70,11 @@ sudo apt -y install mpv                     # Video player
 sudo apt -y install wordgrinder             # Word processor
 sudo apt -y install alsa-utils              # Sound control
 
+sudo apt -y install newsboat                # Newsreader
+
+mkdir -p ~/.newsboat
+cp configs/newsboat_urls ~/.newsboat/urls
+
 #~ # ISpell
 #~ sudo apt -y install ispell
 #~ sudo apt -y install ibulgarian
