@@ -11,6 +11,13 @@ echo ""
 echo "INSTALLING MAIN SYSTEM..."
 echo ""
 
+# Recreating the directory structure of most home systems
+mkdir -p ~/Downloads
+mkdir -p ~/Music
+mkdir -p ~/Documents
+mkdir -p ~/Videos
+mkdir -p ~/Pictures
+
 mkdir -p ~/bin
 mkdir -p ~/.local/bin
 
