@@ -24,6 +24,12 @@ mkdir -p ~/.local/bin
 # Configs
 cat configs/add_to_profile >> ~/.profile
 cat configs/add_to_bashrc >> ~/.bashrc
+
+# Prepending .bashrc
+cp configs/prepend_to_bashrc /tmp/.bashrc
+cat ~/.bashrc >> /tmp/.bashrc
+cp /tmp/.bashrc ~/.bashrc
+
 cp configs/.vimrc ~/
 cp configs/.bash_aliases ~/
 sudo mv /etc/motd /etc/motd_old
