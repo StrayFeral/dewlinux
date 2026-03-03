@@ -63,6 +63,7 @@ sudo apt -y install ripgrep                 # grep replacement
 sudo apt -y install fd-find                 # find replacement
 sudo apt -y install gpm                     # Mouse support
 sudo apt -y install strace                  # Trace system calls
+sudo apt -y install nload                   # Network monitoring
 
 sudo apt -y install vlock                   # Console locker
 
