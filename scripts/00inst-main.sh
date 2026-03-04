@@ -126,5 +126,19 @@ wget "https://ftp.nluug.nl/pub/vim/runtime/spell/de.utf-8.sug" -O ~/.vim/spell/d
 mkdir -p ~/.wordgrinder
 cp configs/wordgrinder_startup.lua ~/.wordgrinder/startup.lua
 
+# Very cool tail replacement
+mkdir -p lazytail
+wget https://raw.githubusercontent.com/raaymax/lazytail/master/install.sh -O lazytail/install.sh
+chmod +x lazytail/install.sh
+bash lazytail/install.sh
+lazytail init
+
+# Scooter - terminal regexxer replacement
+wget https://github.com/thomasschafer/scooter/releases/download/v0.9.0/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
+tar -xzf scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
+mv scooter/scooter ~/.local/bin/
+rm scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
+rm -rf scooter
+
 echo ""
 echo "MAIN COMPONENTS INSTALLED."
