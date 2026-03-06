@@ -94,13 +94,17 @@ make
 # (it is the same)
 ```
 
+> Type `make help` to get the make parameters list
+
 Parameters to `make`:
-- all (or no parameter): Install everything
+- all (or no parameter): Install ONLY main, games, dev and cyr
 - main: Main packages installation
 - games: Games installation
 - dev: Development tools installation (C, Perl, Python)
 - cyr: Installation of Cyrillic keyboard layouts
+- devmore: Installation of nasm, golang, Rust and Lua
 - gmail: Installation and OAUTH2 setup of either a Google Mail (GMail) or a Microsoft mail account (Outlook.com/Hotmail.com/Live.com)
+- chess: Installation of chess games
 - DEBUG=1: Sets the DEBUG flag
 
 > For the email installation and setup, please see bellow
