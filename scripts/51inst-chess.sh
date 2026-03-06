@@ -16,11 +16,12 @@ sudo apt -y install fairymax
 sudo apt -y install phalanx
 sudo apt -y install stockfish
 sudo apt -y install gnuchess
-sudo apt -y install pychess
 
-export CARGO_TARGET_DIR=/tmp/cargo-target
+# sudo apt -y install pychess
+
+# export CARGO_TARGET_DIR=/tmp/cargo-target
 # cargo install chess-tui --locked
-cargo install chess-tui
+# cargo install chess-tui
 
 echo ""
 echo "CHESS INSTALLED."
