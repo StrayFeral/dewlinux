@@ -12,16 +12,19 @@ echo "INSTALLING CHESS GAMES..."
 echo ""
 echo "This requires installation of the devmore tools"
 
-sudo apt -y install fairymax
-sudo apt -y install phalanx
-sudo apt -y install stockfish
-sudo apt -y install gnuchess
+# sudo apt -y install gnuchess               # GNU chess engine
+sudo apt -y install stockfish              # Best chess engine
+cargo install chess-tui                    # Chess TUI front-end
 
-# sudo apt -y install pychess
-
-# export CARGO_TARGET_DIR=/tmp/cargo-target
-# cargo install chess-tui --locked
-# cargo install chess-tui
+# Configuring chess-tui
+if [ -f "/path/to/file" ]; then
+    # In case you're gonna use gnuchess
+    # run as:
+    # gnuchess --uci
+    sed -i "s|engine_path = \"\"|$(which stockfish)|g" ~/.config/chess-tui/config.toml
+else
+    cp configs/chess-tui.toml ~/.config/chess-tui/config.toml
+fi
 
 echo ""
 echo "CHESS GAMES INSTALLED."

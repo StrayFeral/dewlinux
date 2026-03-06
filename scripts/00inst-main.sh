@@ -20,8 +20,8 @@ mkdir -p ~/Pictures
 
 mkdir -p ~/bin
 mkdir -p ~/.local/bin
-export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
-# echo "export PATH=$PATH:$HOME/.local/bin:$HOME/bin" >> ~/.profile
+mkdir -p ~/.cargo/bin
+export PATH="$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"
 
 # Configs
 cat configs/add_to_profile >> ~/.profile
@@ -85,6 +85,7 @@ sudo apt -y install fbi fim                 # Image viewers
 sudo apt -y install mpv                     # Video player
 sudo apt -y install wordgrinder             # Word processor
 sudo apt -y install alsa-utils              # Sound control
+sudo apt -y install libasound2-dev
 
 sudo apt -y install newsboat                # Newsreader
 
@@ -139,6 +140,9 @@ lazytail init
 wget https://github.com/thomasschafer/scooter/releases/download/v0.9.0/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz -O /tmp/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
 tar -xzf /tmp/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
 mv ./scooter ~/.local/bin/
+
+# Not sure this is automatically added, so I am adding it manually
+echo "export PATH=$PATH:$HOME/.cargo/bin" >> ~/.profile
 
 echo ""
 echo "MAIN COMPONENTS INSTALLED."
