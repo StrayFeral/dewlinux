@@ -20,8 +20,8 @@ mkdir -p ~/Pictures
 
 mkdir -p ~/bin
 mkdir -p ~/.local/bin
-export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
-echo "export PATH=$PATH:$HOME/.local/bin:$HOME/bin" >> ~/.profile
+# export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
+# echo "export PATH=$PATH:$HOME/.local/bin:$HOME/bin" >> ~/.profile
 
 # Configs
 cat configs/add_to_profile >> ~/.profile
@@ -136,11 +136,9 @@ bash lazytail/install.sh
 lazytail init
 
 # Scooter - terminal regexxer replacement
-wget https://github.com/thomasschafer/scooter/releases/download/v0.9.0/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
-tar -xzf scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
-mv scooter/scooter ~/.local/bin/
-rm scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
-rm -rf scooter
+wget https://github.com/thomasschafer/scooter/releases/download/v0.9.0/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz -O /tmp/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
+tar -xzf /tmp/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
+mv ./scooter ~/.local/bin/
 
 echo ""
 echo "MAIN COMPONENTS INSTALLED."
