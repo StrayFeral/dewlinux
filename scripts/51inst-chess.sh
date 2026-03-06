@@ -19,7 +19,8 @@ sudo apt -y install gnuchess
 sudo apt -y install pychess
 
 export CARGO_TARGET_DIR=/tmp/cargo-target
-cargo install chess-tui --locked
+# cargo install chess-tui --locked
+cargo install chess-tui
 
 echo ""
 echo "CHESS INSTALLED."
