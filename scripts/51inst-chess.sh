@@ -8,7 +8,7 @@ export DEBIAN_FRONTEND="noninteractive"
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
 echo ""
-echo "INSTALLING CHESS..."
+echo "INSTALLING CHESS GAMES..."
 echo ""
 echo "This requires installation of the devmore tools"
 
@@ -24,4 +24,4 @@ sudo apt -y install gnuchess
 # cargo install chess-tui
 
 echo ""
-echo "CHESS INSTALLED."
+echo "CHESS GAMES INSTALLED."
