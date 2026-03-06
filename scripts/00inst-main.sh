@@ -20,6 +20,8 @@ mkdir -p ~/Pictures
 
 mkdir -p ~/bin
 mkdir -p ~/.local/bin
+export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
+echo "$PATH:$HOME/.local/bin:$HOME/bin" >> ~/.profile
 
 # Configs
 cat configs/add_to_profile >> ~/.profile
