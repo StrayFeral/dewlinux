@@ -45,6 +45,10 @@ gmail:
 	[[ "$(DEBUG)" == 1 ]] && set -x
 	./scripts/03inst-gmail.sh
 
+chess:
+	[[ "$(DEBUG)" == 1 ]] && set -x
+	./scripts/51inst-chess.sh
+
 help:
 	@echo "Targets:"
 	@echo "  make all		- Installation of everything, except gmail and devmore"
@@ -54,6 +58,8 @@ help:
 	@echo "  make cyr		- Installation of Cyrillic keyboard layouts"
 	@echo ""
 	@echo "THE FOLOWING TARGETS ARE **NOT** INCLUDED IN 'make all':"
+	@echo "  make chess		- Install chess games"
+	@echo "			  (requires installation of devmore first!)"
 	#@echo "  make email		- Installation of email client and tools"
 	@echo "  make gmail		- Installation and setup of email client for"
 	@echo "			  GMail/Hotmail/Outlook/Live.com"
