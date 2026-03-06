@@ -32,8 +32,8 @@ sudo apt -y install golang-go
 # Run/compile: rustc
 # Install modules: cargo
 echo "Installing Rust"
-sudo apt -y install rustc
-sudo apt -y install cargo
+sudo apt -y install rustup
+rustup install 1.88
 
 # Lua tools
 # Language type: interpreted, like perl/python
