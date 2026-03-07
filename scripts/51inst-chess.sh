@@ -22,6 +22,7 @@ sudo apt -y install stockfish              # Best chess engine
 cargo install chess-tui                    # Chess TUI front-end
 
 # Configuring chess-tui
+mkdir -p ~/.config/chess-tui
 if [ -f "/path/to/file" ]; then
     # In case you're gonna use gnuchess
     # run as:
