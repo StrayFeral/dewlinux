@@ -3,6 +3,11 @@
 echo "Re-requesting OAUTH2 authorization: $(date)"
 echo ""
 
+if ! dpkg-query -W -f='${Status}' "offlineimap" 2>/dev/null | grep -q "ok installed"; then
+    echo "Email tools are not installed. You should run: make gmail"
+    exit 1
+fi
+
 #if [[ $# -eq 0 ]]; then
 #    echo "Usage: $0 <emailprovider>"
 #    exit 1

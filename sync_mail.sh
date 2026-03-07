@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if ! dpkg-query -W -f='${Status}' "offlineimap" 2>/dev/null | grep -q "ok installed"; then
+    echo "Email tools are not installed. You should run: make gmail"
+    exit 1
+fi
+
 # Preventing race condition
 LOCKFILE="/tmp/mailsync.lock"
 

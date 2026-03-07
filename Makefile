@@ -6,11 +6,11 @@ SHELL := /bin/bash
 # by StrayF 2026
 
 
-.PHONY: base main dev cyr gmail games help
+.PHONY: base main dev cyr gmail games help mainmore
 
 DEBUG ?= 0
 
-base: main dev cyr
+base: main dev cyr mainmore
 	@echo ""
 	@echo "Email/Gmail setup not installed. You need to install this manually."
 	@echo ""
@@ -29,6 +29,10 @@ dev:
 cyr:
 	[[ "$(DEBUG)" == 1 ]] && set -x
 	./scripts/01inst-kblayouts.sh
+	
+mainmore:
+	[[ "$(DEBUG)" == 1 ]] && set -x
+	./scripts/20inst-mainmore.sh
 
 gmail:
 	[[ "$(DEBUG)" == 1 ]] && set -x
@@ -41,10 +45,11 @@ games:
 
 help:
 	@echo "TARGETS:"
-	@echo "  make base		- Installation of: main dev cyr"
+	@echo "  make base		- Installation of: main dev cyr mainmore"
 	@echo "  make main		- Main packages installation"
 	@echo "  make dev		- Perl, Python3, Nasm, C/C++, Golang, Rust, Lua"
 	@echo "  make cyr		- Installation of Cyrillic keyboard layouts"
+	@echo "  make mainmore		- More main tools (requires: dev)"
 	@echo ""
 	@echo "FOR ADDITIONAL INSTALL:"
 	@echo "  make gmail		- Installation and setup of email client for"
