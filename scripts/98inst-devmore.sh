@@ -45,5 +45,7 @@ sudo apt -y install lua5.4
 sudo apt -y install luarocks
 sudo apt -y install luajit
 
+cargo install rgx-cli                       # Regex tester
+
 echo ""
 echo "MORE SOFTWARE DEVELOPMENT TOOLS INSTALLED."
