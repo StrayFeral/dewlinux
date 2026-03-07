@@ -28,6 +28,7 @@ if [ -f ~/.config/chess-tui/config.toml ]; then
     # run as:
     # gnuchess --uci
     sed -i "s|engine_path = \"\"|$(which stockfish)|g" ~/.config/chess-tui/config.toml
+    sed -i "s|sound_enabled = true|sound_enabled = false|g" ~/.config/chess-tui/config.toml
 else
     cp configs/chess-tui.toml ~/.config/chess-tui/config.toml
 fi

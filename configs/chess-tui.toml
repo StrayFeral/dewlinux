@@ -4,5 +4,4 @@ log_level = "OFF"
 bot_depth = 9
 bot_difficulty = 0
 selected_skin_name = "Default"
-sound_enabled = true
-
+sound_enabled = false
