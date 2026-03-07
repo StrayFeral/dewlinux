@@ -141,6 +141,16 @@ wget https://github.com/thomasschafer/scooter/releases/download/v0.9.0/scooter-v
 tar -xzf /tmp/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
 mv ./scooter ~/.local/bin/
 
+# Wikipedia client
+git clone https://github.com/Builditluc/wiki-tui
+cargo install wiki-tui
+
+# Neoscim - another spreadsheet
+# wget https://git.oliveratkinson.net/Oliver/neoscim/actions/runs/23/artifacts/neoscim -O /tmp/neoscim.zip
+# unzip /tmp/neoscim.zip -d ~/.cargo/bin/
+# chmod +x ~/.cargo/bin/neoscim
+
+
 # Not sure this is automatically added, so I am adding it manually
 echo "export PATH=$PATH:$HOME/.cargo/bin" >> ~/.profile
 
