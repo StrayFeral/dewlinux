@@ -74,7 +74,7 @@ sudo apt -y install lynx links2             # Browsers
 
 sudo apt -y install neovim                  # Text editor
 sudo apt -y install mc                      # File manager
-sudo apt -y install sc sc-im                # Spreadsheets
+sudo apt -y install sc-im                   # Spreadsheets
 sudo apt -y install fastfetch               # System info
 sudo apt -y install tty-clock               # Clock
 
@@ -92,14 +92,6 @@ sudo apt -y install newsboat                # Newsreader
 mkdir -p ~/.newsboat
 cp configs/newsboat_urls ~/.newsboat/urls
 
-#~ # ISpell
-#~ sudo apt -y install ispell
-#~ sudo apt -y install ibulgarian
-#~ sudo apt -y install iamerican
-#~ sudo apt -y install ifrench
-#~ sudo apt -y install ienglish-common
-#~ sudo apt -y install irussian
-
 # ASpell
 sudo apt -y install aspell
 sudo apt -y install aspell-bg
@@ -108,7 +100,6 @@ sudo apt -y install aspell-ru
 sudo apt -y install aspell-en
 
 sudo apt -y install weechat                 # IRC client
-
 sudo apt -y install poppler-utils           # pdftotext file.pdf - | less
 
 mkdir -p ~/.vim/spell
@@ -142,7 +133,6 @@ tar -xzf /tmp/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
 mv ./scooter ~/.local/bin/
 
 sudo apt -y install cage foot               # These would get 256 colors
-
 
 # Not sure this is automatically added, so I am adding it manually
 echo "export PATH=$PATH:$HOME/.cargo/bin" >> ~/.profile
