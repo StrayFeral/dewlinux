@@ -33,6 +33,10 @@ cat ~/.bashrc >> /tmp/.bashrc
 cp /tmp/.bashrc ~/.bashrc
 
 cp configs/.vimrc ~/
+mkdir -p ~/.config/nvim
+cp ~/.vimrc ~/.config/nvim/init.vim
+
+
 cp configs/.bash_aliases ~/
 sudo mv /etc/motd /etc/motd_old
 sudo cp configs/motd /etc/motd
