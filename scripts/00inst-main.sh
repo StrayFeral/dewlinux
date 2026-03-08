@@ -34,7 +34,7 @@ cp /tmp/.bashrc ~/.bashrc
 
 cp configs/.vimrc ~/
 mkdir -p ~/.config/nvim
-cp ~/.vimrc ~/.config/nvim/init.vim
+cp configs/neovim_config ~/.config/nvim/init.vim
 
 
 cp configs/.bash_aliases ~/
