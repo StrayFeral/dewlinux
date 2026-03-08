@@ -34,3 +34,5 @@ nmap 3 :set spell spelllang=ru<cr>
 nmap 4 :set spell spelllang=fr<cr>
 nmap 0 :set nospell<cr>
 
+au BufRead,BufNewFile *.zil set filetype=lisp
+
