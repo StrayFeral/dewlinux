@@ -1,0 +1,163 @@
+WordGrinder dumpfile v3: this is a text file; diff me!
+.addons.autosave.enabled: false
+.addons.autosave.pattern: "%F.autosave.%T.wg"
+.addons.autosave.period: 10
+.addons.htmlexport.bold_off: "</b>"
+.addons.htmlexport.bold_on: "<b>"
+.addons.htmlexport.italic_off: "</i>"
+.addons.htmlexport.italic_on: "<i>"
+.addons.htmlexport.underline_off: "</u>"
+.addons.htmlexport.underline_on: "<u>"
+.addons.pagecount.enabled: false
+.addons.pagecount.wordsperpage: 250
+.addons.scrapbook.document: "Scrapbook"
+.addons.scrapbook.pattern: "Item from '%N' at %T:"
+.addons.scrapbook.timestamp: true
+.addons.smartquotes.doublequotes: false
+.addons.smartquotes.leftdouble: "“"
+.addons.smartquotes.leftsingle: "‘"
+.addons.smartquotes.notinraw: true
+.addons.smartquotes.rightdouble: "”"
+.addons.smartquotes.rightsingle: "’"
+.addons.smartquotes.singlequotes: false
+.addons.spellchecker.enabled: false
+.addons.spellchecker.usesystemdictionary: true
+.addons.spellchecker.useuserdictionary: true
+.documents.1.co: 1
+.documents.1.cp: 1
+.documents.1.cw: 1
+.documents.1.margin: 0
+.documents.1.name: "main"
+.documents.1.viewmode: 1
+.documents.1.wordcount: 1
+.documents.2.co: 1
+.documents.2.cp: 4
+.documents.2.cw: 21
+.documents.2.margin: 0
+.documents.2.name: "lorem_ipsum.txt"
+.documents.2.sticky_selection: false
+.documents.2.viewmode: 1
+.documents.2.wordcount: 371
+.fileformat: 8.0
+.menu.accelerators.BACKSPACE: "ZDPC"
+.menu.accelerators.DELETE: "ZDNC"
+.menu.accelerators.DOWN: "ZD"
+.menu.accelerators.EC: "^C"
+.menu.accelerators.ECadd: "^M"
+.menu.accelerators.ECfind: "^L"
+.menu.accelerators.EF: "^F"
+.menu.accelerators.EG: "^G"
+.menu.accelerators.EN: "^K"
+.menu.accelerators.END: "ZE"
+.menu.accelerators.EP: "^V"
+.menu.accelerators.ER: "^R"
+.menu.accelerators.ET: "^X"
+.menu.accelerators.Eredo: "^Y"
+.menu.accelerators.Eundo: "^Z"
+.menu.accelerators.FQ: "^Q"
+.menu.accelerators.FS: "^S"
+.menu.accelerators.HOME: "ZH"
+.menu.accelerators.LEFT: "ZL"
+.menu.accelerators.PGDN: "ZPGDN"
+.menu.accelerators.PGUP: "ZPGUP"
+.menu.accelerators.RIGHT: "ZR"
+.menu.accelerators.SB: "^B"
+.menu.accelerators.SDOWN: "ZSD"
+.menu.accelerators.SEND: "ZSE"
+.menu.accelerators.SHOME: "ZSH"
+.menu.accelerators.SI: "^I"
+.menu.accelerators.SLEFT: "ZSL"
+.menu.accelerators.SO: "^O"
+.menu.accelerators.SP: "^P"
+.menu.accelerators.SPGDN: "ZSPGDN"
+.menu.accelerators.SPGUP: "ZSPGUP"
+.menu.accelerators.SRIGHT: "ZSR"
+.menu.accelerators.SU: "^U"
+.menu.accelerators.SUP: "ZSU"
+.menu.accelerators.S^DOWN: "ZSNP"
+.menu.accelerators.S^LEFT: "ZSWL"
+.menu.accelerators.S^PGDN: "ZSED"
+.menu.accelerators.S^PGUP: "ZSBD"
+.menu.accelerators.S^RIGHT: "ZSWR"
+.menu.accelerators.S^UP: "ZSPP"
+.menu.accelerators.UP: "ZU"
+.menu.accelerators.ZBD: "^PGUP"
+.menu.accelerators.ZD: "DOWN"
+.menu.accelerators.ZDNC: "DELETE"
+.menu.accelerators.ZDPC: "BACKSPACE"
+.menu.accelerators.ZDW: "^E"
+.menu.accelerators.ZE: "END"
+.menu.accelerators.ZED: "^PGDN"
+.menu.accelerators.ZH: "HOME"
+.menu.accelerators.ZL: "LEFT"
+.menu.accelerators.ZM: "^@"
+.menu.accelerators.ZNP: "^DOWN"
+.menu.accelerators.ZPGDN: "PGDN"
+.menu.accelerators.ZPGUP: "PGUP"
+.menu.accelerators.ZPP: "^UP"
+.menu.accelerators.ZR: "RIGHT"
+.menu.accelerators.ZSBD: "S^PGUP"
+.menu.accelerators.ZSD: "SDOWN"
+.menu.accelerators.ZSE: "SEND"
+.menu.accelerators.ZSED: "S^PGDN"
+.menu.accelerators.ZSH: "SHOME"
+.menu.accelerators.ZSL: "SLEFT"
+.menu.accelerators.ZSNP: "S^DOWN"
+.menu.accelerators.ZSPGDN: "SPGDN"
+.menu.accelerators.ZSPGUP: "SPGUP"
+.menu.accelerators.ZSPP: "S^UP"
+.menu.accelerators.ZSR: "SRIGHT"
+.menu.accelerators.ZSU: "SUP"
+.menu.accelerators.ZSW: "^W"
+.menu.accelerators.ZSWL: "S^LEFT"
+.menu.accelerators.ZSWR: "S^RIGHT"
+.menu.accelerators.ZU: "UP"
+.menu.accelerators.ZWL: "^LEFT"
+.menu.accelerators.ZWR: "^RIGHT"
+.menu.accelerators.^@: "ZM"
+.menu.accelerators.^B: "SB"
+.menu.accelerators.^C: "EC"
+.menu.accelerators.^DOWN: "ZNP"
+.menu.accelerators.^E: "ZDW"
+.menu.accelerators.^F: "EF"
+.menu.accelerators.^G: "EG"
+.menu.accelerators.^I: "SI"
+.menu.accelerators.^K: "EN"
+.menu.accelerators.^L: "ECfind"
+.menu.accelerators.^LEFT: "ZWL"
+.menu.accelerators.^M: "ECadd"
+.menu.accelerators.^O: "SO"
+.menu.accelerators.^P: "SP"
+.menu.accelerators.^PGDN: "ZED"
+.menu.accelerators.^PGUP: "ZBD"
+.menu.accelerators.^Q: "FQ"
+.menu.accelerators.^R: "ER"
+.menu.accelerators.^RIGHT: "ZWR"
+.menu.accelerators.^S: "FS"
+.menu.accelerators.^U: "SU"
+.menu.accelerators.^UP: "ZPP"
+.menu.accelerators.^V: "EP"
+.menu.accelerators.^W: "ZSW"
+.menu.accelerators.^X: "ET"
+.menu.accelerators.^Y: "Eredo"
+.menu.accelerators.^Z: "Eundo"
+.name: "/home/eantonov/Downloads/os_images/dewlinux/samplemedia/lorem_ipsum.wg"
+.statusbar: true
+.current: 2
+#1
+P 
+.
+#2
+H1 Lorem Ipsum
+P Erat aenean sed netus torquent quis malesuada nostra leo hac mauris pharetra senectus. Dolor quam non iaculis congue sed etiam facilisi praesent nulla faucibus eros. Donec commodo eleifend non non tortor et ante morbi placerat tincidunt interdum praesent sociosqu blandit. Tincidunt eget eros quam torquent nulla cras lobortis mi dignissim lobortis malesuada tempus quis. Laoreet ultrices sed aenean felis lectus justo augue venenatis pulvinar. Morbi imperdiet lacus quam augue egestas semper orci litora eleifend maecenas velit. Sodales tempor dictum arcu neque euismod quisque gravida ligula lobortis orci sociosqu hac. Fusce tristique lobortis placerat consequat phasellus eget libero maximus convallis litora proin tristique.
+Q Suscipit erat arcu purus interdum cras platea tellus. Suspendisse semper aliquam purus litora erat laoreet sociosqu turpis. Ligula auctor litora arcu eget auctor nec turpis primis erat placerat sed felis class pretium. Ultrices blandit curabitur sapien vestibulum blandit suscipit et ultrices luctus integer velit eget nullam eleifend. Ultrices aliquam sapien scelerisque laoreet mauris duis tempor taciti lectus fermentum.
+Q Tincidunt ornare auctor ad odio id class ultrices ac inceptos augue risus eros donec habitasse. Quisque nulla habitasse quam eleifend aliquam at volutpat dictumst senectus. Porttitor erat placerat nibh cubilia mauris nulla donec rutrum dolor. Class gravida erat mattis sed molestie accumsan nulla fringilla. Augue porta erat quis morbi risus velit odio ornare quis tellus. Integer commodo molestie sed aliquam donec fames euismod posuere orci quis.
+LB Lectus quisque etiam eros orci euismod praesent nulla proin mauris justo libero auctor faucibus.
+LB Iaculis diam metus lectus cubilia etiam tellus conubia tempor rhoncus maximus nulla sem sed nisi. Vestibulum pulvinar nibh etiam erat varius sed vitae iaculis cubilia fermentum bibendum in.
+LB Aptent quis enim ac hendrerit in tempus sagittis quisque congue erat in hac.
+P Odio aliquam orci pretium mattis erat fusce nibh aliquam justo mauris fringilla dignissim sollicitudin metus.
+LN Egestas iaculis quisque quam duis lectus euismod eros accumsan.
+LN Metus libero semper dignissim felis enim nisi nunc mauris auctor rutrum amet mollis pellentesque.
+P Nulla condimentum eros neque mollis netus sed non sed id ultrices mi ultrices semper consequat. Dolor elit congue purus non aenean lorem vitae nulla interdum eleifend quis magna praesent. Nullam odio augue tristique aenean inceptos maximus malesuada quam sem quam. Vel posuere conubia velit vestibulum bibendum metus bibendum fringilla.
+P 
+.
