@@ -19,5 +19,9 @@ cargo install wiki-tui
 
 cargo install xleak                         # Excel XLS viewer
 
+# Markdown (MD) viewer
+git clone https://github.com/bahdotsh/mdterm.git
+cargo install --path mdterm/
+
 echo ""
 echo "MAIN MORE COMPONENTS INSTALLED."
