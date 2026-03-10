@@ -18,6 +18,9 @@ sudo apt -y install vim-ale                 # Great vim plugin
 sudo apt -y install hexcurse                # Hex editor
 sudo apt -y install hexedit xxd             # More hex tools
 
+# HTML
+sudo apt -y install tidy                    # HTML Tidy
+
 # Python 3
 echo "Installing Python3"
 sudo apt -y install python3
