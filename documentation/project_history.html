@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Project DEW History</title>
+    </head>
+    <body>
+        <p><a href="index.html">&lt;&lt;&lt;Back to the Main page&gt;&gt;&gt;</a></p>
+        <h1>Main Use Cases for Project DEW</h1>
+        <h2>Project definition</h2>
+        <p>DEWLINUX is a Terminal-only System Profile on top of a Debian-based Linux Environment. The system is designed to provide a satisfactory level of comfort for new terminal users.</p>
+        <p></p>
+        <h2>Core ideas</h2>
+        <p>I came up with the idea while watching the <a href="https://www.imdb.com/title/tt12637874/">Fallout (2024) tv-series</a>. Here is how the focus of my idea evolved over time:</p>
+        <ol>
+            <li>Mimic the Vault Overseer computer as a modern terminal-only system.
+                <ul>
+                    <li><b>CORE PROJECT DEW SYSTEM DESIGN SPECIFICATION:</b>
+                        <ol>
+                            <li>Virtual machine as a main platform, since this would be just an idea testing</li>
+                            <li>Debian 13 as a software platform</li>
+                            <li>Keeping it minimalistic by using the most basic terminal possible (8 colors)</li>
+                            <li>While the system would have non-stop network connectivity, keep the email setup OFF-LINE based out of a nostalgic vibe</li>
+                            <li>Despite it's a terminal-based system, provide the most of the user experience technically possible for the <b>chosen terminal type (!)</b></li>
+                        </ol>
+                    </li>
+                </ul>
+            </li>
+            <li>But what is possible to be done with such a system in 2026? What the user experience would be?</li>
+            <li>Should I make my own Linux distro? (Nah!)</li>
+            <li>Ok, but let's not just make a terminal system, let's actually make it ready to use, by providing installation and setup automation
+                <ul>
+                    <li>Let's provide a wizard-like GMAIL setup.
+                        <ul>
+                            <li>OPS! Seems the major providers are no longer using the familiar &quot;username&quot; and &quot;password&quot; IMAP setup. And just like 2-3 months ago all major providers decided to phase out the so called &quot;app passwords&quot;. What should I do?</li>
+                            <li>The only alternative is OAUTH2. Let's be heroes and do an OAUTH2 setup.</li>
+                            <li>But setting up OAUTH2 is real s#it for a person never exposed to GCP. And all the available solutions for some reason did not worked on my system. I want to QUIT!!</li>
+                            <li>I can't quit. I went hardcore and coded my own wizard. It's actually not hard at all, once you get the logic of things.</li>
+                            <li>With regards to the 90s DOS era, let's make the email setup entirely off-line based! User would run a shell script to sync the email when they want to. And if they wish so - they could always make a cron-job out of it.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>With regards to the 90s pure DOS user experience, let's explore and see how I could improve the terminal-only user experience by providing the user with curated, tested and quality-assured set of terminal enhancements.</li>
+            <li>Let's make it a user-friendly terminal user experience introduction for new terminal users.</li>
+            <li>My personal terminal UX test ground with the idea that I could adopt some of the terminal tools I tested.</li>
+        </ol>
+        <p></p>
+        <h2>Main Use Cases for the design of Project DEW</h2>
+        <p><b>DISCLAIMER: Since Project DEW was created as a playground of this idea I've got, it was designed to run on a virtual machine from the very beginning. For this reason some things were never taken into consideration, just like document printing for example.</b></p>
+        <ul>
+            <li>Having some colors for comfort (similar to 4DOS)</li>
+            <li>Files management</li>
+            <li>Using internet websites</li>
+            <li>Using the most common email - GMAIL with an email client</li>
+            <li>Viewing digital content:
+                <ul>
+                    <li>Basic text files (ASCII files)</li>
+                    <li>Microsoft Office Word and Excel documents</li>
+                    <li>Other spreadsheet formats</li>
+                    <li>Images</li>
+                    <li>Video viewing, maybe watching movies</li>
+                    <li>Music listening</li>
+                </ul>
+            </li>
+            <li>Creating digital content (authoring):
+                <ul>
+                    <li>Basic text files (ASCII files)</li>
+                    <li>Word processing - <b>CURRENTLY NOT MATURE</b></li>
+                    <li>Creating a spreadsheet</li>
+                    <li>Creating Microsoft Office Word and Excel documents - <b>CURRENTLY UNAVAILABLE!</b></li>
+                    <li>Image creation and manipulation - <b>CURRENTLY UNAVAILABLE!</b></li>
+                    <li>Video editing - <b>CURRENTLY UNAVAILABLE!</b></li>
+                    <li>Creating music - <b>CURRENTLY UNAVAILABLE!</b></li>
+                </ul>
+            </li>
+            <li>Software development
+                <ul>
+                    <li>Perl</li>
+                    <li>Python 3</li>
+                    <li>Lua</li>
+                    <li>C/C++</li>
+                    <li>Go (Golang)</li>
+                    <li>Rust</li>
+                    <li>gasm, nasm</li>
+                </ul>
+            </li>
+            <li>Self-organization (TODO management etc)</li>
+            <li>Chat</li>
+            <li>Reading news</li>
+            <li>Games</li>
+        </ul>
+    </body>
+</html>

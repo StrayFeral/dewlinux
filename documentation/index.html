@@ -6,201 +6,21 @@
     </head>
     <body>
         <h1>PROJECT DEW DOCUMENTATION</h1>
-        <p>2026 by StrayF</p>
+        <p><i>2026-03-11 by StrayF</i></p>
+        <p>Welcome to Project DEW!</p>
         <p></p>
-        <h2>WHAT IS INSTALLED AND WHY</h2>
-        <p>Since this experiment assumes a system for personal home use, the folowing use cases were taken into consideration with the folowing utilities installed:</p>
-        <ul>
-            <li>A bootable and operational computer as a base
-                <ul>
-                    <li>Debian linux</li>
-                </ul>
-            </li>
-            <li>Basic accessibility option - manual font setup
-                <ul>
-                    <li>dpkg-reconfigure console-setup</li>
-                </ul>
-            </li>
-            <li>Additional keyboard layout setup and switching (left ALT + left SHIFT to switch)</li>
-            <li>Basic system management and system information
-                <ul>
-                    <li>manual system management</li>
-                    <li>fastfetch - system info</li>
-                    <li>htop, btop - process monitoring</li>
-                    <li>eza - ls replacement (I already aliased ls with it)</li>
-                    <li>fzf - fuzzy finder</li>
-                    <li>ncdu - du replacement</li>
-                    <li>bat - cat replacement</li>
-                    <li>dysk, duf - df replacements</li>
-                    <li>rg - grep replacement (ripgrep)</li>
-                    <li>fd - find replacement (fdfind)</li>
-                    <li>nload - network monitoring</li>
-                    <li>lazytail - tail replacement</li>
-                    <li>scooter - regexxer replacement (fast multi-file search/replace)</li>
-                </ul>
-            </li>
-            <li>Comfortable shell with some coloring
-                <ul>
-                    <li>bash</li>
-                </ul>
-            </li>
-            <li>Desktop organization
-                <ul>
-                    <li>tmux</li>
-                </ul>
-            </li>
-            <li>Comfortable file management
-                <ul>
-                    <li>locate</li>
-                    <li>mc</li>
-                </ul>
-            </li>
-            <li>Text editing - text files
-                <ul>
-                    <li>vim</li>
-                    <li>nvim</li>
-                </ul>
-            </li>
-            <li>Document conversion
-                <ul>
-                    <li>pandoc</li>
-                </ul>
-            </li>
-            <li>View of .md files
-                <ul>
-                    <li>mdterm</li>
-                    <li>mdview - this is just a function to pandoc and lynx</li>
-                </ul>
-            </li>
-            <li>Text editing - Word Processor
-                <ul>
-                    <li>wordgrinder</li>
-                </ul>
-            </li>
-            <li>PDF text viewer
-                <ul>
-                    <li>pdftotext file.pdf - | less</li>
-                </ul>
-            </li>
-            <li>Wikipedia client
-                <ul>
-                    <li>wiki-tui</li>
-                </ul>
-            </li>
-            <li>Spreadsheet
-                <ul>
-                    <li>sc-im</li>
-                </ul>
-            </li>
-            <li>Calendar and self-organizing
-                <ul>
-                    <li>calcurse</li>
-                </ul>
-            </li>
-            <li>TODO management and self-organizing
-                <ul>
-                    <li>taskwarrior</li>
-                </ul>
-            </li>
-            <li>Excel (XLS) files viewer
-                <ul>
-                    <li>xleak</li>
-                    <li>sc-im - ONLY if compiled with XLS support</li>
-                </ul>
-            </li>
-            <li>Word (DOC) files viewer
-                <ul>
-                    <li>docview - this is just a function to pandoc and less</li>
-                </ul>
-            </li>
-            <li>Music listening
-                <ul>
-                    <li>alsamixer</li>
-                    <li>mocp</li>
-                </ul>
-            </li>
-            <li>Image viewing
-                <ul>
-                    <li>fbi</li>
-                    <li>fim</li>
-                </ul>
-            </li>
-            <li>Video playing
-                <ul>
-                    <li>mpv</li>
-                </ul>
-            </li>
-            <li>Internet browsing
-                <ul>
-                    <li>lynx</li>
-                    <li>links2</li>
-                </ul>
-            </li>
-            <li>Email
-                <ul>
-                    <li>neomutt</li>
-                    <li>/home/$USER/dewlinux/sync_mail.sh</li>
-                </ul>
-            </li>
-            <li>Chat
-                <ul>
-                    <li>weechat</li>
-                </ul>
-            </li>
-            <li>Newsreading
-                <ul>
-                    <li>newsboat</li>
-                </ul>
-            </li>
-            <li>Software development
-                <ul>
-                    <li>vim - already installed</li>
-                    <li>ALE plugin for vim</li>
-                    <li>python3</li>
-                    <li>perl</li>
-                    <li>hexcurse, hexedit, xxd</li>
-                    <li>gcc</li>
-                    <li>go</li>
-                    <li>lua</li>
-                    <li>rust</li>
-                    <li>gasm, nasm</li>
-                    <li>gdb - GNU debugger</li>
-                    <li>rgx - regex tester</li>
-                </ul>
-            </li>
-            <li>Software development - for manual install
-                <ul>
-                    <li>Python linter and code formatter</li>
-                    <li>Perl linter and code formatter</li>
-                </ul>
-            </li>
-            <li>Games
-                <ul>
-                    <li>bsdgames
-                        <ul>
-                            <li>adventure</li>
-                            <li>arithmetic</li>
-                            <li>backgammon</li>
-                            <li>bcd</li>
-                            <li>hangman</li>
-                            <li>robots</li>
-                            <li>trek</li>
-                            <li>worm</li>
-                            <li>quiz</li>
-                        </ul>
-                    </li>
-                    <li>pacman4console</li>
-                    <li>nudoku</li>
-                    <li>frotz</li>
-                    <li>cowsay</li>
-                    <li>bastet</li>
-                    <li>vitetris</li>
-                    <li>chess-tui - configured with stockfish engine</li>
-                    <li>gnuchess - the classic chess engine, could be used with chess-tui too</li>
-                    <li>phalanx - another chess engine, which as gnuchess could be used in the terminal</li>
-                </ul>
-            </li>
-        </ul>
+        <h2>Table of Contents</h2>
+        <ol>
+            <li><a href="project_history.html">Project definition and history</a></li>
+            <li><a href="installed.html">What's installed</a></li>
+            <li><a href="gcp_instructions.html">Help on setting GMAIL up for NeoMutt</a> (GCP Instructions)</li>
+            <li><a href="chess_help.html">Chess game help</a></li>
+        </ol>
         <p></p>
+        <h2>External links</h2>
+        <ol>
+            <li><a href="https://www.youtube.com/@SkateCode">Project DEW Youtube channel - GO HERE FOR MORE HELP AND TUTORIAL VIDEOS!</a></li>
+            <li><a href="https://github.com/StrayFeral/dewlinux">Project DEW GitHub code repository</a></li>
+        </ol>
     </body>
 </html>
