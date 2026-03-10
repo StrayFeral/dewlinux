@@ -142,5 +142,8 @@ sudo apt -y install cage foot               # These would get 256 colors
 # Not sure this is automatically added, so I am adding it manually
 echo "export PATH=$PATH:$HOME/.cargo/bin" >> ~/.profile
 
+# Forcing colored prompt
+sed -i "s|#force_color_prompt=yes|force_color_prompt=yes|g" ~/.bashrc
+
 echo ""
 echo "MAIN COMPONENTS INSTALLED."
