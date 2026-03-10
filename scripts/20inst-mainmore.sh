@@ -17,5 +17,7 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"
 git clone https://github.com/Builditluc/wiki-tui
 cargo install wiki-tui
 
+cargo install xleak                         # Excel XLS viewer
+
 echo ""
 echo "MAIN MORE COMPONENTS INSTALLED."

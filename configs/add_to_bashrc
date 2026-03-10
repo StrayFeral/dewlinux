@@ -6,3 +6,9 @@ mdview() {
     pandoc "$1" | lynx -stdin
 }
 
+# Viewing .doc files
+docview() {
+    pandoc "$1" -t plain | less
+    # pandoc "$1" -t commonmark | less
+}
+

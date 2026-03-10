@@ -54,6 +54,7 @@ sudo apt -y install libssl-dev libncurses-dev libsqlite3-dev
 # If anyone gets a smart idea working on this Debian image -
 # be my guest.
 
+sudo apt -y install bsdutils bsdextrautils  # Utilities
 sudo apt -y install wget
 sudo apt -y install curl
 sudo apt -y install locate                  # File location
