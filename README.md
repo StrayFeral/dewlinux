@@ -2,8 +2,8 @@
 
 ## STATUS
 
-- 2026-02-26: PHASE3 Start. I will make demo videos and will put them on Youtube.
-- 2026-02-03: PHASE1 and PHASE2 Start. WORK-IN-PROGRESS...
+- 2026-03-11: PHASE3 Start. Project DEW Introductory video is uploaded.
+- 2026-02-03: PHASE1 and PHASE2 Start.
 
 ## DESCRIPTION
 
@@ -178,14 +178,6 @@ Finally, if you have Google Contacts and you want to use them in abook, just run
 
 > If for any reason you would need to re-authorize the setup (like if you changed your settings in GCP) just run `reauthorize.sh` and it will do what's needed.
 
-### VIDEO
+### VIDEO TUTORIALS
 
-The folowing video shows the initial installation
-> WORK IN PROGRESS! VIDEO NOT READY YET!
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/VIDEO_ID" 
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-          frameborder="0" allowfullscreen>
-  </iframe>
-</div>
+[![DEW00: Project DEW Introductory Video](https://img.youtube.com/vi/-o7sr3MgS2s/0.jpg)](https://www.youtube.com/watch?v=-o7sr3MgS2s)

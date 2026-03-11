@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Project DEW Video Tutorials</title>
+        <style>
+          .video-list-container {
+            max-width: 800px; /* Limits width so it doesn't stretch too far on a 17" screen */
+            margin: 20px 0;
+            font-family: sans-serif;
+          }
+
+          .video-item {
+            display: flex;
+            text-decoration: none;
+            color: #0f0f0f;
+            margin-bottom: 16px;
+            gap: 12px;
+          }
+
+          .thumb-wrapper {
+            flex-shrink: 0;
+            width: 240px; /* Optimal "list" size for large screens */
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #000;
+          }
+
+          .thumb-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This crops the 4:3 image to a 16:9 cinematic look */
+          }
+
+          .video-info h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+            line-height: 1.4;
+          }
+
+          .video-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #606060;
+          }
+        </style>
+    </head>
+    <body>
+        <p><a href="index.html">&lt;&lt;&lt;Back to the Main page&gt;&gt;&gt;</a></p>
+        <h1>Project DEW Video Tutorials</h1>
+        <div class="video-list-container">
+            <a href="https://www.youtube.com/watch?v=-o7sr3MgS2s" class="video-item" target="_blank">
+                <div class="thumb-wrapper">
+                    <img src="https://img.youtube.com/vi/-o7sr3MgS2s/hqdefault.jpg" alt="Video Thumbnail">
+                    </div>
+                    <div class="video-info">
+                    <h3>[DEW00] Project DEW Introductory Video</h3>
+                </div>
+            </a>
+        </div>
+    </body>
+</html>
