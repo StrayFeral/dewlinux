@@ -39,6 +39,8 @@ I've decided to use Debian, so I went with the netinst image which is only near 
 
 My goal was never to use the most barebone distro. While I have some experience with some unix distros, some RedHat derivatives, I am mostly experienced in pure Debian and some of the derivative distros, so Debian was the natural choice for me. While I am experimenting to go a bit hardcore, it was never my goal to go fully hardcore for which Devuan was never considered.
 
+You can download Debian linux from here: [https://www.debian.org/](https://www.debian.org/)
+
 ## INSTALLATION
 
 > DISCLAIMER: The folowing instructions and code base represent a tested and verified installation and workflow ONLY for the above mentioned linux distro. If you're using another operating system of any sort, please keep in mind my goal was never to publish a multi-platform code. You are free to modify and adapt this project for your own OS and needs.
