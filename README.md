@@ -183,3 +183,4 @@ Finally, if you have Google Contacts and you want to use them in abook, just run
 ### VIDEO TUTORIALS
 
 [![DEW00: Project DEW Introductory Video](https://img.youtube.com/vi/-o7sr3MgS2s/0.jpg)](https://www.youtube.com/watch?v=-o7sr3MgS2s)
+[![DEW01: Project DEW Installation](https://img.youtube.com/vi/k9RXcay66Jo/0.jpg)](https://www.youtube.com/watch?v=k9RXcay66Jo)
