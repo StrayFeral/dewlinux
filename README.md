@@ -162,9 +162,9 @@ You must create:
 - Add your email
 - Add your email as a TESTER
 - Manually add a scopes:
-    https://mail.google.com/
-    https://www.googleapis.com/auth/contacts.readonly
-    https://www.googleapis.com/auth/contacts.other.readonly
+    - https://mail.google.com/
+    - https://www.googleapis.com/auth/contacts.readonly
+    - https://www.googleapis.com/auth/contacts.other.readonly
 
 > COPY THE CLIENT_ID AND CLIENT_SECRET AND SAVE THEM SOMEWHERE !!
 
