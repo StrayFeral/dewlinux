@@ -113,6 +113,20 @@ That AppArmor dialog was the only thing I could not automate, sorry.
 
 > IMPORTANT: Essentially what I've built is a terminal-only system. While installation of some packages does install specific libraries from graphical environments and we get about 20% contamination with such components, the system as a whole remains a terminal-only system with no graphical desktop environment being installed or able to run.
 
+## SETUP OF GMAIL, OUTLOOK, HOTMAIL AND LIVE.COM MAIL ACCOUNTS WITH NEOMUTT
+
+By design specification, this setup was created to support configuration of **FREE** emails from the folowing providers:
+- **GMail.com** (Google)
+- **Outlook.com** (Microsoft)
+- **HotMail.com** (Microsoft)
+- **Live.com** (Microsoft)
+
+> DISCLAIMER: By design specification this setup supports only single email account configuration.
+
+**NOTE:** While NeoMutt does support multiple account configuration, such setup was never intended.
+
+> DISCLAIMER: Only GMail setup was tested and ensured to work.
+
 ### NEOMUTT OAUTH2 (GMAIL/OUTLOOK) EMAIL SETUP
 
 This is the only weird part.
@@ -142,14 +156,14 @@ Use your host OS and go to:
 You must create:
 - New project
 - Select the newly created project
+- Enable GMAIL API (search in APIs&Services)
+- Enable People API
 - New EXTERNAL DESKTOP app
 - Add your email
 - Add your email as a TESTER
-- Enable GMAIL API (search in APIs&Services)
-- Enable People API
 - Manually add a scopes:
     https://mail.google.com/
-    https://www.googleapis.com/auth/contacts
+    https://www.googleapis.com/auth/contacts.readonly
     https://www.googleapis.com/auth/contacts.other.readonly
 
 > COPY THE CLIENT_ID AND CLIENT_SECRET AND SAVE THEM SOMEWHERE !!
@@ -179,6 +193,16 @@ Finally, if you have Google Contacts and you want to use them in abook, just run
 ```
 
 > If for any reason you would need to re-authorize the setup (like if you changed your settings in GCP) just run `reauthorize.sh` and it will do what's needed.
+
+GCP will give you a total of 10 (ten) projects. So if there is a project you no longer use, better delete it. The fastest way to do this is to type this in the Cloud Shell:
+
+```bash
+gcloud projects delete <PROJECT ID>
+```
+
+For example: `gcloud projects delete dewmail003`
+
+It will take 30 (thirty) days for the project to be permanently deleted.
 
 ### VIDEO TUTORIALS
 
