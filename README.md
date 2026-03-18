@@ -151,7 +151,7 @@ You need to do these steps only once.
 
 Use your host OS and go to:
 
->https://console.cloud.google.com
+> https://console.cloud.google.com
 
 You must create:
 - New project
