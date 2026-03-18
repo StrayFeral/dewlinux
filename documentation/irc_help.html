@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>IRC HELP</title>
+    </head>
+    <body>
+        <p><a href="index.html">&lt;&lt;&lt;Back to the Main page&gt;&gt;&gt;</a></p>
+        <h1>IRC HELP (WEECHAT)</h1>
+        <p>IRC stands for Internet Relay Chat. It is a very old way to talk to other people.</p>
+        
+        <h2>IRC General Information</h2>
+        <p>If you have zero idea what IRC is and looks like, check the folowing links in the end of this section.</p>
+        <p>
+            In short - in the IRC chat you type commands. Each command starts with the slash symbol "/" and continues with a word.
+            There are global commands which could be executed in any chat window, like "/connect", "/disconnect", "/join", "/part",
+            "/leave", "/msg", "/nick" and more.
+        </p>
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/IRC">Wikipedia IRC article</a></li>
+            <li><a href="https://www.mirc.com/">mIRC - the most popular IRC client from the past</a></li>
+            <li><a href="https://weechat.org/files/doc/weechat/stable/weechat_quickstart.en.html">WeeChat quickstart</a></li>
+            <li><a href="https://libera.chat/">Libera.Chat - server with lots of channels</a></li>
+        </ul>
+        <p></p>
+        
+        <h2>How to setup Libera.Chat (INITIAL SETUP)</h2>
+        <p><i>You need to do what's described in this section only once.</i></p>
+        <p>You need to type the folowing commands first (beware not to copy the list bullets!):</p>
+        <p>
+            <i>(and be sure to replace "YOURNICKNAMEHERE" with a nickname of your choice - put in any case you want),
+            however using real names is not advisable!</i>
+        </p>
+        <ul>
+            <li>/server add libera irc.libera.chat/6697 -tls</li>
+            <li>/set irc.server.libera.nicks "YOURNICKNAMEHERE,YOURNICKNAMEHERE2,YOURNICKNAMEHERE3,YOURNICKNAMEHERE4,YOURNICKNAMEHERE5"</li>
+            <li>/set irc.server.libera.username "YOURUSERNAMEHERE"</li>
+            <li>/set irc.server.libera.realname "YOURREALNAMEHERE"</li>
+        </ul>
+        <p>
+            When you setup default nicks for a server you can set any number of nicks. The idea is - upon connection if the first nickname
+            already exists, it means "it's taken" and you need to quickly set new nick for 1 minute. When you set multiple nicks
+            this would be done automatically - WeeChat will automatically set the second nick, if it's taken too it will set
+            the third nick etc.
+        </p>
+        <p></p>
+        
+        <h2>How to chat in WeeChat</h2>
+        <p>From now on what you need to do is this - launch `weechat` and then it will await commands. Here are the most useful ones:</p>
+        <ul>
+            <li>/connect libera</li>
+            <li>/disconnect</li>
+            <li>/quit</li>
+            <li>/nick YOURNEWNICKHERE</li>
+            <li>/me SOMETHINGHERE</li>
+            <li>/join CHANNELNAMEHERE</li>
+            <li>/part</li>
+            <li>/leave</li>
+            <li>/msg TARGETNICKNAMEHERE private message text goes here</li>
+        </ul>
+        
+        <p>While some are obvious on what they do, here is a brief explanation:</p>
+        <ul>
+            <li>/connect libera - connects to Libera.Chat</li>
+            <li>/disconnect - disconnects from the currently connected server</li>
+            <li>/quit - disconnects and quit WeeChat</li>
+            <li>/nick YOURNEWNICKHERE - changing your nickname mid session</li>
+            <li>/me SOMETHINGHERE - saying something in public and accenting it</li>
+            <li>/join CHANNELNAMEHERE - joining a chat channel</li>
+            <li>/part - leaving the current chat channel</li>
+            <li>/leave - same as above</li>
+            <li>/msg TARGETNICKNAMEHERE private message text goes here - sending a private message to a user</li>
+        </ul>
+        
+        <p>Examples:</p>
+        <ul>
+            <li>/connect libera</li>
+            <li>/join #mytestchannel1</li>
+            <li>/nick im-so-cool</li>
+            <li>/me is going insane</li>
+            <li>/msg john321 hey did you noticed Jane is gone?</li>
+            <li>/quit</li>
+        </ul>
+        <p><i>NOTE: "/quit" usually allows a message, which is the quit reason, so you could type "/quit must go for coffee"</i></p>
+        
+        <p>
+            <i>
+                NOTE: Nicknames and channel names accept both dashes and underscores in the name, as well as numbers in the end.
+                Better avoid special characters.
+            </i>
+        </p>
+        
+        <p>
+            Important: If you mistype the name of a channel or you just type the name of a channel which does not exists,
+            you will be joined to a brand new channel and you will automatically become the ChanOp of this channel.
+        </p>
+        <p>
+            Regular users and operators: Basically there are few roles for users - regular users, channel operators (ChanOp), 
+            server admins and I think there were few other roles I can't recall. If you join an existing channel you would be
+            a regular user. However if you want to create your own channel, just join a channel with non-existing name and it
+            will be your channel and you will me automatically assigned the role of a ChanOp.
+        </p>
+        <p>
+            There are far more things to explain about IRC, but it is not the purpose of this document. Visit the links
+            above and read.
+        </p>
+    </body>
+</html>
