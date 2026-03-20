@@ -18,6 +18,7 @@
 - neomutt
 - newsboat
 - rgx
+- scooter
 
 ### Installed and planing to use more often
 - bat
