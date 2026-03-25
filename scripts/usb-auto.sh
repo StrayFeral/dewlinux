@@ -2,6 +2,8 @@
 
 DEV="/dev/$1"
 
+sleep 2
+
 # Mount device
 OUTPUT=$(udisksctl mount -b "$DEV" 2>/dev/null)
 
