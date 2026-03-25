@@ -41,17 +41,6 @@ cp configs/.bash_aliases ~/
 sudo mv /etc/motd /etc/motd_old
 sudo cp configs/motd /etc/motd
 
-# User-friendly way for newbies to understand what's connected and where
-sudo apt -y install udisks2
-sudo cp configs/99-usb-auto.rules /etc/udev/rules.d/
-sudo cp scripts/usb-auto.sh /usr/local/bin/
-sudo cp configs/usb-auto@.service /etc/systemd/system/
-sudo cp configs/49-udisks2.rules /etc/polkit-1/rules.d/
-sudo usermod -aG plugdev $USER
-sudo udevadm control --reload
-sudo udevadm trigger
-sudo systemctl daemon-reexec
-cp scripts/usbcheck.sh ~/bin/
 
 # Compiling C sources
 sudo apt -y install build-essential
