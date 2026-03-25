@@ -46,6 +46,8 @@ sudo apt -y install udisks2
 sudo cp configs/99-usb-auto.rules /etc/udev/rules.d/
 sudo cp scripts/usb-auto.sh /usr/local/bin/
 sudo cp configs/usb-auto@.service /etc/systemd/system/
+sudo cp configs/49-udisks2.rules /etc/polkit-1/rules.d/
+sudo usermod -aG plugdev $USER
 sudo udevadm control --reload
 sudo systemctl daemon-reexec
 cp scripts/usbcheck.sh ~/bin/
