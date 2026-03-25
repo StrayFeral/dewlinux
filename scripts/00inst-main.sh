@@ -45,7 +45,9 @@ sudo cp configs/motd /etc/motd
 sudo apt -y install udisks2
 sudo cp configs/99-usb-auto.rules /etc/udev/rules.d/
 sudo cp scripts/usb-auto.sh /usr/local/bin/
+sudo cp configs/usb-auto@.service /etc/systemd/system/
 sudo udevadm control --reload
+sudo systemctl daemon-reexec
 
 # Compiling C sources
 sudo apt -y install build-essential

@@ -1,0 +1,6 @@
+[Unit]
+Description=USB auto handler for %I
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/usb-auto.sh %I
