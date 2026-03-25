@@ -41,6 +41,12 @@ cp configs/.bash_aliases ~/
 sudo mv /etc/motd /etc/motd_old
 sudo cp configs/motd /etc/motd
 
+# User-friendly way for newbies to understand what's connected and where
+sudo apt -y install udisks2
+sudo cp configs/99-usb-auto.rules /etc/udev/rules.d/
+sudo cp scripts/usb-auto.sh /usr/local/bin/
+sudo udevadm control --reload
+
 # Compiling C sources
 sudo apt -y install build-essential
 sudo apt -y install autoconf automake
