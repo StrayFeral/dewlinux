@@ -73,6 +73,17 @@ sudo apt -y install gpm                     # Mouse support
 sudo apt -y install strace                  # Trace system calls
 sudo apt -y install nload                   # Network monitoring
 
+# A bit of user-friendliness
+sudo apt -y install udisks2
+sudo usermod -aG plugdev $USER
+sudo udevadm control --reload
+sudo udevadm trigger
+sudo systemctl daemon-reexec
+cp configs/10-udisks2.rules /etc/polkit-1/rules.d/10-udisks2.rules
+sudo systemctl restart polkit
+cp scripts/listusb.sh ~/bin
+cp scripts/removeusb.sh ~/bin
+
 sudo apt -y install vlock                   # Console locker
 
 sudo apt -y install pandoc                  # Document conversion tool
