@@ -49,6 +49,7 @@ sudo cp configs/usb-auto@.service /etc/systemd/system/
 sudo cp configs/49-udisks2.rules /etc/polkit-1/rules.d/
 sudo usermod -aG plugdev $USER
 sudo udevadm control --reload
+sudo udevadm trigger
 sudo systemctl daemon-reexec
 cp scripts/usbcheck.sh ~/bin/
 

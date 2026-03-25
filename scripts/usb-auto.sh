@@ -1,15 +1,23 @@
 #!/bin/bash
 
-DEV="/dev/$1"
+# $1 = device node (e.g., /dev/sda1)
 
-sleep 2
+DEV="$1"
+MOUNT_BASE="/media"
+LABEL=$(blkid -o value -s LABEL "$DEV")
+if [ -z "$LABEL" ]; then
+    LABEL=$(basename "$DEV")   # fallback if no label
+fi
 
-OUTPUT=$(udisksctl mount -b "$DEV" 2>/dev/null)
+MOUNT_POINT="$MOUNT_BASE/$LABEL"
 
-MOUNT_POINT=$(echo "$OUTPUT" | sed -n 's/.* at \(.*\)\.$/\1/p')
+# Create mount point if it doesn't exist
+mkdir -p "$MOUNT_POINT"
 
-[ -z "$MOUNT_POINT" ] && exit 0
+# Mount the device (read/write, no auto options)
+mount "$DEV" "$MOUNT_POINT"
 
-who | while read user tty rest; do
-    echo "New device is now connected as '$MOUNT_POINT'" > "/dev/$tty"
-done
+if [ $? -eq 0 ]; then
+    # Print message to all terminals
+    echo "USB device $DEV mounted at $MOUNT_POINT" | wall
+fi

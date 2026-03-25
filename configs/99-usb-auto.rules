@@ -1,1 +1,1 @@
-ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd[a-z][0-9]", TAG+="systemd", ENV{SYSTEMD_WANTS}="usb-auto@%k.service"
+ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd[a-z][0-9]", ENV{ID_DRIVE_THUMB}=="1", RUN+="/usr/local/bin/usb-auto.sh %N"
