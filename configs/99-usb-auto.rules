@@ -1,1 +1,0 @@
-ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd[a-z][0-9]", ENV{ID_DRIVE_THUMB}=="1", RUN+="/usr/local/bin/usb-auto.sh %N"
