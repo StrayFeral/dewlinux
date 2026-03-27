@@ -6,7 +6,7 @@ SHELL := /bin/bash
 # by StrayF 2026
 
 
-.PHONY: base main dev cyr gmail games help mainmore
+.PHONY: base main dev cyr gmail games help mainmore tads
 
 DEBUG ?= 0
 
@@ -42,6 +42,10 @@ games:
 	[[ "$(DEBUG)" == 1 ]] && set -x
 	./scripts/50inst-games.sh
 	./scripts/51inst-chess.sh
+
+tads:
+	[[ "$(DEBUG)" == 1 ]] && set -x
+	./scripts/52inst-frobtads.sh
 
 help:
 	@echo "TARGETS:"
