@@ -13,9 +13,9 @@ sudo apt update
 sudo apt upgrade
 
 echo "Downloading additional updates..."
-git -C wiki-tui
-git -C mdterm
-git -C lazytail
+git -C wiki-tui/ pull
+git -C mdterm/ pull
+git -C lazytail/ pull
 
 echo "Installing additional updates..."
 cargo install --path wiki-tui/
