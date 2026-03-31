@@ -10,7 +10,7 @@ echo ""
 
 echo "Acquiring updates..."
 sudo apt update
-sudo apt upgrade
+sudo apt -y upgrade
 
 echo "Downloading additional updates..."
 git -C wiki-tui/ pull
