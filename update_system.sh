@@ -25,7 +25,7 @@ cargo install xleak
 cargo install chess-tui
 
 bash lazytail/install.sh
-lazytail init
+# lazytail init
 
 echo ""
 echo "SYSTEM UPDATED."
