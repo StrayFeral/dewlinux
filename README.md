@@ -2,6 +2,7 @@
 
 ## STATUS
 
+- 2026-04-03: PROJECT VERSION 1. Added versioning, scripts polished.
 - 2026-03-11: PHASE3 Start. Project DEW Introductory video is uploaded.
 - 2026-02-03: PHASE1 and PHASE2 Start.
 
