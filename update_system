@@ -33,6 +33,15 @@ cargo install chess-tui
 bash lazytail/install.sh
 # lazytail init
 
+cp scripts/listusb ~/bin
+cp scripts/removeusb ~/bin
+cp pull_google_contacts ~/bin
+cp play_chess ~/bin
+cp dewhelp ~/bin
+cp update_system ~/bin
+cp sync_mail ~/bin
+cp reauthorize ~/bin
+
 popd
 
 echo ""
