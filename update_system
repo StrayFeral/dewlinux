@@ -30,7 +30,7 @@ git pull
 
 # If first parameter is set to "brief", this will NOT be executed
 # (as it takes lots of time)
-if [[ $# -gt 0 && "$1" != "brief" ]]; then
+if [[ $# -eq 0 || "$1" != "brief" ]]; then
     echo ""
     echo "Downloading additional updates..."
     git -C wiki-tui/ pull
