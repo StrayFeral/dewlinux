@@ -208,3 +208,6 @@ It will take 30 (thirty) days for the project to be permanently deleted.
 
 [![DEW00: Project DEW Introductory Video](https://img.youtube.com/vi/-o7sr3MgS2s/0.jpg)](https://www.youtube.com/watch?v=-o7sr3MgS2s)
 [![DEW01: Project DEW Installation](https://img.youtube.com/vi/k9RXcay66Jo/0.jpg)](https://www.youtube.com/watch?v=k9RXcay66Jo)
+[![DEW02: Project DEW Installation](https://img.youtube.com/vi/BOOqHpfhqr8/0.jpg)](https://www.youtube.com/watch?v=BOOqHpfhqr8)
+[![DEW03: Project DEW Installation](https://img.youtube.com/vi/aFckSwKU0Ac/0.jpg)](https://www.youtube.com/watch?v=aFckSwKU0Ac)
+[![DEW04: Project DEW Installation](https://img.youtube.com/vi/hiOzNuQVkQA/0.jpg)](https://www.youtube.com/watch?v=hiOzNuQVkQA)
