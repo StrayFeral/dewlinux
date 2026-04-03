@@ -4,6 +4,14 @@ set -euo pipefail
 export DEBIAN_FRONTEND="noninteractive"
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
+if [[ $# -gt 0 && "$1" == "help" ]]; then
+    echo ""
+    echo "FULL UPDATE   : update_system"
+    echo "BRIEF UPDATE  : update_system brief"
+    echo ""
+    exit 2
+fi
+
 echo ""
 echo "UPDATING THE SYSTEM..."
 echo ""
