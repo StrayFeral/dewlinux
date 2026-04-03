@@ -52,6 +52,9 @@ ln -sf ~/dewlinux/reauthorize ~/bin/reauthorize
 cp scripts/get_mail_secret.py ~/bin
 chmod 700 ~/bin/get_mail_secret.py
 
+# Nice to have
+wget "https://www.markdownguide.org/assets/markdown-cheat-sheet.md" -O ~/dewlinux/markdown-cheat-sheet.md
+
 popd
 
 echo ""
