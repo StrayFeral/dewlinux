@@ -166,5 +166,8 @@ echo "export PATH=$PATH:$HOME/.cargo/bin" >> ~/.profile
 # Forcing colored prompt
 sed -i "s|#force_color_prompt=yes|force_color_prompt=yes|g" ~/.bashrc
 
+# Nice to have
+wget "https://www.markdownguide.org/assets/markdown-cheat-sheet.md" -O ~/dewlinux/markdown-cheat-sheet.md
+
 echo ""
 echo "MAIN COMPONENTS INSTALLED."
