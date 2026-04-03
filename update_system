@@ -19,21 +19,25 @@ echo ""
 pushd .
 cd ~/dewlinux/
 
+echo ""
 echo "Acquiring updates..."
 sudo apt update
 sudo apt -y upgrade
 
+echo ""
 echo "Updating PROJECT DEW codebase..."
 git pull
 
 # If first parameter is set to "brief", this will NOT be executed
 # (as it takes lots of time)
 if [[ $# -gt 0 && "$1" != "brief" ]]; then
+    echo ""
     echo "Downloading additional updates..."
     git -C wiki-tui/ pull
     git -C mdterm/ pull
     git -C lazytail/ pull
 
+    echo ""
     echo "Installing additional updates..."
     cargo install --path wiki-tui/
     cargo install --path mdterm/
