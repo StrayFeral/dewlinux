@@ -14,7 +14,7 @@ fi
 #fi
 
 pushd .
-cd $HOME/dewlinux/
+cd ~/dewlinux/
 
 python3 scripts/oauth2_config.py $1
 

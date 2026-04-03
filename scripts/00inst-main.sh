@@ -83,15 +83,15 @@ cp configs/10-udisks2.rules /etc/polkit-1/rules.d/10-udisks2.rules
 sudo systemctl restart polkit
 
 # Creating symlinks
-ln -sf $HOME/dewlinux/scripts/listusb ~/bin/listusb
-ln -sf $HOME/dewlinux/scripts/removeusb ~/bin/removeusb
-ln -sf $HOME/dewlinux/scripts/myip ~/bin/myip
-ln -sf $HOME/dewlinux/pull_google_contacts ~/bin/pull_google_contacts
-ln -sf $HOME/dewlinux/play_chess ~/bin/play_chess
-ln -sf $HOME/dewlinux/dewhelp ~/bin/dewhelp
-ln -sf $HOME/dewlinux/update_system ~/bin/update_system
-ln -sf $HOME/dewlinux/sync_mail ~/bin/sync_mail
-ln -sf $HOME/dewlinux/reauthorize ~/bin/reauthorize
+ln -sf ~/dewlinux/scripts/listusb ~/bin/listusb
+ln -sf ~/dewlinux/scripts/removeusb ~/bin/removeusb
+ln -sf ~/dewlinux/scripts/myip ~/bin/myip
+ln -sf ~/dewlinux/pull_google_contacts ~/bin/pull_google_contacts
+ln -sf ~/dewlinux/play_chess ~/bin/play_chess
+ln -sf ~/dewlinux/dewhelp ~/bin/dewhelp
+ln -sf ~/dewlinux/update_system ~/bin/update_system
+ln -sf ~/dewlinux/sync_mail ~/bin/sync_mail
+ln -sf ~/dewlinux/reauthorize ~/bin/reauthorize
 
 sudo apt -y install vlock                   # Console locker
 
