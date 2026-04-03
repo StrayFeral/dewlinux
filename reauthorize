@@ -13,5 +13,10 @@ fi
 #    exit 1
 #fi
 
+pushd .
+cd $HOME/dewlinux/
+
 python3 scripts/oauth2_config.py $1
+
+popd
 

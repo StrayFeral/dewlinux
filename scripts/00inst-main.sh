@@ -81,8 +81,16 @@ sudo udevadm trigger
 sudo systemctl daemon-reexec
 cp configs/10-udisks2.rules /etc/polkit-1/rules.d/10-udisks2.rules
 sudo systemctl restart polkit
-cp scripts/listusb.sh ~/bin
-cp scripts/removeusb.sh ~/bin
+
+cp scripts/listusb ~/bin
+cp scripts/removeusb ~/bin
+cp scripts/myip ~/bin
+cp pull_google_contacts ~/bin
+cp play_chess ~/bin
+cp help ~/bin
+cp update_system ~/bin
+cp sync_mail ~/bin
+cp reauthorize ~/bin
 
 sudo apt -y install vlock                   # Console locker
 

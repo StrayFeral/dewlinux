@@ -8,9 +8,15 @@ echo ""
 echo "UPDATING THE SYSTEM..."
 echo ""
 
+pushd .
+cd $HOME/dewlinux/
+
 echo "Acquiring updates..."
 sudo apt update
 sudo apt -y upgrade
+
+echo "Updating PROJECT DEW codebase..."
+git pull
 
 echo "Downloading additional updates..."
 git -C wiki-tui/ pull
@@ -26,6 +32,8 @@ cargo install chess-tui
 
 bash lazytail/install.sh
 # lazytail init
+
+popd
 
 echo ""
 echo "SYSTEM UPDATED."
