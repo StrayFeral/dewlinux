@@ -61,10 +61,9 @@ export MSMTPQ_DIR="$HOME/.msmtp.queue"
 export MSMTP_QUEUE="$HOME/.msmtp.queue"
 export MSMTPQ_Q_ONLY=1
 
-echo '' >> ~/.profile
-echo 'export MSMTPQ_DIR="$HOME/.msmtp.queue"' >> ~/.profile
-echo 'export MSMTP_QUEUE="$HOME/.msmtp.queue"' >> ~/.profile
-echo 'export MSMTPQ_Q_ONLY=1' >> ~/.profile
+printf '\nexport MSMTPQ_DIR="$HOME/.msmtp.queue"\n' >> ~/.profile
+printf 'export MSMTP_QUEUE="$HOME/.msmtp.queue"\n' >> ~/.profile
+printf 'export MSMTPQ_Q_ONLY=1\n' >> ~/.profile
 
 
 # Generate a key

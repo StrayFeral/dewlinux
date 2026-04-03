@@ -3,6 +3,8 @@ set -euo pipefail
 
 export DEBIAN_FRONTEND="noninteractive"
 
+export DEWVERSION=1
+
 # Debugging
 # trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
@@ -161,7 +163,7 @@ mv ./scooter ~/.local/bin/
 sudo apt -y install cage foot               # These would get 256 colors
 
 # Not sure this is automatically added, so I am adding it manually
-echo "export PATH=$PATH:$HOME/.cargo/bin" >> ~/.profile
+printf "export PATH=$PATH:$HOME/.cargo/bin\n" >> ~/.profile
 
 # Forcing colored prompt
 sed -i "s|#force_color_prompt=yes|force_color_prompt=yes|g" ~/.bashrc

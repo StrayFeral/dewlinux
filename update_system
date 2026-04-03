@@ -18,42 +18,52 @@ sudo apt -y upgrade
 echo "Updating PROJECT DEW codebase..."
 git pull
 
-echo "Downloading additional updates..."
-git -C wiki-tui/ pull
-git -C mdterm/ pull
-git -C lazytail/ pull
+# If first parameter is set to "brief", this will NOT be executed
+# (as it takes lots of time)
+if [[ $# -gt 0 && "$1" != "brief" ]]; then
+    echo "Downloading additional updates..."
+    git -C wiki-tui/ pull
+    git -C mdterm/ pull
+    git -C lazytail/ pull
 
-echo "Installing additional updates..."
-cargo install --path wiki-tui/
-cargo install --path mdterm/
-cargo install rgx-cli
-cargo install xleak
-cargo install chess-tui
+    echo "Installing additional updates..."
+    cargo install --path wiki-tui/
+    cargo install --path mdterm/
+    cargo install rgx-cli
+    cargo install xleak
+    cargo install chess-tui
 
-bash lazytail/install.sh
-# lazytail init
+    bash lazytail/install.sh
+    # lazytail init
+fi
 
-# If the user is updating from a version before I made these changes
-# then we need to do these
+# Versioning check
+if [[ ! -v DEWVERSION ]]; then
+    printf "\nexport DEWVERSION=1\n\n" >> ~/.profile
+    source ~/.profile
 
-sudo cp configs/motd /etc/motd
+    sudo cp configs/motd /etc/motd
 
-# Creating symlinks
-ln -sf ~/dewlinux/scripts/listusb ~/bin/listusb
-ln -sf ~/dewlinux/scripts/removeusb ~/bin/removeusb
-ln -sf ~/dewlinux/scripts/myip ~/bin/myip
-ln -sf ~/dewlinux/pull_google_contacts ~/bin/pull_google_contacts
-ln -sf ~/dewlinux/play_chess ~/bin/play_chess
-ln -sf ~/dewlinux/dewhelp ~/bin/dewhelp
-ln -sf ~/dewlinux/update_system ~/bin/update_system
-ln -sf ~/dewlinux/sync_mail ~/bin/sync_mail
-ln -sf ~/dewlinux/reauthorize ~/bin/reauthorize
+    # Creating symlinks
+    ln -sf ~/dewlinux/scripts/listusb ~/bin/listusb
+    ln -sf ~/dewlinux/scripts/removeusb ~/bin/removeusb
+    ln -sf ~/dewlinux/scripts/myip ~/bin/myip
+    ln -sf ~/dewlinux/pull_google_contacts ~/bin/pull_google_contacts
+    ln -sf ~/dewlinux/play_chess ~/bin/play_chess
+    ln -sf ~/dewlinux/dewhelp ~/bin/dewhelp
+    ln -sf ~/dewlinux/update_system ~/bin/update_system
+    ln -sf ~/dewlinux/sync_mail ~/bin/sync_mail
+    ln -sf ~/dewlinux/reauthorize ~/bin/reauthorize
 
-cp scripts/get_mail_secret.py ~/bin
-chmod 700 ~/bin/get_mail_secret.py
+    cp scripts/get_mail_secret.py ~/bin
+    chmod 700 ~/bin/get_mail_secret.py
 
-# Nice to have
-wget "https://www.markdownguide.org/assets/markdown-cheat-sheet.md" -O ~/dewlinux/markdown-cheat-sheet.md
+    # Nice to have
+    wget "https://www.markdownguide.org/assets/markdown-cheat-sheet.md" -O ~/dewlinux/markdown-cheat-sheet.md
+    
+    echo ""
+    echo "THE SYSTEM WAS UPDATED TO VERSION 1. YOU BETTER LOGOFF AND LOGIN AGAIN."
+fi
 
 popd
 
