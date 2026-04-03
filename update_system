@@ -49,6 +49,9 @@ ln -sf ~/dewlinux/update_system ~/bin/update_system
 ln -sf ~/dewlinux/sync_mail ~/bin/sync_mail
 ln -sf ~/dewlinux/reauthorize ~/bin/reauthorize
 
+cp scripts/get_mail_secret.py ~/bin
+chmod 700 ~/bin/get_mail_secret.py
+
 popd
 
 echo ""

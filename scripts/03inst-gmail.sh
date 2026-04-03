@@ -51,7 +51,7 @@ mkdir -p ~/.contacts/google
 cp configs/gmail/.msmtprc ~/
 chmod 600 ~/.msmtprc
 cp configs/gmail/.neomuttrc ~/
-cp scripts/get_mail_secret.py ~/
+cp scripts/get_mail_secret.py ~/bin
 cp scripts/msmtp-enqueue-only ~/bin
 
 mkdir -p ~/.msmtp.queue
@@ -113,7 +113,7 @@ sed -i "s|YOURGMAILEMAILHERE|$emailaddr|g" ~/.msmtprc
 sed -i "s|YOURGMAILEMAILHERE|$emailaddr|g" ~/.neomuttrc
 sed -i "s|YOURNAMEHERE|$realname|g" ~/.neomuttrc
 
-chmod 700 ~/get_mail_secret.py
+chmod 700 ~/bin/get_mail_secret.py
 sudo cp configs/gmail/usr.bin.msmtp /etc/apparmor.d/
 sudo chmod 644 /etc/apparmor.d/usr.bin.msmtp
 sudo apparmor_parser -r /etc/apparmor.d/usr.bin.msmtp
