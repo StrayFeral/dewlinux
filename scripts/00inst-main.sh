@@ -87,7 +87,7 @@ cp scripts/removeusb ~/bin
 cp scripts/myip ~/bin
 cp pull_google_contacts ~/bin
 cp play_chess ~/bin
-cp help ~/bin
+cp dewhelp ~/bin
 cp update_system ~/bin
 cp sync_mail ~/bin
 cp reauthorize ~/bin
