@@ -70,6 +70,9 @@ if [[ ! -v DEWVERSION ]]; then
     cp scripts/get_mail_secret.py ~/bin
     chmod 700 ~/bin/get_mail_secret.py
 
+    sudo apt -y install upower
+    cp configs/.bash_aliases ~/
+
     # Nice to have
     wget "https://www.markdownguide.org/assets/markdown-cheat-sheet.md" -O ~/dewlinux/markdown-cheat-sheet.md
     
