@@ -60,6 +60,7 @@ sudo apt -y install libssl-dev libncurses-dev libsqlite3-dev
 sudo apt -y install bsdutils bsdextrautils  # Utilities
 sudo apt -y install wget
 sudo apt -y install curl
+sudo apt -y install upower                  # Battery status tool
 sudo apt -y install locate                  # File location
 sudo apt -y install tmux                    # Terminal multiplexer
 sudo apt -y install htop btop               # System monitoring
