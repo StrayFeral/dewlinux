@@ -44,40 +44,16 @@ sudo mv /etc/motd /etc/motd_old
 sudo cp configs/motd /etc/motd
 
 
-# Compiling C sources
-sudo apt -y install build-essential
-sudo apt -y install autoconf automake
-sudo apt -y install pkg-config
-sudo apt -y install libtool
-sudo apt -y install libssl-dev libncurses-dev libsqlite3-dev
+PACKAGES = build-essential autoconf automake pkg-config libtool libssl-dev libncurses-dev libsqlite3-dev \
+    bsdutils bsdextrautils \
+    wget curl upower locate tmux htop btop eza fzf ncdu bat dysk duf ripgrep fd-find gpm strace nload udisks2 \
+    vlock pandoc lynx links2 neovim mc sc-im fastfetch tty-clock calcurse taskwarrior moc moc-ffmpeg-plugin fbi fim mpv wordgrinder alsa-utils libasound2-dev newsboat \
+    aspell aspell-bg aspell-fr aspell-ru aspell-en \
+    weechat poppler-utils
 
-# I've spent near a day to figure out how to automate the dialog of
-# msmpt asking for apparmor and since this lost me too much time and
-# msmtp still asks me, I give up so I can move on to other tasks.
-# If anyone gets a smart idea working on this Debian image -
-# be my guest.
+sudo apt-get install -y -qq --no-upgrade $(PACKAGES)
 
-sudo apt -y install bsdutils bsdextrautils  # Utilities
-sudo apt -y install wget
-sudo apt -y install curl
-sudo apt -y install upower                  # Battery status tool
-sudo apt -y install locate                  # File location
-sudo apt -y install tmux                    # Terminal multiplexer
-sudo apt -y install htop btop               # System monitoring
-sudo apt -y install eza                     # Colorful ls
-sudo apt -y install fzf                     # Modern search tool
-sudo apt -y install ncdu                    # Great du replacement
-sudo apt -y install bat                     # Cat replacement
-sudo apt -y install dysk                    # df replacement
-sudo apt -y install duf                     # df replacement
-sudo apt -y install ripgrep                 # grep replacement
-sudo apt -y install fd-find                 # find replacement
-sudo apt -y install gpm                     # Mouse support
-sudo apt -y install strace                  # Trace system calls
-sudo apt -y install nload                   # Network monitoring
 
-# A bit of user-friendliness
-sudo apt -y install udisks2
 sudo usermod -aG plugdev $USER
 sudo udevadm control --reload
 sudo udevadm trigger
@@ -97,40 +73,9 @@ ln -sf ~/dewlinux/sync_mail ~/bin/sync_mail
 ln -sf ~/dewlinux/reauthorize ~/bin/reauthorize
 ln -sf ~/dewlinux/scripts/battery ~/bin/battery
 
-sudo apt -y install vlock                   # Console locker
-
-sudo apt -y install pandoc                  # Document conversion tool
-sudo apt -y install lynx links2             # Browsers
-
-sudo apt -y install neovim                  # Text editor
-sudo apt -y install mc                      # File manager
-sudo apt -y install sc-im                   # Spreadsheets
-sudo apt -y install fastfetch               # System info
-sudo apt -y install tty-clock               # Clock
-
-sudo apt -y install calcurse                # Calendar
-sudo apt -y install taskwarrior             # TODO manager
-sudo apt -y install moc moc-ffmpeg-plugin   # MP3 player: mocp
-sudo apt -y install fbi fim                 # Image viewers
-sudo apt -y install mpv                     # Video player
-sudo apt -y install wordgrinder             # Word processor
-sudo apt -y install alsa-utils              # Sound control
-sudo apt -y install libasound2-dev
-
-sudo apt -y install newsboat                # Newsreader
-
 mkdir -p ~/.newsboat
 cp configs/newsboat_urls ~/.newsboat/urls
 
-# ASpell
-sudo apt -y install aspell
-sudo apt -y install aspell-bg
-sudo apt -y install aspell-fr
-sudo apt -y install aspell-ru
-sudo apt -y install aspell-en
-
-sudo apt -y install weechat                 # IRC client
-sudo apt -y install poppler-utils           # pdftotext file.pdf - | less
 
 mkdir -p ~/.vim/spell
 # Vim spellchecking language files

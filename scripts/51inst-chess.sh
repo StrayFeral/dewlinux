@@ -12,14 +12,8 @@ echo "INSTALLING CHESS GAMES..."
 echo ""
 echo "This requires installation of the devmore tools"
 
-# I am installing these two just so the user have a choice
-# also these two could be played on the terminal itself
-# and still gnuchess could be played with chess-tui too
-sudo apt -y install gnuchess               # GNU chess engine
-sudo apt -y install phalanx
-
-sudo apt -y install stockfish              # Best chess engine
-cargo install chess-tui                    # Chess TUI front-end
+sudo apt-get install -y -qq --no-upgrade stockfish  # Best chess engine
+cargo install chess-tui                             # Chess TUI front-end
 
 # Configuring chess-tui
 mkdir -p ~/.config/chess-tui

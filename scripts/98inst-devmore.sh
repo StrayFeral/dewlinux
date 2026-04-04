@@ -11,28 +11,19 @@ echo ""
 echo "INSTALLING MORE SOFTWARE DEVELOPMENT TOOLS..."
 echo ""
 
-# GNU Debugger
-sudo apt -y install gdb
-
-# Netwide Assembler
-echo "Installing Netwide Assembler"
-sudo apt -y install nasm
+sudo apt-get install -y -qq --no-upgrade gdb nasm golang-go rustup lua5.4 luarocks luajit
 
 # Golang tools
 # Language type: compiled, like c/c++
 # Source file extension: .go
 # Run/compile: go build
 # Install modules: go get
-echo "Installing Golang"
-sudo apt -y install golang-go
 
 # Rust tools
 # Language type: compiled, like c/c++
 # Source file extension: .rs
 # Run/compile: rustc
 # Install modules: cargo
-echo "Installing Rust"
-sudo apt -y install rustup
 rustup install 1.88
 
 # Lua tools
@@ -40,10 +31,6 @@ rustup install 1.88
 # Source file extension: .lua
 # Run/compile: lua5.4
 # Install modules: luarocks
-echo "Installing Lua"
-sudo apt -y install lua5.4
-sudo apt -y install luarocks
-sudo apt -y install luajit
 
 cargo install rgx-cli                       # Regex tester
 

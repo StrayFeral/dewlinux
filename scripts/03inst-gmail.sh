@@ -30,7 +30,7 @@ if [[ "$emailaddr" == *"gmail"* ]]; then
 fi
 
 sudo apt update
-sudo apt -y install neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass abook
+sudo apt-get install -y -qq --no-upgrade neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass abook
 
 mkdir -p ~/bin
 mkdir -p ~/.mail/gmail ~/.msmtpqueue

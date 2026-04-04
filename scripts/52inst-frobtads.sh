@@ -18,7 +18,7 @@ cd /tmp
 wget https://www.tads.org/frobtads/frobtads-1.2.3.tar.gz
 tar -xzvf frobtads-1.2.3.tar.gz
 
-sudo apt -y install libncurses5-dev libncursesw5-dev libcurl4-openssl-dev
+sudo apt-get install -y -qq --no-upgrade libncurses5-dev libncursesw5-dev libcurl4-openssl-dev
 
 sed -i '1987s/tcur > 0/tcur != 0/' tads3/vmtz.cpp
 
