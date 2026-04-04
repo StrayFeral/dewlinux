@@ -66,12 +66,12 @@ if [[ ! -v DEWVERSION ]]; then
     ln -sf ~/dewlinux/update_system ~/bin/update_system
     ln -sf ~/dewlinux/sync_mail ~/bin/sync_mail
     ln -sf ~/dewlinux/reauthorize ~/bin/reauthorize
+    ln -sf ~/dewlinux/scripts/battery ~/bin/battery
 
     cp scripts/get_mail_secret.py ~/bin
     chmod 700 ~/bin/get_mail_secret.py
 
     sudo apt -y install upower
-    cp configs/.bash_aliases ~/
 
     # Nice to have
     wget "https://www.markdownguide.org/assets/markdown-cheat-sheet.md" -O ~/dewlinux/markdown-cheat-sheet.md

@@ -3,5 +3,4 @@ alias lsla='eza -la --header --group --time-style=long-iso'
 alias ll='lsla'
 alias bat='batcat'
 alias fd='fdfind'
-alias battery='upower -i $(upower -e | grep "BAT") | grep -E "state|to\ full|percentage"'
 

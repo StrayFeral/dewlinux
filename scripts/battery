@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Attempt to find the battery path
+BATTERY_PATH=$(upower -e | grep 'BAT' | head -n 1)
+
+# Check if the device has a battery at all
+if [ -z "$BATTERY_PATH" ]; then
+    echo "Plugged into Wall Power. No battery present"
+    exit 0
+fi
+
+# Get the current state, percentage, and time remaining
+STATE=$(upower -i "$BATTERY_PATH" | grep "state" | awk '{print $2}')
+PERCENT=$(upower -i "$BATTERY_PATH" | grep "percentage" | awk '{print $2}')
+TIME_LEFT=$(upower -i "$BATTERY_PATH" | grep "time to empty" | awk '{$1=$2=$3=""; print $0}' | sed 's/^[ \t]*//')
+
+if [ "$STATE" == "discharging" ]; then
+    # If time_left is empty, the OS is likely still calculating
+    if [ -z "$TIME_LEFT" ]; then
+        TIME_LEFT="calculating..."
+    fi
+    echo "Running on Battery: $PERCENT (Approx. $TIME_LEFT remaining)"
+else
+    # If charging, we can optionally show "time to full" instead
+    TIME_FULL=$(upower -i "$BATTERY_PATH" | grep "time to full" | awk '{$1=$2=$3=""; print $0}' | sed 's/^[ \t]*//')
+    
+    if [ -n "$TIME_FULL" ]; then
+        echo "Plugged into Wall Power. Battery: $PERCENT (Full in $TIME_FULL)"
+    else
+        echo "Plugged into Wall Power. Battery: $PERCENT (Status: $STATE)"
+    fi
+fi

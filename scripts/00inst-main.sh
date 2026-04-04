@@ -95,6 +95,7 @@ ln -sf ~/dewlinux/dewhelp ~/bin/dewhelp
 ln -sf ~/dewlinux/update_system ~/bin/update_system
 ln -sf ~/dewlinux/sync_mail ~/bin/sync_mail
 ln -sf ~/dewlinux/reauthorize ~/bin/reauthorize
+ln -sf ~/dewlinux/scripts/battery ~/bin/battery
 
 sudo apt -y install vlock                   # Console locker
 
