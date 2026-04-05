@@ -56,7 +56,8 @@ sudo apt-get install -y -qq --no-upgrade \
     wordgrinder \
     alsa-utils libasound2-dev newsboat \
     aspell aspell-bg aspell-fr aspell-ru aspell-en \
-    weechat poppler-utils
+    weechat poppler-utils \
+    cage foot
 
 
 sudo usermod -aG plugdev $USER
@@ -111,8 +112,6 @@ lazytail init
 wget https://github.com/thomasschafer/scooter/releases/download/v0.9.0/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz -O /tmp/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
 tar -xzf /tmp/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
 mv ./scooter ~/.local/bin/
-
-sudo apt -y install cage foot               # These would get 256 colors
 
 # Not sure this is automatically added, so I am adding it manually
 printf "export PATH=$PATH:$HOME/.cargo/bin\n" >> ~/.profile
