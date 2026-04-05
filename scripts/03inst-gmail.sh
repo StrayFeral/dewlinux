@@ -29,7 +29,8 @@ if [[ "$emailaddr" == *"gmail"* ]]; then
     export TOKENENDPOINT="https://oauth2.googleapis.com/token"
 fi
 
-echo "Downloading packages, this will take some time, please wait..."
+echo ""
+echo "Downloading packages, this may take some time, please wait..."
 echo ""
 
 sudo apt update

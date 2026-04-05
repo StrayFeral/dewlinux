@@ -11,7 +11,7 @@ echo ""
 echo "INSTALLING SOFTWARE DEVELOPMENT TOOLS..."
 echo ""
 
-echo "Downloading packages, this will take some time, please wait..."
+echo "Downloading packages, this may take some time, please wait..."
 echo ""
 
 sudo apt install -y -qq --no-upgrade vim-ale hexcurse hexedit xxd tidy \

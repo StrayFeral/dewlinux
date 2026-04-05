@@ -11,7 +11,7 @@ echo ""
 echo "INSTALLING MORE SOFTWARE DEVELOPMENT TOOLS..."
 echo ""
 
-echo "Downloading packages, this will take some time, please wait..."
+echo "Downloading packages, this may take some time, please wait..."
 echo ""
 
 sudo apt install -y -qq --no-upgrade gdb nasm golang-go rustup lua5.4 luarocks luajit

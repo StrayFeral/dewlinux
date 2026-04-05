@@ -43,6 +43,7 @@ cp configs/.bash_aliases ~/
 sudo mv /etc/motd /etc/motd_old
 sudo cp configs/motd /etc/motd
 
+echo ""
 echo "Downloading packages, this will take some time, please wait..."
 echo ""
 

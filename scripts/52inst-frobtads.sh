@@ -18,7 +18,8 @@ cd /tmp
 wget https://www.tads.org/frobtads/frobtads-1.2.3.tar.gz
 tar -xzvf frobtads-1.2.3.tar.gz
 
-echo "Downloading packages, this will take some time, please wait..."
+echo ""
+echo "Downloading packages, this may take some time, please wait..."
 echo ""
 
 sudo apt install -y -qq --no-upgrade libncurses5-dev libncursesw5-dev libcurl4-openssl-dev
