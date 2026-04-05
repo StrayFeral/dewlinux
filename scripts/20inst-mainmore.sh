@@ -15,13 +15,13 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"
 
 # Wikipedia client
 git clone https://github.com/Builditluc/wiki-tui
-cargo install wiki-tui
+cargo install -q wiki-tui
 
-cargo install xleak                         # Excel XLS viewer
+cargo install -q xleak                      # Excel XLS viewer
 
 # Markdown (MD) viewer
 git clone https://github.com/bahdotsh/mdterm.git
-cargo install --path mdterm/
+cargo install -q --path mdterm/
 
 echo ""
 echo "MAIN MORE COMPONENTS INSTALLED."

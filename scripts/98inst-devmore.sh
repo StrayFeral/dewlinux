@@ -14,7 +14,7 @@ echo ""
 echo "Downloading packages, this may take some time, please wait..."
 echo ""
 
-sudo apt install -y -qq --no-upgrade gdb nasm golang-go rustup lua5.4 luarocks luajit
+sudo apt-get install -y -qq --no-upgrade gdb nasm golang-go rustup lua5.4 luarocks luajit
 
 # Golang tools
 # Language type: compiled, like c/c++
@@ -35,7 +35,7 @@ rustup install 1.88
 # Run/compile: lua5.4
 # Install modules: luarocks
 
-cargo install rgx-cli                       # Regex tester
+cargo install -q rgx-cli                    # Regex tester
 
 echo ""
 echo "MORE SOFTWARE DEVELOPMENT TOOLS INSTALLED."

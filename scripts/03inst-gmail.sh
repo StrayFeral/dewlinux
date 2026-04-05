@@ -34,7 +34,7 @@ echo "Downloading packages, this may take some time, please wait..."
 echo ""
 
 sudo apt update
-sudo apt install -y -qq --no-upgrade neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass abook
+sudo apt-get install -y -qq --no-upgrade neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass abook
 
 mkdir -p ~/bin
 mkdir -p ~/.mail/gmail ~/.msmtpqueue

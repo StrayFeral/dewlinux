@@ -12,8 +12,8 @@ echo "INSTALLING CHESS GAMES..."
 echo ""
 echo "This requires installation of the devmore tools"
 
-sudo apt install -y -qq --no-upgrade stockfish  # Best chess engine
-cargo install chess-tui                             # Chess TUI front-end
+sudo apt-get install -y -qq --no-upgrade stockfish  # Best chess engine
+cargo install -q chess-tui                          # Chess TUI front-end
 
 # Configuring chess-tui
 mkdir -p ~/.config/chess-tui
