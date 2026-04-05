@@ -14,7 +14,7 @@ echo ""
 echo "Downloading packages, this will take some time, please wait..."
 echo ""
 
-sudo apt-get install -y -qq --no-upgrade bsdgames pacman4console nudoku cowsay bastet vitetris frotz
+sudo apt install -y -qq --no-upgrade bsdgames pacman4console nudoku cowsay bastet vitetris frotz
 
 wget "https://www.ifarchive.org/if-archive/games/zcode/LostPig.z8" -O zgames/LostPig.z8
 

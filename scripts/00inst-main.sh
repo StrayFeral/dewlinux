@@ -46,7 +46,7 @@ sudo cp configs/motd /etc/motd
 echo "Downloading packages, this will take some time, please wait..."
 echo ""
 
-sudo apt-get install -y -qq --no-upgrade \
+sudo apt install -y -qq --no-upgrade \
     build-essential autoconf automake pkg-config libtool libssl-dev libncurses-dev libsqlite3-dev \
     bsdutils bsdextrautils \
     wget curl upower locate tmux htop btop eza fzf ncdu bat dysk duf ripgrep fd-find gpm strace nload udisks2 \

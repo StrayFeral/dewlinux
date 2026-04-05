@@ -21,7 +21,7 @@ tar -xzvf frobtads-1.2.3.tar.gz
 echo "Downloading packages, this will take some time, please wait..."
 echo ""
 
-sudo apt-get install -y -qq --no-upgrade libncurses5-dev libncursesw5-dev libcurl4-openssl-dev
+sudo apt install -y -qq --no-upgrade libncurses5-dev libncursesw5-dev libcurl4-openssl-dev
 
 sed -i '1987s/tcur > 0/tcur != 0/' tads3/vmtz.cpp
 
