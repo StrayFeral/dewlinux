@@ -43,15 +43,19 @@ cp configs/.bash_aliases ~/
 sudo mv /etc/motd /etc/motd_old
 sudo cp configs/motd /etc/motd
 
+echo "Downloading packages, this will take some time, please wait..."
+echo ""
 
-PACKAGES = build-essential autoconf automake pkg-config libtool libssl-dev libncurses-dev libsqlite3-dev \
+sudo apt-get install -y -qq --no-upgrade \
+    build-essential autoconf automake pkg-config libtool libssl-dev libncurses-dev libsqlite3-dev \
     bsdutils bsdextrautils \
     wget curl upower locate tmux htop btop eza fzf ncdu bat dysk duf ripgrep fd-find gpm strace nload udisks2 \
-    vlock pandoc lynx links2 neovim mc sc-im fastfetch tty-clock calcurse taskwarrior moc moc-ffmpeg-plugin fbi fim mpv wordgrinder alsa-utils libasound2-dev newsboat \
+    vlock pandoc lynx links2 neovim mc sc-im fastfetch tty-clock calcurse taskwarrior \
+    moc moc-ffmpeg-plugin fbi fim mpv \
+    wordgrinder \
+    alsa-utils libasound2-dev newsboat \
     aspell aspell-bg aspell-fr aspell-ru aspell-en \
     weechat poppler-utils
-
-sudo apt-get install -y -qq --no-upgrade $(PACKAGES)
 
 
 sudo usermod -aG plugdev $USER

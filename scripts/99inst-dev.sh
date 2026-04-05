@@ -11,6 +11,9 @@ echo ""
 echo "INSTALLING SOFTWARE DEVELOPMENT TOOLS..."
 echo ""
 
+echo "Downloading packages, this will take some time, please wait..."
+echo ""
+
 sudo apt-get install -y -qq --no-upgrade vim-ale hexcurse hexedit xxd tidy \
     python3 python-is-python3 python3-pip pipx python3-isort python3-pylsp-black python3-flake8 python3-mypy python3-bandit \
     perlnavigator libperl-critic-perl perltidy

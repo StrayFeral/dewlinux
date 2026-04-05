@@ -29,6 +29,9 @@ if [[ "$emailaddr" == *"gmail"* ]]; then
     export TOKENENDPOINT="https://oauth2.googleapis.com/token"
 fi
 
+echo "Downloading packages, this will take some time, please wait..."
+echo ""
+
 sudo apt update
 sudo apt-get install -y -qq --no-upgrade neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass abook
 
