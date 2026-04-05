@@ -62,7 +62,7 @@ sudo usermod -aG plugdev $USER
 sudo udevadm control --reload
 sudo udevadm trigger
 sudo systemctl daemon-reexec
-cp configs/10-udisks2.rules /etc/polkit-1/rules.d/10-udisks2.rules
+sudo cp configs/10-udisks2.rules /etc/polkit-1/rules.d/10-udisks2.rules
 sudo systemctl restart polkit
 
 # Creating symlinks
