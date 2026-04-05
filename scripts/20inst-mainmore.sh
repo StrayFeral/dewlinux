@@ -11,16 +11,22 @@ echo ""
 echo "INSTALLING MAIN MORE..."
 echo ""
 
+echo "Downloading ADDITIONAL MAIN packages, this will take approx 6 minutes, please wait..."
+echo ""
+
 export PATH="$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"
 
 # Wikipedia client
 git clone https://github.com/Builditluc/wiki-tui
+echo "Compiling wiki-tui ..."
 cargo install -q wiki-tui
 
+echo "Compiling xleak ..."
 cargo install -q xleak                      # Excel XLS viewer
 
 # Markdown (MD) viewer
 git clone https://github.com/bahdotsh/mdterm.git
+echo "Compiling mdterm ..."
 cargo install -q --path mdterm/
 
 echo ""

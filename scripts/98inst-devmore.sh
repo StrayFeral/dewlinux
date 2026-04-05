@@ -35,6 +35,7 @@ rustup install 1.88
 # Run/compile: lua5.4
 # Install modules: luarocks
 
+echo "Compiling rgx-cli ..."
 cargo install -q rgx-cli                    # Regex tester
 
 echo ""

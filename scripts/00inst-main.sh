@@ -44,7 +44,7 @@ sudo mv /etc/motd /etc/motd_old
 sudo cp configs/motd /etc/motd
 
 echo ""
-echo "Downloading packages, this will take some time, please wait..."
+echo "Downloading MAIN packages, this will take approx 2:30 minutes, please wait..."
 echo ""
 
 sudo apt-get install -y -qq --no-upgrade \

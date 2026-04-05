@@ -14,6 +14,8 @@ echo "This requires installation of the devmore tools"
 echo ""
 
 sudo apt-get install -y -qq --no-upgrade stockfish  # Best chess engine
+
+echo "Compiling chess-tui ..."
 cargo install -q chess-tui                          # Chess TUI front-end
 
 # Configuring chess-tui
