@@ -18,15 +18,18 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"
 
 # Wikipedia client
 git clone https://github.com/Builditluc/wiki-tui
-echo "Compiling wiki-tui ..."
+echo ""
+echo "Compiling wiki-tui, please wait ..."
 cargo install -q wiki-tui
 
-echo "Compiling xleak ..."
+echo ""
+echo "Compiling xleak, please wait ..."
 cargo install -q xleak                      # Excel XLS viewer
 
 # Markdown (MD) viewer
 git clone https://github.com/bahdotsh/mdterm.git
-echo "Compiling mdterm ..."
+echo ""
+echo "Compiling mdterm, please wait ..."
 cargo install -q --path mdterm/
 
 echo ""

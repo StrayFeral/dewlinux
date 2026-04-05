@@ -12,10 +12,13 @@ echo "INSTALLING CHESS GAMES..."
 echo ""
 echo "This requires installation of the devmore tools"
 echo ""
+echo "Downloading packages, this will take approx 1:30 minutes, please wait..."
+echo ""
 
 sudo apt-get install -y -qq --no-upgrade stockfish  # Best chess engine
 
-echo "Compiling chess-tui ..."
+echo ""
+echo "Compiling chess-tui, please wait ..."
 cargo install -q chess-tui                          # Chess TUI front-end
 
 # Configuring chess-tui
