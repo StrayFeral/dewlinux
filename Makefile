@@ -10,6 +10,8 @@ SHELL := /bin/bash
 
 DEBUG ?= 0
 
+export MAKEFILEPATH := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+
 base: main dev cyr mainmore
 	@echo ""
 	@echo "Email/Gmail setup and games were installed. You need to install this manually."

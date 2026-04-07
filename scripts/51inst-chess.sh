@@ -7,8 +7,10 @@ export DEBIAN_FRONTEND="noninteractive"
 # trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
-# DEWPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-DEWPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+DEWPATH=""
+if [ -n "${MAKEFILEPATH:-}" ]; then
+    DEWPATH="${MAKEFILEPATH}/"
+fi
 
 echo ""
 echo "INSTALLING CHESS GAMES..."
@@ -33,7 +35,7 @@ if [ -f ~/.config/chess-tui/config.toml ]; then
     sed -i "s|engine_path = \"\"|$(which stockfish)|g" ~/.config/chess-tui/config.toml
     sed -i "s|sound_enabled = true|sound_enabled = false|g" ~/.config/chess-tui/config.toml
 else
-    cp -f $DEWPATH/configs/chess-tui.toml ~/.config/chess-tui/config.toml
+    cp -f "${DEWPATH}configs/chess-tui.toml" ~/.config/chess-tui/config.toml
 fi
 
 echo ""
