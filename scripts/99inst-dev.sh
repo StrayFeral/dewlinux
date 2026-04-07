@@ -7,6 +7,8 @@ export DEBIAN_FRONTEND="noninteractive"
 # trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
+DEWPATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 echo ""
 echo "INSTALLING SOFTWARE DEVELOPMENT TOOLS..."
 echo ""
@@ -22,7 +24,7 @@ pipx ensurepath
 
 # Copying the vim-ale config
 if [ ! -f ~/.vimrc ] || ! grep -q "= DEWLINUX ALE" ~/.vimrc; then
-    cat configs/vim_ale_config >> ~/.vimrc
+    cat "${DEWPATH}configs/vim_ale_config" >> ~/.vimrc
 fi
 
 echo ""
