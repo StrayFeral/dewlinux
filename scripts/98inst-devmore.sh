@@ -37,7 +37,7 @@ rustup install 1.88
 
 echo ""
 echo "Compiling rgx-cli, please wait ..."
-cargo install -q rgx-cli                    # Regex tester
+cargo install -q rgx-cli --force            # Regex tester
 
 echo ""
 echo "MORE SOFTWARE DEVELOPMENT TOOLS INSTALLED."

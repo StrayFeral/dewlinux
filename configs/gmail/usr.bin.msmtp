@@ -64,6 +64,10 @@ profile msmtp /usr/bin/msmtp flags=(attach_disconnected) {
        interface=org.freedesktop.DBus.Properties
        member=GetAll,
 
+  # ADDED 2026-04-07
+  owner @{HOME}/.msmtp.queue/ r,
+  owner @{HOME}/.msmtp.queue/** rw,
+
   # secret helpers
   /{,usr/}bin/bash Cx -> helpers,
   /{,usr/}bin/dash Cx -> helpers,

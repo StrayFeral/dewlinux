@@ -43,10 +43,6 @@ games:
 	./scripts/50inst-games.sh
 	./scripts/51inst-chess.sh
 
-tads:
-	[[ "$(DEBUG)" == 1 ]] && set -x
-	./scripts/52inst-frobtads.sh
-
 help:
 	@echo "TARGETS:"
 	@echo "  make base		- Installation of: main dev cyr mainmore"

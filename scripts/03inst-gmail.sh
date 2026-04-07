@@ -7,6 +7,9 @@ export DEBIAN_FRONTEND="noninteractive"
 # trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
+# DEWPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DEWPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+
 echo ""
 echo "INSTALLING OAUTH2 EMAIL TOOLS..."
 echo ""
@@ -37,37 +40,54 @@ sudo apt update
 sudo apt-get install -y -qq --no-upgrade neomutt offlineimap msmtp msmtp-mta python3 python3-requests gnupg pass abook
 
 mkdir -p ~/bin
-mkdir -p ~/.mail/gmail ~/.msmtpqueue
+mkdir -p ~/.mail/gmail
+# ~/.msmtpqueue
+
+# Local vCard Storage
+mkdir -p ~/.contacts/google
+
+mkdir -p ~/.msmtp.queue
+chmod 700 ~/.msmtp.queue
 
 mkdir -p ~/.abook
-cp configs/gmail/abookrc ~/.abook/abookrc
+
+
+if [ ! -f ~/.abook/abookrc ] || ! grep -q "= DEWLINUX APPENDED" ~/.abook/abookrc; then
+    cp -f "$DEWPATH/configs/gmail/abookrc" ~/.abook/abookrc
+fi
 
 # While I am using abook to hold the Google contact list, I still
 # want the aliases
 touch ~/.neomutt_aliases
 
 # Default signature file
-cp configs/gmail/.neomutt_signature ~/.neomutt_signature
+if [ ! -f ~/.neomutt_signature ]; then
+    cp -f "$DEWPATH/configs/gmail/.neomutt_signature" ~/.neomutt_signature
+fi
 
-# Local vCard Storage
-mkdir -p ~/.contacts/google
-
-cp configs/gmail/.msmtprc ~/
-chmod 600 ~/.msmtprc
-cp configs/gmail/.neomuttrc ~/
-cp scripts/get_mail_secret.py ~/bin
-cp scripts/msmtp-enqueue-only ~/bin
-
-mkdir -p ~/.msmtp.queue
-chmod 700 ~/.msmtp.queue
+if [ ! -f ~/.msmtprc ] || ! grep -q "= DEWLINUX APPENDED" ~/.msmtprc; then
+    cp -f "$DEWPATH/configs/gmail/.msmtprc" ~/
+    chmod 600 ~/.msmtprc
+fi
+if [ ! -f ~/.neomuttrc ] || ! grep -q "= DEWLINUX APPENDED" ~/.neomuttrc; then
+    cp -f "$DEWPATH/configs/gmail/.neomuttrc" ~/
+fi
+if [ ! -f ~/bin/get_mail_secret.py ]; then
+    cp -f "$DEWPATH/scripts/get_mail_secret.py" ~/bin
+fi
+if [ ! -f ~/msmtp-enqueue-only ]; then
+    cp -f "$DEWPATH/scripts/msmtp-enqueue-only" ~/bin
+fi
 
 export MSMTPQ_DIR="$HOME/.msmtp.queue"
 export MSMTP_QUEUE="$HOME/.msmtp.queue"
 export MSMTPQ_Q_ONLY=1
 
-printf '\nexport MSMTPQ_DIR="$HOME/.msmtp.queue"\n' >> ~/.profile
-printf 'export MSMTP_QUEUE="$HOME/.msmtp.queue"\n' >> ~/.profile
-printf 'export MSMTPQ_Q_ONLY=1\n' >> ~/.profile
+if ! grep -q "MSMTPQ_DIR" ~/.profile; then
+    printf '\nexport MSMTPQ_DIR="$HOME/.msmtp.queue"\n' >> ~/.profile
+    printf 'export MSMTP_QUEUE="$HOME/.msmtp.queue"\n' >> ~/.profile
+    printf 'export MSMTPQ_Q_ONLY=1\n' >> ~/.profile
+fi
 
 
 # Generate a key
@@ -90,7 +110,8 @@ EOF
 
 
 # Initialize the password store
-export public_key=$(gpg --list-secret-keys --keyid-format LONG | grep sec | cut -d'/' -f2 | cut -d' ' -f1)
+# export public_key=$(gpg --list-secret-keys --keyid-format LONG | grep sec | cut -d'/' -f2 | cut -d' ' -f1)
+export public_key=$(gpg --list-secret-keys --with-colons | grep '^fpr' | head -n 1 | cut -d: -f10)
 pass init "$public_key"
 
 # If you don't want to type passwords in the middle of neomutt session
@@ -100,11 +121,13 @@ pass init "$public_key"
 # sync it all with an external script
 
 # Get the refresh token
-python3 scripts/oauth2_config.py $emailaddr
+python3 $DEWPATH/scripts/oauth2_config.py $emailaddr
 
 # For some weird reason this file normally would get truncated and
 # this will break the whole config. So I am copying at the very end
-cp configs/gmail/.offlineimaprc ~/
+if [ ! -f ~/.offlineimaprc ] || ! grep -q "= DEWLINUX APPENDED" ~/.offlineimaprc; then
+    cp -f $DEWPATH/configs/gmail/.offlineimaprc ~/
+fi
 
 sed -i "s|YOURLINUXUSERNAMEHERE|$USER|g" ~/.offlineimaprc
 sed -i "s|YOURGMAILEMAILHERE|$emailaddr|g" ~/.offlineimaprc
@@ -117,10 +140,18 @@ sed -i "s|YOURGMAILEMAILHERE|$emailaddr|g" ~/.neomuttrc
 sed -i "s|YOURNAMEHERE|$realname|g" ~/.neomuttrc
 
 chmod 700 ~/bin/get_mail_secret.py
-sudo cp configs/gmail/usr.bin.msmtp /etc/apparmor.d/
-sudo chmod 644 /etc/apparmor.d/usr.bin.msmtp
-sudo apparmor_parser -r /etc/apparmor.d/usr.bin.msmtp
-sudo systemctl restart apparmor
+if [ ! -f /etc/apparmor.d/usr.bin.msmtp ] || ! grep -q "= DEWLINUX APPENDED" /etc/apparmor.d/usr.bin.msmtp; then
+    sudo cp -f $DEWPATH/configs/gmail/usr.bin.msmtp /etc/apparmor.d/
+    sudo chmod 644 /etc/apparmor.d/usr.bin.msmtp
+    
+    sudo mkdir -p /etc/apparmor.d/local
+    sudo touch /etc/apparmor.d/local/usr.bin.msmtp
+    
+    #sudo apparmor_parser -r /etc/apparmor.d/usr.bin.msmtp
+    sudo apparmor_parser -r /etc/apparmor.d/usr.bin.msmtp 2>/dev/null || true
+    #sudo systemctl restart apparmor
+    sudo systemctl reload apparmor
+fi
 
 # -rwx------ 1 forester forester 2219 Feb 13 17:41 /home/forester/get_mail_secret.py
 # -rw------- 1 forester forester 664 Feb 13 17:39 /home/forester/.msmtprc

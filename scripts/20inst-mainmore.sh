@@ -14,23 +14,25 @@ echo ""
 echo "Downloading ADDITIONAL MAIN packages, this will take approx 6 minutes, please wait..."
 echo ""
 
-export PATH="$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"
+export PATH="$PATH:~/.local/bin:~/bin:~/.cargo/bin"
 
 # Wikipedia client
-git clone https://github.com/Builditluc/wiki-tui
+rm -rf /tmp/wiki-tui
+git clone --depth 1 https://github.com/Builditluc/wiki-tui /tmp/wiki-tui
 echo ""
 echo "Compiling wiki-tui, please wait ..."
-cargo install -q wiki-tui
+cargo install -q --path /tmp/wiki-tui/ --force
 
 echo ""
 echo "Compiling xleak, please wait ..."
-cargo install -q xleak                      # Excel XLS viewer
+cargo install -q xleak --force                # Excel XLS viewer
 
 # Markdown (MD) viewer
-git clone https://github.com/bahdotsh/mdterm.git
+rm -rf /tmp/mdterm
+git clone --depth 1 https://github.com/bahdotsh/mdterm.git /tmp/mdterm
 echo ""
 echo "Compiling mdterm, please wait ..."
-cargo install -q --path mdterm/
+cargo install -q --path /tmp/mdterm/ --force
 
 echo ""
 echo "MAIN MORE COMPONENTS INSTALLED."

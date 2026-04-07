@@ -7,6 +7,9 @@ export DEBIAN_FRONTEND="noninteractive"
 # trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
+# DEWPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DEWPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+
 echo ""
 echo "INSTALLING SOFTWARE DEVELOPMENT TOOLS..."
 echo ""
@@ -21,7 +24,9 @@ sudo apt-get install -y -qq --no-upgrade vim-ale hexcurse hexedit xxd tidy \
 pipx ensurepath
 
 # Copying the vim-ale config
-cat configs/vim_ale_config >> ~/.vimrc
+if [ ! -f ~/.vimrc ] || ! grep -q "= DEWLINUX ALE" ~/.vimrc; then
+    cat "$DEWPATH/configs/vim_ale_config" >> ~/.vimrc
+fi
 
 echo ""
 echo "SOFTWARE DEVELOPMENT TOOLS INSTALLED."

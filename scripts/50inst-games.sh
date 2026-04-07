@@ -7,6 +7,9 @@ export DEBIAN_FRONTEND="noninteractive"
 # trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
+# DEWPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DEWPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+
 echo ""
 echo "INSTALLING GAMES..."
 echo ""
@@ -16,7 +19,9 @@ echo ""
 
 sudo apt-get install -y -qq --no-upgrade bsdgames pacman4console nudoku cowsay bastet vitetris frotz
 
-wget "https://www.ifarchive.org/if-archive/games/zcode/LostPig.z8" -O zgames/LostPig.z8
+if [ ! -f $DEWPATH/zgames/LostPig.z8 ]; then
+    wget "https://www.ifarchive.org/if-archive/games/zcode/LostPig.z8" -O $DEWPATH/zgames/LostPig.z8
+fi
 
 echo ""
 echo "GAMES INSTALLED."

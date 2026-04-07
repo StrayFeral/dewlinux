@@ -1,4 +1,4 @@
-" = DEWLINUX APPENDED
+" = DEWLINUX ALE
 
 " ALE configuration for Python
 " This packadd ensures ALE loads in both Vim and Neovim
