@@ -8,8 +8,8 @@ export DEBIAN_FRONTEND="noninteractive"
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
 DEWPATH=""
-if [ -n "${MAKEFILEPATH:-}" ]; then
-    DEWPATH="${MAKEFILEPATH}/"
+if [ -n "${1:-}" ]; then
+    DEWPATH="${1}/"
 fi
 
 echo ""

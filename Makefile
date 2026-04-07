@@ -10,7 +10,7 @@ SHELL := /bin/bash
 
 DEBUG ?= 0
 
-export MAKEFILEPATH := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+MAKEFILEPATH := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 base: main dev cyr mainmore
 	@echo ""
@@ -20,30 +20,30 @@ base: main dev cyr mainmore
 	@echo "ALL DONE."
 
 main:
-	[[ "$(DEBUG)" == 1 ]] && set -x
-	./scripts/00inst-main.sh
+	[[ "${DEBUG}" == 1 ]] && set -x
+	./scripts/00inst-main.sh ${MAKEFILEPATH}
 
 dev:
-	[[ "$(DEBUG)" == 1 ]] && set -x
-	./scripts/99inst-dev.sh
-	./scripts/98inst-devmore.sh
+	[[ "${DEBUG}" == 1 ]] && set -x
+	./scripts/99inst-dev.sh ${MAKEFILEPATH}
+	./scripts/98inst-devmore.sh ${MAKEFILEPATH}
 
 cyr:
-	[[ "$(DEBUG)" == 1 ]] && set -x
-	./scripts/01inst-kblayouts.sh
+	[[ "${DEBUG}" == 1 ]] && set -x
+	./scripts/01inst-kblayouts.sh ${MAKEFILEPATH}
 	
 mainmore:
-	[[ "$(DEBUG)" == 1 ]] && set -x
-	./scripts/20inst-mainmore.sh
+	[[ "${DEBUG}" == 1 ]] && set -x
+	./scripts/20inst-mainmore.sh ${MAKEFILEPATH}
 
 gmail:
-	[[ "$(DEBUG)" == 1 ]] && set -x
-	./scripts/03inst-gmail.sh
+	[[ "${DEBUG}" == 1 ]] && set -x
+	./scripts/03inst-gmail.sh ${MAKEFILEPATH}
 
 games:
-	[[ "$(DEBUG)" == 1 ]] && set -x
-	./scripts/50inst-games.sh
-	./scripts/51inst-chess.sh
+	[[ "${DEBUG}" == 1 ]] && set -x
+	./scripts/50inst-games.sh ${MAKEFILEPATH}
+	./scripts/51inst-chess.sh ${MAKEFILEPATH}
 
 help:
 	@echo "TARGETS:"
