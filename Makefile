@@ -10,8 +10,6 @@ SHELL := /bin/bash
 
 DEBUG ?= 0
 
-MAKEFILEPATH := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-
 base: main dev cyr mainmore
 	@echo ""
 	@echo "Email/Gmail setup and games were installed. You need to install this manually."
@@ -21,29 +19,29 @@ base: main dev cyr mainmore
 
 main:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	${MAKEFILEPATH}/scripts/00inst-main.sh
+	./scripts/00inst-main.sh
 
 dev:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	${MAKEFILEPATH}/scripts/00inst-main.sh/scripts/99inst-dev.sh
-	${MAKEFILEPATH}/scripts/00inst-main.sh/scripts/98inst-devmore.sh
+	./scripts/00inst-main.sh/scripts/99inst-dev.sh
+	./scripts/00inst-main.sh/scripts/98inst-devmore.sh
 
 cyr:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	${MAKEFILEPATH}/scripts/00inst-main.sh/scripts/01inst-kblayouts.sh
+	./scripts/00inst-main.sh/scripts/01inst-kblayouts.sh
 	
 mainmore:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	 ${MAKEFILEPATH}/scripts/20inst-mainmore.sh
+	 ./scripts/20inst-mainmore.sh
 
 gmail:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	 ${MAKEFILEPATH}/scripts/03inst-gmail.sh
+	 ./scripts/03inst-gmail.sh
 
 games:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	 ${MAKEFILEPATH}/scripts/50inst-games.sh
-	 ${MAKEFILEPATH}/scripts/51inst-chess.sh
+	 ./scripts/50inst-games.sh
+	 ./scripts/51inst-chess.sh
 
 help:
 	@echo "TARGETS:"
