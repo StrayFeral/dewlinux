@@ -12,7 +12,7 @@ DEBUG ?= 0
 
 base: main dev cyr mainmore
 	@echo ""
-	@echo "Email/Gmail setup not installed. You need to install this manually."
+	@echo "Email/Gmail setup and games were installed. You need to install this manually."
 	@echo ""
 	@echo "=========================================================="
 	@echo "ALL DONE."
