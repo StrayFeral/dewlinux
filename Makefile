@@ -6,7 +6,7 @@ SHELL := /bin/bash
 # by StrayF 2026
 
 
-.PHONY: base main dev cyr gmail games help mainmore tads
+.PHONY: base main dev cyr gmail games help mainmore
 
 DEBUG ?= 0
 
@@ -21,29 +21,29 @@ base: main dev cyr mainmore
 
 main:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	./scripts/00inst-main.sh ${MAKEFILEPATH}
+	${MAKEFILEPATH}/scripts/00inst-main.sh
 
 dev:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	./scripts/99inst-dev.sh ${MAKEFILEPATH}
-	./scripts/98inst-devmore.sh ${MAKEFILEPATH}
+	${MAKEFILEPATH}/scripts/00inst-main.sh/scripts/99inst-dev.sh
+	${MAKEFILEPATH}/scripts/00inst-main.sh/scripts/98inst-devmore.sh
 
 cyr:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	./scripts/01inst-kblayouts.sh ${MAKEFILEPATH}
+	${MAKEFILEPATH}/scripts/00inst-main.sh/scripts/01inst-kblayouts.sh
 	
 mainmore:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	./scripts/20inst-mainmore.sh ${MAKEFILEPATH}
+	 ${MAKEFILEPATH}/scripts/20inst-mainmore.sh
 
 gmail:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	./scripts/03inst-gmail.sh ${MAKEFILEPATH}
+	 ${MAKEFILEPATH}/scripts/03inst-gmail.sh
 
 games:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	./scripts/50inst-games.sh ${MAKEFILEPATH}
-	./scripts/51inst-chess.sh ${MAKEFILEPATH}
+	 ${MAKEFILEPATH}/scripts/50inst-games.sh
+	 ${MAKEFILEPATH}/scripts/51inst-chess.sh
 
 help:
 	@echo "TARGETS:"

@@ -9,10 +9,7 @@ export DEWVERSION=2
 # trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
-DEWPATH=""
-if [ -n "${1:-}" ]; then
-    DEWPATH="${1}/"
-fi
+DEWPATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo ""
 echo "INSTALLING MAIN SYSTEM..."
