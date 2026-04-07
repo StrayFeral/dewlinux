@@ -1,7 +1,7 @@
 set nocompatible
 
 " ===============================================
-" EVG SETTINGS
+" = DEWLINUX APPENDED
 " ===============================================
 
 set backspace=indent,eol,start

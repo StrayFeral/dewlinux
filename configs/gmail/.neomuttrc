@@ -1,3 +1,4 @@
+# = DEWLINUX APPENDED
 set mbox_type = Maildir
 set folder = "~/.mail/gmail"
 

@@ -1,5 +1,5 @@
 
-#=========================== ADDITIONAL DEW SETTINGS
+# = DEWLINUX APPENDED
 
 export PAGER="/usr/bin/less"
 export VISUAL="/usr/bin/vim"

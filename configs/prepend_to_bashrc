@@ -1,3 +1,4 @@
+# = DEWLINUX PREPENDED
 # Force locale to local VM settings, ignoring SSH passthrough
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

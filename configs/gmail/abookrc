@@ -1,3 +1,4 @@
+# = DEWLINUX APPENDED
 set address_style=eu
 set add_email_prevent_duplicates=false
 set mutt_command=neomutt
