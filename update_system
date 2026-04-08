@@ -34,6 +34,8 @@ git pull
 # (as it takes lots of time)
 if [[ $# -eq 0 || "$1" != "brief" ]]; then
     echo ""
+    echo "(The folowing updates would take more time, please be patient and do not interrupt this installation)"
+    echo ""
     
     rm -rf /tmp/mdterm
     rm -rf /tmp/wiki-tui
