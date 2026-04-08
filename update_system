@@ -40,20 +40,20 @@ if [[ $# -eq 0 || "$1" != "brief" ]]; then
     
     rm -rf /tmp/wiki-tui
     git clone -q --depth 1 https://github.com/Builditluc/wiki-tui /tmp/wiki-tui
-    echo "[3/${TOTALUPDATES}] Compiling wiki-tui, please wait..."
+    echo "[3/${TOTALUPDATES}] Compiling wiki-tui..."
     cargo install -q --path /tmp/wiki-tui/ --force
     rm -rf /tmp/wiki-tui
     
-    echo "[4/${TOTALUPDATES}] Compiling mdterm, please wait..."
+    echo "[4/${TOTALUPDATES}] Compiling mdterm..."
     rm -rf /tmp/mdterm
     git clone -q --depth 1 https://github.com/bahdotsh/mdterm.git /tmp/mdterm
     cargo install -q --path /tmp/mdterm/ --force
     rm -rf /tmp/mdterm
     
-    echo "[5/${TOTALUPDATES}] Compiling rgx-cli, please wait..."
+    echo "[5/${TOTALUPDATES}] Compiling rgx-cli..."
     cargo install -q rgx-cli --force
     
-    echo "[6/${TOTALUPDATES}] Compiling xleak, please wait..."
+    echo "[6/${TOTALUPDATES}] Compiling xleak..."
     cargo install -q xleak --force
 fi
 
