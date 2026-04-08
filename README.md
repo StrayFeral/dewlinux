@@ -1,6 +1,6 @@
 # DEWLINUX: THE DEBIAN TERMINAL-ONLY REMIX
 
-![Screenshot](screenshots/05_login.png)
+![Screenshot](screenshots/main_screenshot.png)
 
 ## STATUS
 
