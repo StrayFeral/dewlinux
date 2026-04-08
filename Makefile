@@ -25,12 +25,12 @@ main:
 
 dev:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	${MAKEFILEPATH}/scripts/00inst-main.sh/scripts/99inst-dev.sh
-	${MAKEFILEPATH}/scripts/00inst-main.sh/scripts/98inst-devmore.sh
+	${MAKEFILEPATH}/scripts/99inst-dev.sh
+	${MAKEFILEPATH}/scripts/98inst-devmore.sh
 
 cyr:
 	[[ "${DEBUG}" == 1 ]] && set -x
-	${MAKEFILEPATH}/scripts/00inst-main.sh/scripts/01inst-kblayouts.sh
+	${MAKEFILEPATH}/scripts/01inst-kblayouts.sh
 	
 mainmore:
 	[[ "${DEBUG}" == 1 ]] && set -x
