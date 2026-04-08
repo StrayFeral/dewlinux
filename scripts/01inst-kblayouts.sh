@@ -24,7 +24,7 @@ sudo sed -i 's/XKBOPTIONS=.*/XKBOPTIONS="grp:lalt_lshift_toggle"/' /etc/default/
 cat <<EOF | sudo tee /etc/default/console-setup > /dev/null
 ACTIVE_CONSOLES="/dev/tty[1-6]"
 CHARMAP="UTF-8"
-CODESET="Combined"
+CODESET="Uni3"
 FONTFACE="TerminusBold"
 FONTSIZE="12x24"
 VIDEOMODE=
