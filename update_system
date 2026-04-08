@@ -34,9 +34,9 @@ if [[ $# -eq 0 || "$1" != "brief" ]]; then
     rm -rf /tmp/mdterm
     rm -rf /tmp/wiki-tui
     
-    echo ""
     rm -rf /tmp/wiki-tui
     git clone --depth 1 https://github.com/Builditluc/wiki-tui /tmp/wiki-tui
+    echo ""
     echo "Compiling wiki-tui, please wait..."
     cargo install -q --path /tmp/wiki-tui/ --force
     rm -rf /tmp/wiki-tui
