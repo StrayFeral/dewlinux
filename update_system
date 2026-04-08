@@ -35,24 +35,26 @@ if [[ $# -eq 0 || "$1" != "brief" ]]; then
     rm -rf /tmp/wiki-tui
     
     rm -rf /tmp/wiki-tui
-    git clone --depth 1 https://github.com/Builditluc/wiki-tui /tmp/wiki-tui
+    git clone -q --depth 1 https://github.com/Builditluc/wiki-tui /tmp/wiki-tui
     echo ""
     echo "Compiling wiki-tui, please wait..."
     echo ""
     cargo install -q --path /tmp/wiki-tui/ --force
     rm -rf /tmp/wiki-tui
     
-    echo ""
-    echo "Compiling materm, please wait..."
+    echo "Compiling mdterm, please wait..."
     echo ""
     rm -rf /tmp/mdterm
-    git clone --depth 1 https://github.com/bahdotsh/mdterm.git /tmp/mdterm
+    git clone -q --depth 1 https://github.com/bahdotsh/mdterm.git /tmp/mdterm
     cargo install -q --path /tmp/mdterm/ --force
     rm -rf /tmp/mdterm
     
-    cargo install rgx-cli --force
-    cargo install xleak --force
-    cargo install chess-tui --force
+    echo "Compiling rgx-cli, please wait..."
+    echo ""
+    cargo install -q rgx-cli --force
+    echo "Compiling xleak, please wait..."
+    echo ""
+    cargo install -q xleak --force
 fi
 
 # Versioning check
