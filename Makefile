@@ -46,7 +46,17 @@ games:
 	 ${MAKEFILEPATH}/scripts/51inst-chess.sh
 
 help:
-	@echo "TARGETS:"
+	@echo ""
+	@echo "=== PROJECT DEWLINUX SOFTWARE INSTALLER ==="
+	@echo ""
+	@echo "IMPORTANT: All the MAIN TARGETS are already installed during"
+	@echo "the Debian installation."
+	@echo "(if you used the PROJECT DEW INSTALLER .ISO IMAGE!)"
+	@echo ""
+	@echo "If you used another .ISO image for OS installation, just"
+	@echo "run make. It will install all the MAIN TARGETS."
+	@echo ""
+	@echo "MAIN TARGETS:"
 	@echo "  make base		- Installation of: main dev cyr mainmore"
 	@echo "  make main		- Main packages installation"
 	@echo "  make dev		- Perl, Python3, Nasm, C/C++, Golang, Rust, Lua"
@@ -59,4 +69,4 @@ help:
 	@echo "			  (SINGLE account OAUTH2 setup !!)"
 	@echo "  make games		- Games installation"
 	@echo ""
-	@echo "  DEBUG=1		- Sets the DEBUG flag"
+	@echo "DEBUG=1			- Sets the DEBUG flag"
