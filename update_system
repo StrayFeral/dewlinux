@@ -38,11 +38,13 @@ if [[ $# -eq 0 || "$1" != "brief" ]]; then
     git clone --depth 1 https://github.com/Builditluc/wiki-tui /tmp/wiki-tui
     echo ""
     echo "Compiling wiki-tui, please wait..."
+    echo ""
     cargo install -q --path /tmp/wiki-tui/ --force
     rm -rf /tmp/wiki-tui
     
     echo ""
     echo "Compiling materm, please wait..."
+    echo ""
     rm -rf /tmp/mdterm
     git clone --depth 1 https://github.com/bahdotsh/mdterm.git /tmp/mdterm
     cargo install -q --path /tmp/mdterm/ --force
