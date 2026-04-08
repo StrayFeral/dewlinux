@@ -119,9 +119,11 @@ mkdir -p ~/.wordgrinder
 cp -f "${DEWPATH}/configs/wordgrinder_startup.lua" ~/.wordgrinder/startup.lua
 
 # Scooter - terminal regexxer replacement
+rm -rf /tmp/scooter*
 wget https://github.com/thomasschafer/scooter/releases/download/v0.9.0/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz -O /tmp/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
 tar -xzf /tmp/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz -C /tmp/
 mv -f /tmp/scooter ~/.local/bin/
+rm -rf /tmp/scooter*
 
 # Not sure this is automatically added, so I am adding it manually
 if ! grep -q "cargo/bin" ~/.profile; then

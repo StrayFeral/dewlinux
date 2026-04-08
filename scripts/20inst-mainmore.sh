@@ -22,6 +22,7 @@ git clone --depth 1 https://github.com/Builditluc/wiki-tui /tmp/wiki-tui
 echo ""
 echo "Compiling wiki-tui, please wait ..."
 cargo install -q --path /tmp/wiki-tui/ --force
+rm -rf /tmp/wiki-tui
 
 echo ""
 echo "Compiling xleak, please wait ..."
@@ -33,6 +34,7 @@ git clone --depth 1 https://github.com/bahdotsh/mdterm.git /tmp/mdterm
 echo ""
 echo "Compiling mdterm, please wait ..."
 cargo install -q --path /tmp/mdterm/ --force
+rm -rf /tmp/mdterm
 
 echo ""
 echo "MAIN MORE COMPONENTS INSTALLED."
