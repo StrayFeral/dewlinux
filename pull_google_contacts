@@ -8,6 +8,8 @@ if ! dpkg-query -W -f='${Status}' "offlineimap" 2>/dev/null | grep -q "ok instal
     exit 1
 fi
 
-cp ~/.abook/addressbook ~/.abook/addressbook.bak
-python3 ~/dewlinux/scripts/pull_contacts.py
+if [ -f ~/.abook/addressbook ]; then
+    cp -f ~/.abook/addressbook ~/.abook/addressbook.bak
+fi
 
+python3 ~/dewlinux/scripts/pull_contacts.py

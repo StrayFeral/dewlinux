@@ -75,8 +75,7 @@ def pull_contacts(token: str) -> list[dict]:
 
 def write_to_abook(connections: list[dict]) -> None:
     if not connections:
-        print("No contacts found. Aborting.")
-        return
+        return False
 
     with open(ABOOK_FILE, "w") as f:
         count: int = 0
@@ -129,6 +128,8 @@ def write_to_abook(connections: list[dict]) -> None:
             f.write("\n")
 
             count += 1
+    
+    return True
 
 
 if __name__ == "__main__":
@@ -147,10 +148,13 @@ if __name__ == "__main__":
 
         # print(f"Writing {len(contacts)} contacts to {ABOOK_FILE}...")
         print(f"Writing {len(contacts)} contacts to abook address book...")
-        write_to_abook(contacts)
+        downloaded: bool = write_to_abook(contacts)
         
         print("")
-        print("All contacts downloaded.")
+        if not downloaded:
+            print("No contacts found.")
+        else:
+            print("Contacts downloaded.")
 
     except Exception as e:
         print(f"Error: {e}")
