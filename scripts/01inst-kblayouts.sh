@@ -46,8 +46,9 @@ sudo udevadm trigger --subsystem-match=input --action=change || true
 # Rebuild the initrd image to bake in the font and layouts
 echo "Updating initramfs..."
 echo ""
-sudo update-initramfs -u
-
+#sudo update-initramfs -u
+sudo update-initramfs -u -k all
+sync
 
 
 # IMPORTANT:
