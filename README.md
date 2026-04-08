@@ -1,156 +1,115 @@
-# DEWLINUX Experiment: Could we use linux as cli-only in 2026?
+# DEWLINUX: THE DEBIAN TERMINAL-ONLY REMIX
 
 ## STATUS
 
+- 2026-04-08: PROJECT VERSION 2. Project now evolved into a full Debian Remix. User experience significantly improved, required user interaction during installations reduced to the bare minimum. Added a modified installer, to help with installation. Installation polished significantly. Project is now mature and stable. Documentation is updated.
 - 2026-04-03: PROJECT VERSION 1. Added versioning, scripts polished.
 - 2026-03-11: PHASE3 Start. Project DEW Introductory video is uploaded.
 - 2026-02-03: PHASE1 and PHASE2 Start.
 
 ## DESCRIPTION
 
-This repository is to document my journey in my experimental project **"DEWLINUX"**.
+**DEWLINUX** is a Terminal-Centric Debian Remix designed for a streamlined CLI workflow.
 
-**DEWLINUX** is a Terminal-only System Profile on top of a Debian-based Linux Environment.
+**GOAL:** Provide a modern terminal-only environment, comfortable enough for new terminal users to explore the boundaries of a terminal-only user experience and discover what is possible to be accomplished on such a system in 2026 in comparison to what was possible on a similar system in 1994.
 
-The goal of the project is to explore what it is to use a modern linux distribution only in command-line mode in 2026.
+**PRIMARY PLATFORM:** Virtual Machines. At the moment I do not have a spare laptop to test on. Maybe would get one in the next months.
 
-I am going to use a linux distro without any desktop environment installed.
+**SHOWCASE:** Tutorials and showcase videos are available on [my Youtube channel](https://www.youtube.com/@SkateCode). Please subscribe for updates!
 
-I am going to search and document some great everyday tools for use to a home user.
+**PRIMARY USE CASE:** Home-based system for everyday personal use, without additional peripheral devices, like printers etc. Primary input controller is assumed to be a standard keyboard and a mouse.
 
-The experiment will be conducted at present in the form of a virtual machine environment.
+> NOTE: "DEWLINUX" and "PROJECT DEW" are used interchangeably and do mean the same thing - the product on this GitHub repository.
 
-Videos showing my progress would be uploaded to my Youtube channel, so please subscribe:
+## DOCUMENTATION AND WHAT IS INSTALLED
 
-<https://www.youtube.com/@SkateCode>
-
-To keep it simple, this experiment would assume a home-based system for everyday personal use, without additional peripheral devices, like printers or whatever else might come to mind. Primary input controller is assumed to be a standard keyboard and some mouse support have been added lately.
-
-## USE CASES AND WHAT IS INSTALLED
-
-Please see [documentation/index.html](documentation/index.html)
-
-After installation you could simply run `contents.sh` which would be inside ~/dewlinux
+To read the documentation, run `dewhelp` from any directory.
 
 ## DISTRO
 
-I've decided to use Debian, so I went with the netinst image which is only near 750mb.
-
 > debian-13.3.0-amd64-netinst.iso
 
-My goal was never to use the most barebone distro. While I have some experience with some unix distros, some RedHat derivatives, I am mostly experienced in pure Debian and some of the derivative distros, so Debian was the natural choice for me. While I am experimenting to go a bit hardcore, it was never my goal to go fully hardcore for which Devuan was never considered.
-
-You can download Debian linux from here: [https://www.debian.org/](https://www.debian.org/)
+My goal was never to use the most bare bone distro. While I have some experience with some unix distros, some RedHat derivatives, I am mostly experienced in pure Debian and some of the derivative distros, so Debian was the natural choice for me. While I am experimenting to go a bit hardcore, it was never my goal to go fully hardcore for which Devuan was never considered.
 
 ## INSTALLATION
 
-> DISCLAIMER: The folowing instructions and code base represent a tested and verified installation and workflow ONLY for the above mentioned linux distro. If you're using another operating system of any sort, please keep in mind my goal was never to publish a multi-platform code. You are free to modify and adapt this project for your own OS and needs.
+> DISCLAIMER: The following instructions and code base represent a tested and verified installation and workflow ONLY for the above mentioned linux distro. If you're using another operating system of any sort, please keep in mind my goal was never to publish a multi-platform code. You are free to modify and adapt this project for your own OS and needs. This software is provided "as is". Use at your own risk. The developer of this code is not responsible for any possible data loss or hardware malfunctions.
 
-> Partitioning and base OS installation are manual by design.
+> NOTE: This code was tested only on a Virtual Machine. You are free to use it on a real computer on your own risk. 
 
-Start creating a virtual machine with the specified Debian image. Choosing any other image is at your own risk. You may choose also to install on an actual computer, but I tested this setup only on a virtual machine.
+### INSTALLATION OF THE MAIN COMPONENTS
 
-> VIRTUAL MACHINES: For hostname type: **blah.local**
+- Download the [PROJECT DEWLINUX INSTALLER](https://drive.google.com/file/d/1tsLvv6Ik_quvvi0lhvKu6KJiVVJnJPRB/view?usp=drive_link)
+- Put it on a virtual machine or make a bootlable memory stick drive
+- If you're using a real computer, make sure the USB drive is the first to boot
+- The installer would start and would ask you only:
+    - Language
+    - Country
+    - Locale
+    - Keymap
+    - Full name
+    - Username
+    - Password (and repeat password)
 
-Where **"blah"** is your desired hostname. If **".local"** is omitted, it could increase your boottime a lot later if you install sendmail.
+At the end of the installation the machine will automatically reboot. Upon your first login PROJECT DEW would be fully installed and operational
 
-**LOGIN AS ROOT**
+> NOTE: This is not an off-line installation. The target machine is expected to have either WIFI or Ethernet connectivity at all time during the installation process.
 
-```bash
-apt update
-apt upgrade
+### INSTALLATION OF THE ADDITIONAL COMPONENTS
 
-export DEBIAN_FRONTEND="noninteractive"
+#### SETUP OF GMAIL, OUTLOOK, HOTMAIL AND LIVE.COM MAIL ACCOUNTS WITH NEOMUTT
 
-apt -y install make sudo git vim vim-nox console-setup console-data
-
-# Only if you want to change the console font and size
-# I personally choose: TerminusBold 12x24
-# DEBIAN_FRONTEND=dialog dpkg-reconfigure console-setup
-
-# Adding the main user to the sudoers file
-usermod -aG sudo $(ls /home)
-
-update-alternatives --set editor $(which vim.nox)
-
-# Get the installation scripts
-git clone https://github.com/StrayFeral/dewlinux.git /home/$(ls /home)/dewlinux
-chown -R $(ls /home):$(ls /home) /home/$(ls /home)/dewlinux
-
-cat /home/$(ls /home)/dewlinux/configs/add_to_profile >> ~/.profile
-cat /home/$(ls /home)/dewlinux/configs/add_to_bashrc >> ~/.bashrc
-cp /home/$(ls /home)/dewlinux/configs/.vimrc ~/
-
-logout
-```
-**LOGIN AS the newly created user**
-
-```bash
-cd ~/dewlinux
-```
-
-Now depends what do you want to do. If you want to install the entire system just type:
-
-```bash
-make
-```
-
-> Type `make help` to get the make parameters list
-
-Parameters to `make`:
-- base (or no parameter): Install ONLY main, dev and cyr
-- main: Main packages installation
-- dev: Development tools installation (C, Perl, Python3, Nasm, Golang, Rust, Lua)
-- cyr: Installation of Cyrillic keyboard layouts
-- games: Games installation
-- gmail: Installation and OAUTH2 setup of either a Google Mail (GMail) or a Microsoft mail account (Outlook.com/Hotmail.com/Live.com)
-- DEBUG=1: Sets the DEBUG flag
-
-> For the email installation and setup, please see bellow
-
-> On the question should you enable AppArmor support, answer YES
-
-That AppArmor dialog was the only thing I could not automate, sorry.
-
-> IMPORTANT: Essentially what I've built is a terminal-only system. While installation of some packages does install specific libraries from graphical environments and we get about 20% contamination with such components, the system as a whole remains a terminal-only system with no graphical desktop environment being installed or able to run.
-
-## SETUP OF GMAIL, OUTLOOK, HOTMAIL AND LIVE.COM MAIL ACCOUNTS WITH NEOMUTT
-
-By design specification, this setup was created to support configuration of **FREE** emails from the folowing providers:
+By design specification, this setup was created to support configuration of **FREE** email accounts from the following providers:
 - **GMail.com** (Google)
 - **Outlook.com** (Microsoft)
 - **HotMail.com** (Microsoft)
 - **Live.com** (Microsoft)
 
-> DISCLAIMER: By design specification this setup supports only single email account configuration.
+> NOTE: By design specification this setup supports only single email account configuration.
 
-**NOTE:** While NeoMutt does support multiple account configuration, such setup was never intended.
+> NOTE: Only GMail setup was tested and ensured to work.
 
-> DISCLAIMER: Only GMail setup was tested and ensured to work.
+##### NEOMUTT OAUTH2 (GMAIL/OUTLOOK) EMAIL SETUP
 
-### NEOMUTT OAUTH2 (GMAIL/OUTLOOK) EMAIL SETUP
+This is the only part of the installation for which you would need to login to the target machine via SSH from another computer which is required to have a modern browser, which unfortunately does not exist yet for the linux terminal. The SSH server is already automatically installed by the installer.
 
-This is the only weird part.
+- This setup expects that you've already completed the Google Cloud Platform setup! If you don't know how to do it, follow [my Youtube video tutorial](https://www.youtube.com/watch?v=BOOqHpfhqr8)!
+- Login via SSH to the target machine where DEWLINUX is installed
+- Run this and follow the on-screen instructions:
 
-> DISCLAIMER: The folowing setup was tested in detail and ensures a fully working OAUTH2 setup for a **free** GMAIL account (though a corporate GMAIL account should also work). Support of Google Contacts is also working, but only in read-only mode. While I made my OAUTH2 authorizer code to authorize a Microsoft account too, this scenario was never tested in reality. If you do a Microsoft email setup - use at your own risk. This project interacts with Google People API and local mail files. It is provided "as is." Use at your own risk.
+```bash
+cd dewlinux/
+./setup_gmail
+```
 
-> NOTE: While neomutt does support multiple email account setup, such scenario was never tested.
+To discover your local IP address, run: `myip`
 
-Before you do anything, the very very first thing you MUST ABSOLUTELY DO is to setup an "app" in the Google Cloud Platform (GCP). I am going to do a video in which I will explain it in detail why this is needed and why without it this setup will never work.
+Once this script is done, you need to run:
 
-I know, many people would scratch their heads and bang themselves in the wall with the "Why should I do this crap" question, but trust me - you just have to. Google outphased the simple username/password authentication since it's not secure enough, recently outphased the apppasswords too (maybe still work in some areas - no idea) and the only authentication method working now is the OAUTH2, which requires you to setup an app in their GCP platform.
+```bash
+sync_mail
+pull_google_contacts
+```
 
-It took me time and lots of nerves until I set this right, since I had no previous GCP exposure at all. I could not find any Youtube video tutorial on how to do this, so I did it the hard way.
+It is important to run the above two **before** you run `neomutt`, as they will initialize the mailboxes, pull your emails and will populate `abook` with your Google Contacts.
 
-I am doing a video tutorial on how to do this, so you don't have to suffer - check my Youtube channel! <https://www.youtube.com/@SkateCode>
+If you later change your GMAIL setup or later at any point for any reason you need another authorization, just do:
+- SSH login to DEWLINUX again from another computer
+- Run `reauthorize` and follow the instructions
 
-Please subscribe to my Youtube channel and click LIKE on the video because I really lost lots of time and efforts until I made this work. Thanks!
+> NOTE: The following setup was tested in detail and ensures a fully working OAUTH2 setup for a **free** GMAIL account (though a corporate GMAIL account should also work). Support of Google Contacts is also working, but only in read-only mode. While I made my OAUTH2 authorizer code to authorize a Microsoft account too, this scenario was never tested in reality. If you do a Microsoft email setup - use at your own risk. This project interacts with Google People API and local mail files. It is provided "as is".
 
-#### GETTING THE GOOGLE OAUTH2 CREDENTIALS
+> NOTE: While NeoMutt does support multiple email account setup, such scenario was never tested.
 
-You need to do these steps only once.
+BACKGROUND: I know, many people would scratch their heads and bang themselves in the wall with the "Why should I do this OAUTH2 crap" question, but trust me - you just have to. Google outphased the simple username/password authentication since it's not secure enough, recently outphased the apppasswords too (maybe still work in some areas - no idea) and the only authentication method working now is the OAUTH2, which requires you to setup an app in their GCP platform.
 
-Use your host OS and go to:
+Please subscribe to my [Youtube channel](https://www.youtube.com/@SkateCode) and click LIKE on the videos because I really lost lots of time and efforts until I made this work. Thanks!
+
+###### GOOGLE CLOUD PLATFORM (GCP) SETUP
+
+You need to do these steps only once. If you find it difficult, please do watch my [Youtube video tutorial](https://www.youtube.com/watch?v=BOOqHpfhqr8). These steps are described in a bit more detail in the documentation, so be sure to run `dewhelp`.
+
+Use your **HOST** OS (and I mean - do this on a different computer, not the one with DEWLINUX) and go to:
 
 > https://console.cloud.google.com
 
@@ -162,7 +121,7 @@ You must create:
 - New EXTERNAL DESKTOP app
 - Add your email
 - Add your email as a TESTER
-- Manually add a scopes:
+- Manually add scopes:
     - https://mail.google.com/
     - https://www.googleapis.com/auth/contacts.readonly
     - https://www.googleapis.com/auth/contacts.other.readonly
@@ -171,39 +130,48 @@ You must create:
 
 > NEVER "PUBLISH" YOUR APPLICATION OR GOOGLE WILL CHARGE YOU MONEY !!
 
-> WARNING: DO NOT RUN the folowing code in a virtual machine terminal. You would need a modern browser for the manual loopback authorization to work. Sorry, but while you can do the installation of everything else straight in the virtual machine terminal, for this step you would need to SSH from another host with some modern browser installed. I mean technically you can do everything in the virtual machine and manually type the URL in your phone, but this would be overkill. So hope you have a working SSH server on your host.
-
-Finally run this and follow the on-screen instructions!
-
-```bash
-make gmail
-```
-
-I made everything to display instructions on what to do, but regardless, the last thing you would need to do is to run
-
-```bash
-./sync_mail.sh
-```
-
-So it will do the initial email pull and create and initialize all local mailbox structure for neomutt to run properly.
-
-Finally, if you have Google Contacts and you want to use them in abook, just run:
-
-```bash
-./pull_google_contacts.sh
-```
-
-> If for any reason you would need to re-authorize the setup (like if you changed your settings in GCP) just run `reauthorize.sh` and it will do what's needed.
-
-GCP will give you a total of 10 (ten) projects. So if there is a project you no longer use, better delete it. The fastest way to do this is to type this in the Cloud Shell:
+GCP will give you a total of about 10 (ten) projects. So if there is a project you no longer use, better delete it. The fastest way to do this is to type this in the Cloud Shell:
 
 ```bash
 gcloud projects delete <PROJECT ID>
 ```
 
-For example: `gcloud projects delete dewmail003`
+Example: `gcloud projects delete dewmail003`
 
 It will take 30 (thirty) days for the project to be permanently deleted.
+
+#### USING NEOMUTT WITH GMAIL
+
+- Read emails, write emails etc: `neomutt`
+- Browse your Google Contacts: `abook`
+- Sync your emails with GMAIL: `sync_mail`
+- Update your local contacts from Google Contacts: `pull_google_contacts`
+
+You can run these from any directory.
+
+> The setup suggests that the DEWLINUX machine operates mostly off-line.
+
+Yes, NeoMutt can operate in full on-line mode, sending one email at a time, receiving emails as they come. But I didn't wanted this. I wanted the user to concentrate on the task they do, not to think of email messages. And also to have all the time you want to do anything you want locally and send your emails and receive the new ones only when you wish to do so. Basically this is what we did in the 90s.
+
+Of course `cron` is at your disposal at any time, so if you want to sync your emails more often, you are still free to do so, by setting `sync_mail` as a cronjob.
+
+It is important to mention, that while the GMAIL access is fully operational, it was never my intention to create a fully functional Google Contact synchronization. You can get your contacts from Google, but if you create a new contact in `abook` it will never be uploaded to Google Contacts.
+
+So the way this work is:
+
+- You create new Google Contacts on other devices
+- You download them to PROJECT DEW and use them with `neomutt` and `abook`
+
+> `pull_google_contacts` will overwrite your locally saved contacts every time you invoke it. However `abook` have its own sorta like "contacts", which are called "aliases" which would not be deleted.
+
+#### INSTALLATION OF THE GAMES
+
+```bash
+cd dewlinux/
+./install_games
+```
+
+You can check what's installed in the PROJECT DEW documentation which you can invoke anytime with `dewhelp` from any directory.
 
 ### VIDEO TUTORIALS
 

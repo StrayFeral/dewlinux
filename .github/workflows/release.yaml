@@ -1,0 +1,28 @@
+name: Production Release
+on:
+  push:
+    tags: [ 'v*' ] # Triggers on v1.0, v2.1.4, etc.
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write    # Required for Sigstore signing
+      contents: write    # Required to create the release
+      attestations: write # Required for Provenance
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create Archive
+        run: git archive --format=zip -o project-${{ github.ref_name }}.zip HEAD
+
+      - name: Attest Build (The 2026 Trust Step)
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: 'project-${{ github.ref_name }}.zip'
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: project-${{ github.ref_name }}.zip
+          generate_release_notes: true
