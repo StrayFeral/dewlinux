@@ -16,7 +16,7 @@ echo ""
 echo "UPDATING THE SYSTEM..."
 echo ""
 
-pushd .
+pushd . > /dev/null
 cd ~/dewlinux/
 
 echo ""
@@ -88,7 +88,7 @@ if [[ ! -v DEWVERSION ]]; then
     echo "THE SYSTEM WAS UPDATED TO VERSION 1. YOU BETTER LOGOFF AND LOGIN AGAIN."
 fi
 
-popd
+popd > /dev/null
 
 echo ""
 echo "SYSTEM UPDATED."
