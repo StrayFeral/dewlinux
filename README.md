@@ -1,5 +1,7 @@
 # DEWLINUX: THE DEBIAN TERMINAL-ONLY REMIX
 
+![Screenshot](screenshots/05_login.png)
+
 ## STATUS
 
 - 2026-04-08: PROJECT VERSION 2. Project now evolved into a full Debian Remix. User experience significantly improved, required user interaction during installations reduced to the bare minimum. Added a modified installer, to help with installation. Installation polished significantly. Project is now mature and stable. Documentation is updated.
