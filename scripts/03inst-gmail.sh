@@ -7,7 +7,7 @@ export DEBIAN_FRONTEND="noninteractive"
 # trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
-DEWPATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DEWPATH="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 echo ""
 echo "INSTALLING OAUTH2 EMAIL TOOLS..."
@@ -52,7 +52,7 @@ mkdir -p ~/.abook
 
 
 if [ ! -f ~/.abook/abookrc ] || ! grep -q "= DEWLINUX APPENDED" ~/.abook/abookrc; then
-    cp -f "${DEWPATH}configs/gmail/abookrc" ~/.abook/abookrc
+    cp -f "${DEWPATH}/configs/gmail/abookrc" ~/.abook/abookrc
 fi
 
 # While I am using abook to hold the Google contact list, I still
@@ -61,21 +61,21 @@ touch ~/.neomutt_aliases
 
 # Default signature file
 if [ ! -f ~/.neomutt_signature ]; then
-    cp -f "${DEWPATH}configs/gmail/.neomutt_signature" ~/.neomutt_signature
+    cp -f "${DEWPATH}/configs/gmail/.neomutt_signature" ~/.neomutt_signature
 fi
 
 if [ ! -f ~/.msmtprc ] || ! grep -q "= DEWLINUX APPENDED" ~/.msmtprc; then
-    cp -f "${DEWPATH}configs/gmail/.msmtprc" ~/
+    cp -f "${DEWPATH}/configs/gmail/.msmtprc" ~/
     chmod 600 ~/.msmtprc
 fi
 if [ ! -f ~/.neomuttrc ] || ! grep -q "= DEWLINUX APPENDED" ~/.neomuttrc; then
-    cp -f "${DEWPATH}configs/gmail/.neomuttrc" ~/
+    cp -f "${DEWPATH}/configs/gmail/.neomuttrc" ~/
 fi
 if [ ! -f ~/bin/get_mail_secret.py ]; then
-    cp -f "${DEWPATH}scripts/get_mail_secret.py" ~/bin
+    cp -f "${DEWPATH}/scripts/get_mail_secret.py" ~/bin
 fi
 if [ ! -f ~/msmtp-enqueue-only ]; then
-    cp -f "${DEWPATH}scripts/msmtp-enqueue-only" ~/bin
+    cp -f "${DEWPATH}/scripts/msmtp-enqueue-only" ~/bin
 fi
 
 export MSMTPQ_DIR="$HOME/.msmtp.queue"
@@ -120,12 +120,12 @@ pass init "$public_key"
 # sync it all with an external script
 
 # Get the refresh token
-python3 "${DEWPATH}scripts/oauth2_config.py" $emailaddr
+python3 "${DEWPATH}/scripts/oauth2_config.py" $emailaddr
 
 # For some weird reason this file normally would get truncated and
 # this will break the whole config. So I am copying at the very end
 if [ ! -f ~/.offlineimaprc ] || ! grep -q "= DEWLINUX APPENDED" ~/.offlineimaprc; then
-    cp -f "${DEWPATH}configs/gmail/.offlineimaprc" ~/
+    cp -f "${DEWPATH}/configs/gmail/.offlineimaprc" ~/
 fi
 
 sed -i "s|YOURLINUXUSERNAMEHERE|$USER|g"        ~/.offlineimaprc
@@ -140,7 +140,7 @@ sed -i "s|YOURNAMEHERE|$realname|g"             ~/.neomuttrc
 
 chmod 700 ~/bin/get_mail_secret.py
 if [ ! -f /etc/apparmor.d/usr.bin.msmtp ] || ! grep -q "= DEWLINUX APPENDED" /etc/apparmor.d/usr.bin.msmtp; then
-    sudo cp -f "${DEWPATH}configs/gmail/usr.bin.msmtp" /etc/apparmor.d/
+    sudo cp -f "${DEWPATH}/configs/gmail/usr.bin.msmtp" /etc/apparmor.d/
     sudo chmod 644 /etc/apparmor.d/usr.bin.msmtp
     
     sudo mkdir -p /etc/apparmor.d/local

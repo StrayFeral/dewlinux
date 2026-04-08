@@ -9,7 +9,7 @@ export DEWVERSION=2
 # trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
-DEWPATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DEWPATH="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 echo ""
 echo "INSTALLING MAIN SYSTEM..."
@@ -29,35 +29,35 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"
 
 # Configs
 if [ ! -f ~/.profile ] || ! grep -q "= DEWLINUX APPENDED" ~/.profile; then
-    cat "${DEWPATH}configs/add_to_profile" >> ~/.profile
+    cat "${DEWPATH}/configs/add_to_profile" >> ~/.profile
 fi
 if [ ! -f ~/.bashrc ] || ! grep -q "= DEWLINUX APPENDED" ~/.bashrc; then
-    cat "${DEWPATH}configs/add_to_bashrc" >> ~/.bashrc
+    cat "${DEWPATH}/configs/add_to_bashrc" >> ~/.bashrc
 fi
 
 # Prepending .bashrc - file already exist
 if ! grep -q "= DEWLINUX PREPENDED" ~/.bashrc; then
-    cp -f "${DEWPATH}configs/prepend_to_bashrc" /tmp/.bashrc
+    cp -f "${DEWPATH}/configs/prepend_to_bashrc" /tmp/.bashrc
     cat ~/.bashrc >> /tmp/.bashrc
     mv -f /tmp/.bashrc ~/.bashrc
 fi
 
 if [ ! -f ~/.vimrc ] || ! grep -q "= DEWLINUX APPENDED" ~/.vimrc; then
-    cp -f "${DEWPATH}configs/.vimrc" ~/
+    cp -f "${DEWPATH}/configs/.vimrc" ~/
 fi
 
 mkdir -p ~/.config/nvim
 if [ ! -f ~/.config/nvim/init.vim ] || ! grep -q "= DEWLINUX APPENDED" ~/.config/nvim/init.vim; then
-    cp -f "${DEWPATH}configs/neovim_config" ~/.config/nvim/init.vim
+    cp -f "${DEWPATH}/configs/neovim_config" ~/.config/nvim/init.vim
 fi
 
 if [ ! -f ~/.bash_aliases ] || ! grep -q "= DEWLINUX APPENDED" ~/.bash_aliases; then
-    cp -f "${DEWPATH}configs/.bash_aliases" ~/
+    cp -f "${DEWPATH}/configs/.bash_aliases" ~/
 fi
 
 # Replacing MOTD
 sudo mv -f /etc/motd /etc/motd_old
-sudo cp -f "${DEWPATH}configs/motd" /etc/motd
+sudo cp -f "${DEWPATH}/configs/motd" /etc/motd
 
 echo ""
 echo "Downloading MAIN packages, this will take approx 2:30 minutes, please wait..."
@@ -84,7 +84,7 @@ sudo udevadm control --reload
 sudo udevadm trigger
 sudo systemctl daemon-reexec
 
-sudo cp -f "${DEWPATH}configs/10-udisks2.rules" /etc/polkit-1/rules.d/10-udisks2.rules
+sudo cp -f "${DEWPATH}/configs/10-udisks2.rules" /etc/polkit-1/rules.d/10-udisks2.rules
 sudo systemctl restart polkit
 
 # Creating symlinks
@@ -100,7 +100,7 @@ ln -sf ~/dewlinux/reauthorize           ~/bin/reauthorize
 ln -sf ~/dewlinux/scripts/battery       ~/bin/battery
 
 mkdir -p ~/.newsboat
-cp -f "${DEWPATH}configs/newsboat_urls" ~/.newsboat/urls
+cp -f "${DEWPATH}/configs/newsboat_urls" ~/.newsboat/urls
 
 
 mkdir -p ~/.vim/spell
@@ -119,7 +119,7 @@ mkdir -p ~/.vim/spell
 
 # Wordgrinder config
 mkdir -p ~/.wordgrinder
-cp -f "${DEWPATH}configs/wordgrinder_startup.lua" ~/.wordgrinder/startup.lua
+cp -f "${DEWPATH}/configs/wordgrinder_startup.lua" ~/.wordgrinder/startup.lua
 
 # Very cool tail replacement
 mkdir -p /tmp/lazytail
