@@ -74,10 +74,7 @@ sudo apt-get install -y -qq --no-upgrade \
     alsa-utils libasound2-dev newsboat \
     aspell aspell-bg aspell-fr aspell-ru aspell-en \
     weechat poppler-utils \
-    cage foot \
-    jq
-
-# Package jq was added only because of the lazytail installation
+    cage foot
 
 sudo usermod -aG plugdev $USER
 sudo udevadm control --reload
@@ -120,16 +117,6 @@ mkdir -p ~/.vim/spell
 # Wordgrinder config
 mkdir -p ~/.wordgrinder
 cp -f "${DEWPATH}/configs/wordgrinder_startup.lua" ~/.wordgrinder/startup.lua
-
-# Very cool tail replacement
-mkdir -p /tmp/lazytail
-wget https://raw.githubusercontent.com/raaymax/lazytail/master/install.sh -O /tmp/lazytail/install.sh
-chmod +x /tmp/lazytail/install.sh
-
-# Feeding ENTER pressings to the installer to assume their defaults in
-# case they ask about it
-(echo "1"; yes "y") | bash /tmp/lazytail/install.sh
-yes "" | ~/.local/bin/lazytail init
 
 # Scooter - terminal regexxer replacement
 wget https://github.com/thomasschafer/scooter/releases/download/v0.9.0/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz -O /tmp/scooter-v0.9.0-x86_64-unknown-linux-musl.tar.gz
