@@ -1,0 +1,7 @@
+#!/bin/bash
+set -euo pipefail
+
+trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
+
+make gmail
+
