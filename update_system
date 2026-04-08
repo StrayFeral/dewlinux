@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+TOTALUPDATES=6
+
 export DEBIAN_FRONTEND="noninteractive"
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
@@ -19,50 +21,52 @@ echo ""
 pushd . > /dev/null
 cd ~/dewlinux/
 
+echo "[1/${TOTALUPDATES}] Acquiring Debian updates..."
 echo ""
-echo "Acquiring updates..."
 sudo apt update
 sudo apt -y upgrade
 
 echo ""
-echo "Updating PROJECT DEW codebase..."
+echo "[2/${TOTALUPDATES}] Updating PROJECT DEW codebase..."
 git pull
 
 # If first parameter is set to "brief", this will NOT be executed
 # (as it takes lots of time)
 if [[ $# -eq 0 || "$1" != "brief" ]]; then
+    echo ""
+    
     rm -rf /tmp/mdterm
     rm -rf /tmp/wiki-tui
     
     rm -rf /tmp/wiki-tui
     git clone -q --depth 1 https://github.com/Builditluc/wiki-tui /tmp/wiki-tui
-    echo ""
-    echo "Compiling wiki-tui, please wait..."
-    echo ""
+    echo "[3/${TOTALUPDATES}] Compiling wiki-tui, please wait..."
     cargo install -q --path /tmp/wiki-tui/ --force
     rm -rf /tmp/wiki-tui
     
-    echo "Compiling mdterm, please wait..."
-    echo ""
+    echo "[4/${TOTALUPDATES}] Compiling mdterm, please wait..."
     rm -rf /tmp/mdterm
     git clone -q --depth 1 https://github.com/bahdotsh/mdterm.git /tmp/mdterm
     cargo install -q --path /tmp/mdterm/ --force
     rm -rf /tmp/mdterm
     
-    echo "Compiling rgx-cli, please wait..."
-    echo ""
+    echo "[5/${TOTALUPDATES}] Compiling rgx-cli, please wait..."
     cargo install -q rgx-cli --force
-    echo "Compiling xleak, please wait..."
-    echo ""
+    
+    echo "[6/${TOTALUPDATES}] Compiling xleak, please wait..."
     cargo install -q xleak --force
 fi
 
 # Versioning check
 if [[ ! -v DEWVERSION ]]; then
-    printf "\nexport DEWVERSION=1\n\n" >> ~/.profile
-    source ~/.profile
+    echo "*** Applying PROJECT DEW VERSION 1 updates..."
+    
+    if [ -f ~/.profile ] || ! grep -q "DEWVERSION" ~/.profile; then
+        printf "\nexport DEWVERSION=1\n\n" >> ~/.profile
+        source ~/.profile
+    fi
 
-    sudo cp configs/motd /etc/motd
+    sudo cp -f configs/motd /etc/motd
 
     # Creating symlinks
     ln -sf ~/dewlinux/scripts/listusb ~/bin/listusb
@@ -76,13 +80,13 @@ if [[ ! -v DEWVERSION ]]; then
     ln -sf ~/dewlinux/reauthorize ~/bin/reauthorize
     ln -sf ~/dewlinux/scripts/battery ~/bin/battery
 
-    cp scripts/get_mail_secret.py ~/bin
+    cp -f scripts/get_mail_secret.py ~/bin
     chmod 700 ~/bin/get_mail_secret.py
 
-    sudo apt -y install upower
+    sudo apt -y -qq --no-upgrade install upower
 
     # Nice to have
-    wget "https://www.markdownguide.org/assets/markdown-cheat-sheet.md" -O ~/dewlinux/markdown-cheat-sheet.md
+    [ -f ~/dewlinux/markdown-cheat-sheet.md ] || wget "https://www.markdownguide.org/assets/markdown-cheat-sheet.md" -O ~/dewlinux/markdown-cheat-sheet.md
     
     echo ""
     echo "THE SYSTEM WAS UPDATED TO VERSION 1. YOU BETTER LOGOFF AND LOGIN AGAIN."
