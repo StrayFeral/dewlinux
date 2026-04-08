@@ -4,7 +4,6 @@ set -euo pipefail
 export DEBIAN_FRONTEND="noninteractive"
 
 # Debugging
-# trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND" >&2' ERR
 trap 'echo "ERROR in ${BASH_SOURCE[0]} at line ${LINENO}: $BASH_COMMAND"; exit 130' INT
 
 echo ""
@@ -31,12 +30,21 @@ FONTSIZE="12x24"
 VIDEOMODE=
 EOF
 
-sudo setupcon --save || true
+# Force Initramfs to include the Framebuffer and Console Setup
+echo "FRAMEBUFFER=y" | sudo tee /etc/initramfs-tools/conf.d/framebuffer > /dev/null
 
-# Re-generate the keymap cached file (Debian needs this for TTY)
-sudo udevadm trigger --subsystem-match=input --action=change
+# Prepare the system for the changes
+sudo systemctl enable console-setup
+sudo rm -f /etc/console-setup/cached_setup_font.sh
 
-# To persists across reboots
+# This generates the cached font/keyboard files that initramfs-tools looks for
+sudo setupcon --save-only
+
+# Apply changes to the boot image
+sudo udevadm trigger --subsystem-match=input --action=change || true
+
+# Rebuild the initrd image to bake in the font and layouts
+echo "Updating initramfs..."
 sudo update-initramfs -u
 
 
