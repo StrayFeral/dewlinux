@@ -136,5 +136,16 @@ sed -i "s|#force_color_prompt=yes|force_color_prompt=yes|g" ~/.bashrc
 # Nice to have
 [ -f ~/dewlinux/markdown-cheat-sheet.md ] || wget "https://www.markdownguide.org/assets/markdown-cheat-sheet.md" -O ~/dewlinux/markdown-cheat-sheet.md
 
+# Weather and Disaster station
+rm -rf /tmp/tuiweathergirl
+mkdir -p /tmp/tuiweathergirl
+# git clone --depth 1 https://github.com/StrayFeral/tuiweathergirl /tmp/tuiweathergirl
+curl -L -O --output-dir /tmp/tuiweathergirl/ "https://github.com/StrayFeral/tuiweathergirl/releases/latest/download/tuiweathergirl.zip"
+echo ""
+echo "Installing TUIWEATHERGIRL, please wait ..."
+unzip /tmp/tuiweathergirl/tuiweathergirl.zip -d /tmp/tuiweathergirl/
+make -f /tmp/tuiweathergirl/Makefile install
+rm -rf /tmp/tuiweathergirl
+
 echo ""
 echo "MAIN COMPONENTS INSTALLED."
