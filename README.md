@@ -2,6 +2,22 @@
 
 ![Screenshot](screenshots/main_screenshot.png)
 
+## CONTENTS
+
+- [Status](#status)
+- [Description](#description)
+- [Documentation and what is installed](#documentation-and-what-is-installed)
+- [Distro](#distro)
+- [Installation](#installation)
+- [Installation of the main components](#installation-of-the-main-components)
+- [Installation of the additional components](#installation-of-the-additional-components)
+- [Setup of GMail, Outlook, Hotmail and Live.com mail accounts with Neomutt](#setup-of-gmail-outlook-hotmail-and-livecom-mail-accounts-with-neomutt)
+- [Neomutt OAUTH2 (GMail/Outlook) email setup](#neomutt-oauth2-gmailoutlook-email-setup)
+- [Google Cloud Platform (GCP) setup](#google-cloud-platform-gcp-setup)
+- [Using Neomutt with GMail](#using-neomutt-with-gmail)
+- [Installation of the games](#installation-of-the-games)
+- [VIDEO TUTORIALS](#video-tutorials)
+
 ## STATUS
 
 - 2026-04-08: PROJECT VERSION 2. Project now evolved into a full Debian Remix. User experience significantly improved, required user interaction during installations reduced to the bare minimum. Added a modified installer, to help with installation. Installation polished significantly. Project is now mature and stable. Documentation is updated.
